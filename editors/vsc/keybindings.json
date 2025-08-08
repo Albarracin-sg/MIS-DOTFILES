@@ -1,0 +1,20 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "ctrl+9",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        {
+          "command": "git.stageAll"
+        },
+        {
+          "command": "github.copilot.git.generateCommitMessage"
+        },
+        {
+          "command": "git.commitAll"
+        }
+      ]
+    }
+  }
+]
