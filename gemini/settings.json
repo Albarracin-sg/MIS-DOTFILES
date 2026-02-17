@@ -1,0 +1,24 @@
+{
+  "ide": {
+    "hasSeenNudge": true,
+    "enabled": true
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "ui": {
+    "showCitations": true
+  },
+  "general": {
+    "vimMode": false,
+    "disableAutoUpdate": true
+  },
+  "tools": {
+    "shell": {
+      "showColor": true
+    },
+    "autoAccept": false
+  }
+}

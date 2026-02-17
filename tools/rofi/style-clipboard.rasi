@@ -1,0 +1,238 @@
+/* ===========================
+   Minimal Dark Horizontal Theme
+   =========================== */
+* {
+    background:     #0d1117;
+    background-alt: #161b22;
+    foreground:     #f0f6fc;
+    text-alt:       #8b949e;
+    selected:       #4c1d95;
+    accent:         #6366f1;
+    transparent:    #00000000;
+}
+
+/*****----- Configuration -----*****/
+configuration {
+    modi:                       "drun";
+    show-icons:                 true;
+    icon-theme:                 "Papirus-Dark";
+    display-drun:               "";
+    drun-display-format:        "{name}";
+    disable-history:            false;
+    click-to-exit:              true;
+    font:                       "Inter 11";
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:               "real";
+    location:                   center;
+    anchor:                     center;
+    fullscreen:                 false;
+    width:                      800px;
+    height:                     500px;
+    x-offset:                   0px;
+    y-offset:                   0px;
+    enabled:                    true;
+    margin:                     0px;
+    padding:                    0px;
+    border:                     0px solid;
+    border-radius:              16px;
+    border-color:               @accent;
+    background-color:           rgba(13, 17, 23, 0.95);
+    cursor:                     "default";
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                    true;
+    spacing:                    0px;
+    margin:                     0px;
+    padding:                    24px;
+    border:                     0px solid;
+    border-radius:              0px;
+    border-color:               @accent;
+    background-color:           @transparent;
+    children:                   [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                    true;
+    spacing:                    0px;
+    margin:                     0px 0px 16px 0px;
+    padding:                    16px 20px;
+    border:                     0px solid;
+    border-radius:              12px;
+    border-color:               @accent;
+    background-color:           @background-alt;
+    text-color:                 @foreground;
+    children:                   [ "prompt", "entry" ];
+}
+
+prompt {
+    enabled:                    true;
+    margin:                     0px 12px 0px 0px;
+    padding:                    0px;
+    background-color:           @transparent;
+    text-color:                 @accent;
+    font:                       "Inter Medium 11";
+}
+
+textbox-prompt-colon {
+    enabled:                    true;
+    expand:                     false;
+    str:                        "";
+    background-color:           @transparent;
+    text-color:                 @accent;
+}
+
+entry {
+    enabled:                    true;
+    background-color:           @transparent;
+    text-color:                 @foreground;
+    cursor:                     text;
+    placeholder:                "Buscar aplicaciones...";
+    placeholder-color:          @text-alt;
+    font:                       "Inter 11";
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                    true;
+    columns:                    1;
+    lines:                      10;
+    cycle:                      true;
+    dynamic:                    true;
+    scrollbar:                  false;
+    layout:                     vertical;
+    reverse:                    false;
+    fixed-height:               true;
+    fixed-columns:              true;
+    spacing:                    4px;
+    margin:                     0px;
+    padding:                    0px;
+    border:                     0px solid;
+    border-radius:              0px;
+    border-color:               @accent;
+    background-color:           @transparent;
+    text-color:                 @foreground;
+    cursor:                     "default";
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                    true;
+    spacing:                    12px;
+    margin:                     0px;
+    padding:                    12px 16px;
+    border:                     0px solid;
+    border-radius:              8px;
+    border-color:               @accent;
+    background-color:           @transparent;
+    text-color:                 @foreground;
+    orientation:                horizontal;
+    cursor:                     pointer;
+}
+
+element normal.normal {
+    background-color:           @transparent;
+    text-color:                 @foreground;
+}
+
+element selected.normal {
+    background-color:           @selected;
+    text-color:                 @foreground;
+}
+
+element alternate.normal {
+    background-color:           @transparent;
+    text-color:                 @foreground;
+}
+
+element-icon {
+    enabled:                    true;
+    margin:                     0px;
+    padding:                    0px;
+    size:                       24px;
+    border:                     0px solid;
+    border-radius:              0px;
+    border-color:               @accent;
+    background-color:           @transparent;
+    text-color:                 inherit;
+    cursor:                     inherit;
+}
+
+element-text {
+    enabled:                    true;
+    margin:                     0px;
+    padding:                    0px;
+    border:                     0px solid;
+    border-radius:              0px;
+    border-color:               @accent;
+    background-color:           @transparent;
+    text-color:                 inherit;
+    font:                       "Inter Medium 12";
+    vertical-align:             0.5;
+    horizontal-align:           0.0;
+    cursor:                     inherit;
+}
+
+element selected.normal element-text {
+    text-color:                 @foreground;
+    font:                       "Inter SemiBold 12";
+}
+
+/*****----- Mode Switcher -----*****/
+mode-switcher{
+    enabled:                    true;
+    spacing:                    0px;
+    margin:                     0px;
+    padding:                    0px;
+    border:                     0px solid;
+    border-radius:              0px;
+    border-color:               @accent;
+    background-color:           @transparent;
+    text-color:                 @foreground;
+}
+
+button {
+    padding:                    8px 16px;
+    border:                     0px solid;
+    border-radius:              8px;
+    border-color:               @accent;
+    background-color:           @background-alt;
+    text-color:                 @foreground;
+    cursor:                     pointer;
+}
+
+button selected {
+    background-color:           @selected;
+    text-color:                 @foreground;
+}
+
+/*****----- Message -----*****/
+message {
+    enabled:                    true;
+    margin:                     0px;
+    padding:                    16px;
+    border:                     0px solid;
+    border-radius:              12px;
+    border-color:               @accent;
+    background-color:           @background-alt;
+    text-color:                 @foreground;
+}
+
+textbox {
+    enabled:                    true;
+    margin:                     0px;
+    padding:                    0px;
+    border:                     0px solid;
+    border-radius:              0px;
+    border-color:               @accent;
+    background-color:           @transparent;
+    text-color:                 @foreground;
+    vertical-align:             0.5;
+    horizontal-align:           0.0;
+    font:                       "Inter 11";
+}

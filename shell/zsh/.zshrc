@@ -1,85 +1,141 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# ========================
+# OH-MY-ZSH CONFIGURACIÓN
+# ========================
 
-# Habilita sustitución en el prompt
-setopt prompt_subst
-
-# =====================
-# Oh My Zsh base
-# =====================
+# Ruta donde está instalado Oh My Zsh
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-ENABLE_CORRECTION="true"
 
+# Tema aleatorio (si ZSH_THEME=random)
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# HYPHEN_INSENSITIVE="true"
+
+# Actualizaciones automáticas
+# zstyle ':omz:update' mode auto
+# zstyle ':omz:update' frequency 13
+
+# ENABLE_CORRECTION="true"
+# COMPLETION_WAITING_DOTS="true"
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# HIST_STAMPS="yyyy-mm-dd"
+
+# ========================
+# PLUGINS
+# ========================
 plugins=(
-  git
-  zsh-autosuggestions
-  zsh-syntax-highlighting
   zsh-history-substring-search
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+  git
 )
 
 source $ZSH/oh-my-zsh.sh
 
-# =====================
-# pyenv
-# =====================
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# ========================
+# USER CONFIG
+# ========================
 
-# =====================
-# Bun
-# =====================
+# export LANG=en_US.UTF-8
+
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='nvim'
+# fi
+
+# ========================
+# PROMPT (Powerlevel10k)
+# ========================
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+eval "$(atuin init zsh)"
+eval "$(zoxide init zsh)"
+
+# ========================
+# PATHS
+# ========================
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
+export PATH=$PATH:/home/sandia/.spicetify
 
-# =====================
-# Spicetify
-# =====================
-export PATH="$HOME/.spicetify:$PATH"
 
-# =====================
-# Aliases
-# =====================
-alias firefox='GTK_USE_PORTAL=1 firefox'
+#=========================
+#variables de entorno
+#=========================
+export GITHUB_TOKEN="${GITHUB_TOKEN}"
 
-# =====================
-# Prompt configuration
-# =====================
+# ========================
+# ALIASES
+# ========================
 
-# Ícono de directorio
-function dir_icon {
-  if [[ "$PWD" == "$HOME" ]]; then
-    echo "%B%F{black}%f%b"
-  else
-    echo "%B%F{cyan}%f%b"
-  fi
-}
+#=========================
+# APAGADO O ENSENDIDO
+#========================
+alias reboot='systemctl reboot'
+alias poweroff='systemctl poweroff'
 
-# Rama actual de git (si aplica)
-function parse_git_branch {
-  local branch
-  branch=$(git symbolic-ref --short HEAD 2> /dev/null)
-  if [ -n "$branch" ]; then
-    echo " [$branch]"
-  fi
-}
 
-# Prompt final con íconos personalizados
-PROMPT='%F{cyan}󰣇 %f %F{magenta}%n%f ${$(dir_icon)} %F{red}%~%f ${vcs_info_msg_0_} %F{yellow}$(parse_git_branch)%f %(?.%B%F{green}.%F{red})%f%b '
+#======================
+#modo oscuro 
+#=====================
+export QT_QPA_PLATFORMTHEME=qt6ct
 
-# Desactiva advertencias innecesarias
-DISABLE_UNSUPPORTED_CONFIG=true
+# ========================
+# MySQL
+# ========================
+alias mysqlon='sudo systemctl start mariadb && echo "MariaDB iniciado :)"'
+alias mysqloff='sudo systemctl stop mariadb && echo "MariaDB detenido :("'
+alias mysqlstatus='systemctl status mariadb'
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# ========================
+# PostgreSQL
+# ========================
+alias pgon='sudo systemctl start postgresql && echo "PostgreSQL iniciado :)"'
+alias pgoff='sudo systemctl stop postgresql && echo "PostgreSQL detenido :("'
+alias pgstatus='systemctl status postgresql'
 
-#gemini
-alias gemini='node ~/.local/lib/node_modules/@google/gemini-cli/dist/index.js'
+
+
+
+#=============================
+#server
+#=============================
+alias tinkpad='ssh kiwi@100.93.157.4'
+
+
+#=============================
+#comit individual
+#=============================
+
+alias gci="~/scripts/vsc/copilot/commit-individual.sh"
+
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:/home/sandia/.dotnet/tools"
+
+
+#===================================
+# EMULADOR
+# ==================================
+export ANDROID_HOME=/opt/android-sdk
+export ANDROID_SDK_ROOT=$ANDROID_HOME
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+alias cls="clear"
+
+
+pokemon-colorscripts -r
+eval $(thefuck --alias)
+
 

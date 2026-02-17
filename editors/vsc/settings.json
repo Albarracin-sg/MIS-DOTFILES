@@ -2,10 +2,11 @@
   // ================================
   // Apariencia general (Tema e iconos)
   // ================================
-  "workbench.colorTheme": "Tokyo Storm Gogh",
+  "workbench.colorTheme": "Tokyo Night",
+  "workbench.iconTheme": "material-icon-theme",
   "workbench.statusBar.visible": false,
   "workbench.sideBar.location": "right",
-  "workbench.editor.showTabs": "single",
+  "workbench.editor.showTabs": "multiple",
   "workbench.editor.empty.hint": "hidden",
   "workbench.startupEditor": "none",
   "breadcrumbs.enabled": false,
@@ -35,16 +36,15 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.cursorBlinking": "expand",
-  //"workbench.activityBar.location": "hidden",
   "editor.cursorSmoothCaretAnimation": "explicit",
   "editor.linkedEditing": true,
   "editor.guides.bracketPairs": true,
   "editor.glyphMargin": false,
   "editor.minimap.enabled": false,
-  "editor.scrollbar.vertical": "hidden",
+  "editor.scrollbar.vertical": "visible",
   "editor.overviewRulerBorder": false,
   "editor.fontSize": 16,
-  "editor.fontFamily": "'FiraCode Nerd Font', 'Fira Code', Consolas, monospace",
+  "editor.fontFamily": "'FiraCode Nerd Font Mono', 'Fira Code', Consolas, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.smoothScrolling": true,
   "editor.renderWhitespace": "none",
@@ -59,7 +59,7 @@
   "editor.quickSuggestions": {
     "other": true,
     "comments": false,
-    "strings": true
+    "strings": true,
   },
   "editor.suggestOnTriggerCharacters": true,
   "editor.parameterHints.enabled": true,
@@ -70,8 +70,8 @@
   // ================================
   // Terminal integrada
   // ================================
-  "terminal.integrated.defaultProfile.windows": "Git Bash",
-  "terminal.integrated.fontFamily": "FiraCode Nerd Font",
+  "terminal.integrated.defaultProfile.linux": "zsh (2)",
+  "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono",
   "terminal.integrated.suggest.enabled": true,
 
   // ================================
@@ -84,10 +84,10 @@
   // Configuraciones por lenguaje
   // ================================
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
+    "editor.defaultFormatter": "vscode.html-language-features",
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
 
   // ================================
@@ -97,6 +97,42 @@
   "liveServer.settings.donotShowInfoMsg": true,
   "tabnine.experimentalAutoImports": true,
   "python.createEnvironment.trigger": "off",
-  "workbench.iconTheme": "material-icon-theme",
-  "workbench.activityBar.location": "hidden"
+
+  // =================================
+  // obsidian
+  // =================================
+  "obsidian-md.defaultVault": "sandia",
+  "obsidian-md.defaultVaultPath": "/home/sandia/obsidian/sandia",
+  "obsidian-md.defaultNote": "Inbox",
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true,
+    "/tmp/postman-collections-post-response.instructions.md": true,
+    "/tmp/postman-collections-pre-request.instructions.md": true,
+    "/tmp/postman-folder-post-response.instructions.md": true,
+    "/tmp/postman-folder-pre-request.instructions.md": true,
+    "/tmp/postman-http-request-post-response.instructions.md": true,
+    "/tmp/postman-http-request-pre-request.instructions.md": true
+  },
+
+  // ================================
+  // Asociaciones de editores
+  // ================================
+  "workbench.editorAssociations": {
+    "*.copilotmd": "vscode.markdown.preview.editor",
+    "*.html": "default",
+  },
+
+  // ================================
+  // GitLens AI
+  // ================================
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+
+  // ================================
+  // UI extra
+  // ================================
+  "window.commandCenter": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "git.confirmSync": false,
+  "vscodeGoogleTranslate.preferredLanguage": "Spanish",
 }

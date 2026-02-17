@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
 
 if [ -z "$1" ]; then
+  # Mostrar "Vaciar portapapeles" primero y luego el historial real
+  {
+    echo "🗑  Vaciar portapapeles"
     cliphist list
+  }
 else
+  if [[ "$1" == "🗑  Vaciar portapapeles" ]]; then
+    # Si selecciona la opción extra, vaciar
+    cliphist wipe
+    notify-send "Clipboard" "Portapapeles vaciado 🗑"
+  else
+    # Selecciona entrada real -> copiar
     cliphist decode <<<"$1" | wl-copy
+  fi
 fi

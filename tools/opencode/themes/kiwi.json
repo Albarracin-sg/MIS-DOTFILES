@@ -1,0 +1,253 @@
+{
+  "$schema": "https://opencode.ai/theme.json",
+  "defs": {
+    "kiwiTransparent": "none",
+    "kiwiBg0": "#07090f",
+    "kiwiBg1": "#0a0c14",
+    "kiwiBg2": "#0f1220",
+    "kiwiBg3": "#121624",
+    "kiwiFg0": "#c7d0f0",
+    "kiwiFg1": "#c0caf5",
+    "kiwiPunctuation": "#9abdf5",
+    "kiwiMuted": "#4b5170",
+    "kiwiMutedAlt": "#8089b3",
+    "kiwiComment": "#5f6996",
+    "kiwiLineNumber": "#3b4261",
+    "kiwiPrimary": "#e0af68",
+    "kiwiPrimaryLight": "#e6bf86",
+    "kiwiPrimaryDark": "#b38c53",
+    "kiwiSecondary": "#7aa2f7",
+    "kiwiSecondaryLight": "#95b5f9",
+    "kiwiSecondaryDark": "#6282c6",
+    "kiwiAccent": "#7dcfff",
+    "kiwiAccentLight": "#97d9ff",
+    "kiwiAccentDark": "#64a6cc",
+    "kiwiSuccess": "#9ece6a",
+    "kiwiSuccessLight": "#b1d888",
+    "kiwiSuccessDark": "#7ea555",
+    "kiwiWarning": "#ff9e64",
+    "kiwiWarningLight": "#ffb183",
+    "kiwiWarningDark": "#cc7e50",
+    "kiwiError": "#f7768e",
+    "kiwiErrorLight": "#f991a5",
+    "kiwiErrorDark": "#c65e72",
+    "kiwiPurple": "#bb9af7",
+    "kiwiPurpleLight": "#c9aef9",
+    "kiwiPurpleDark": "#967bc6",
+    "kiwiTeal": "#73daca",
+    "kiwiTealLight": "#8fe1d5",
+    "kiwiTealDark": "#5caea2",
+    "kiwiCyan": "#2ac3de",
+    "kiwiCyanLight": "#55cfe5",
+    "kiwiCyanDark": "#229cb2",
+    "kiwiCyanAlt": "#41a6b5",
+    "kiwiBlueBright": "#89ddff",
+    "kiwiRedAlt": "#bb616b",
+    "kiwiDiffAddedBg": "#13323a",
+    "kiwiDiffRemovedBg": "#3b1f26",
+    "kiwiDiffAddedLineBg": "#17434c",
+    "kiwiDiffRemovedLineBg": "#4a2830"
+  },
+  "theme": {
+    "primary": {
+      "dark": "kiwiPrimary",
+      "light": "kiwiPrimary"
+    },
+    "secondary": {
+      "dark": "kiwiSecondary",
+      "light": "kiwiSecondary"
+    },
+    "accent": {
+      "dark": "kiwiAccent",
+      "light": "kiwiAccent"
+    },
+    "error": {
+      "dark": "kiwiError",
+      "light": "kiwiError"
+    },
+    "warning": {
+      "dark": "kiwiWarning",
+      "light": "kiwiWarning"
+    },
+    "success": {
+      "dark": "kiwiSuccess",
+      "light": "kiwiSuccess"
+    },
+    "info": {
+      "dark": "kiwiAccent",
+      "light": "kiwiAccent"
+    },
+    "text": {
+      "dark": "kiwiFg0",
+      "light": "kiwiFg0"
+    },
+    "textMuted": {
+      "dark": "kiwiMuted",
+      "light": "kiwiMuted"
+    },
+    "background": {
+      "dark": "kiwiTransparent",
+      "light": "kiwiTransparent"
+    },
+    "backgroundPanel": {
+      "dark": "kiwiBg0",
+      "light": "kiwiBg0"
+    },
+    "backgroundElement": {
+      "dark": "kiwiBg1",
+      "light": "kiwiBg1"
+    },
+    "border": {
+      "dark": "kiwiBg1",
+      "light": "kiwiBg1"
+    },
+    "borderActive": {
+      "dark": "kiwiPrimary",
+      "light": "kiwiPrimary"
+    },
+    "borderSubtle": {
+      "dark": "kiwiBg3",
+      "light": "kiwiBg3"
+    },
+    "diffAdded": {
+      "dark": "kiwiSuccess",
+      "light": "kiwiSuccess"
+    },
+    "diffRemoved": {
+      "dark": "kiwiError",
+      "light": "kiwiError"
+    },
+    "diffContext": {
+      "dark": "kiwiMuted",
+      "light": "kiwiMuted"
+    },
+    "diffHunkHeader": {
+      "dark": "kiwiSecondary",
+      "light": "kiwiSecondary"
+    },
+    "diffHighlightAdded": {
+      "dark": "kiwiCyanAlt",
+      "light": "kiwiCyanAlt"
+    },
+    "diffHighlightRemoved": {
+      "dark": "kiwiRedAlt",
+      "light": "kiwiRedAlt"
+    },
+    "diffAddedBg": {
+      "dark": "kiwiDiffAddedBg",
+      "light": "kiwiDiffAddedBg"
+    },
+    "diffRemovedBg": {
+      "dark": "kiwiDiffRemovedBg",
+      "light": "kiwiDiffRemovedBg"
+    },
+    "diffContextBg": {
+      "dark": "kiwiBg2",
+      "light": "kiwiBg2"
+    },
+    "diffLineNumber": {
+      "dark": "kiwiLineNumber",
+      "light": "kiwiLineNumber"
+    },
+    "diffAddedLineNumberBg": {
+      "dark": "kiwiDiffAddedLineBg",
+      "light": "kiwiDiffAddedLineBg"
+    },
+    "diffRemovedLineNumberBg": {
+      "dark": "kiwiDiffRemovedLineBg",
+      "light": "kiwiDiffRemovedLineBg"
+    },
+    "markdownText": {
+      "dark": "kiwiFg0",
+      "light": "kiwiFg0"
+    },
+    "markdownHeading": {
+      "dark": "kiwiSecondary",
+      "light": "kiwiSecondary"
+    },
+    "markdownLink": {
+      "dark": "kiwiAccent",
+      "light": "kiwiAccent"
+    },
+    "markdownLinkText": {
+      "dark": "kiwiAccent",
+      "light": "kiwiAccent"
+    },
+    "markdownCode": {
+      "dark": "kiwiSuccess",
+      "light": "kiwiSuccess"
+    },
+    "markdownBlockQuote": {
+      "dark": "kiwiPrimary",
+      "light": "kiwiPrimary"
+    },
+    "markdownEmph": {
+      "dark": "kiwiTeal",
+      "light": "kiwiTeal"
+    },
+    "markdownStrong": {
+      "dark": "kiwiPurple",
+      "light": "kiwiPurple"
+    },
+    "markdownHorizontalRule": {
+      "dark": "kiwiMuted",
+      "light": "kiwiMuted"
+    },
+    "markdownListItem": {
+      "dark": "kiwiFg0",
+      "light": "kiwiFg0"
+    },
+    "markdownListEnumeration": {
+      "dark": "kiwiMutedAlt",
+      "light": "kiwiMutedAlt"
+    },
+    "markdownImage": {
+      "dark": "kiwiTeal",
+      "light": "kiwiTeal"
+    },
+    "markdownImageText": {
+      "dark": "kiwiTeal",
+      "light": "kiwiTeal"
+    },
+    "markdownCodeBlock": {
+      "dark": "kiwiFg1",
+      "light": "kiwiFg1"
+    },
+    "syntaxComment": {
+      "dark": "kiwiComment",
+      "light": "kiwiComment"
+    },
+    "syntaxKeyword": {
+      "dark": "kiwiPurple",
+      "light": "kiwiPurple"
+    },
+    "syntaxFunction": {
+      "dark": "kiwiSecondary",
+      "light": "kiwiSecondary"
+    },
+    "syntaxVariable": {
+      "dark": "kiwiFg1",
+      "light": "kiwiFg1"
+    },
+    "syntaxString": {
+      "dark": "kiwiSuccess",
+      "light": "kiwiSuccess"
+    },
+    "syntaxNumber": {
+      "dark": "kiwiWarning",
+      "light": "kiwiWarning"
+    },
+    "syntaxType": {
+      "dark": "kiwiCyan",
+      "light": "kiwiCyan"
+    },
+    "syntaxOperator": {
+      "dark": "kiwiBlueBright",
+      "light": "kiwiBlueBright"
+    },
+    "syntaxPunctuation": {
+      "dark": "kiwiPunctuation",
+      "light": "kiwiPunctuation"
+    }
+  }
+}

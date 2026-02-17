@@ -1,2 +1,10 @@
-@theme "tokyonight"
+configuration {
+    show-icons: true;
+    icon-theme: "Papirus";   // o el que uses (Papirus, Tela, Numix, etc.)
+}
 
+//@theme "/usr/share/rofi/themes/purple.rasi"
+
+//@theme "/usr/share/rofi/themes/purple.rasi"
+
+@theme "/usr/share/rofi/themes/purple.rasi"

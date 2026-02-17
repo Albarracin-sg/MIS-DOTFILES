@@ -11,14 +11,14 @@ Un vistazo a mi rincón digital. Este repositorio contiene la configuración com
 ## Vista Previa
 
 
-### Escritorio 1
-![Escritorio 1](wallpapers/Escritorio/escritorio.png)
+### Wallpaper 1
+![Wallpaper 1](wallpapers/anime-water.png)
 
-### Escritorio 2
-![Escritorio 2](wallpapers/Escritorio/escritorio1.png)
+### Wallpaper 2
+![Wallpaper 2](wallpapers/blood-moon.png)
 
-### Escritorio 3
-![Escritorio 3](wallpapers/Escritorio/escritorio2.png)
+### Wallpaper 3
+![Wallpaper 3](wallpapers/tiger-gray.jpg)
 
 ---
 
@@ -52,8 +52,8 @@ Un vistazo a mi rincón digital. Este repositorio contiene la configuración com
 ├── terminal/       # Configuracion de Kitty
 ├── editors/        # Configuracion de Neovim y VSCode
 ├── gemini/          # Configuracion de ia (gemini CLI)
-├── wm/             # Configuracion de Hyprland y Waybar
-├── tools/          # Configuracion de Rofi y Fastfetch
+├── wm/             # Configuracion de Hyprland, Waybar y Eww
+├── tools/          # Configuracion de Rofi, Fastfetch y Opencode
 ├── wallpapers/     # Mi coleccion de fondos de pantalla
 └── install.sh      # Script de instalacion automatizada
 ```
