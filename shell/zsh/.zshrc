@@ -7,7 +7,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # Tema aleatorio (si ZSH_THEME=random)
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME=""
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -50,9 +50,12 @@ source $ZSH/oh-my-zsh.sh
 # fi
 
 # ========================
-# PROMPT (Powerlevel10k)
+# PROMPT (Starship)
 # ========================
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+unset RPROMPT RPS1
+unset POWERLEVEL9K_CONFIG_FILE POWERLEVEL9K_INSTANT_PROMPT
+unset POWERLEVEL9K_LEFT_PROMPT_ELEMENTS POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS
+eval "$(starship init zsh)"
 eval "$(atuin init zsh)"
 eval "$(zoxide init zsh)"
 
@@ -67,6 +70,12 @@ export PATH=$PATH:/home/sandia/.spicetify
 #=========================
 #variables de entorno
 #=========================
+if [ -f "$HOME/MIS-DOTFILES/.env" ]; then
+  set -a
+  . "$HOME/MIS-DOTFILES/.env"
+  set +a
+fi
+
 export GITHUB_TOKEN="${GITHUB_TOKEN}"
 
 # ========================
@@ -137,5 +146,3 @@ alias cls="clear"
 
 pokemon-colorscripts -r
 eval $(thefuck --alias)
-
-
