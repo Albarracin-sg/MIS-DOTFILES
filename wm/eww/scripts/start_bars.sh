@@ -1,18 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
 
-echo "🚀 Iniciando EWW Multi-Monitor..."
+echo "Iniciando EWW..."
 
-# Cerrar todas las ventanas
-eww close-all
+eww close-all || true
+for window in bar_widget_0 bar_widget_1; do
+  eww close "$window" 2>/dev/null || true
+done
 sleep 0.5
 
-# Detectar número de monitores
-MONITORS=$(hyprctl monitors -j | jq length)
-echo "📺 Detectados $MONITORS monitores"
+monitor_count=$(hyprctl monitors -j | jq 'length')
+opened=0
 
-# Abrir barra en cada monitor
-for ((i=0; i<$MONITORS; i++)); do
-    echo "   Abriendo barra en monitor $i..."
-    eww open "bar_widget_${i}"
-done
+if [ "$monitor_count" -ge 1 ]; then
+  echo "Abriendo bar_widget_0 en monitor 0"
+  eww open bar_widget_0 || true
+  opened=$((opened + 1))
+fi
 
-echo "✅ EWW iniciado en ${MONITORS} monitores"
+if [ "$monitor_count" -ge 2 ]; then
+  echo "Abriendo bar_widget_1 en monitor 1"
+  eww open bar_widget_1 || true
+  opened=$((opened + 1))
+fi
+
+echo "EWW iniciado en ${opened} monitor(es)"
