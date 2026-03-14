@@ -4,9 +4,10 @@ set -euo pipefail
 # Directorio de origen
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Lista de dependencias
-dependencies=(
+# Dependencias comunes
+common_dependencies=(
     "atuin"
+    "blueman"
     "brightnessctl"
     "btop"
     "cliphist"
@@ -30,18 +31,25 @@ dependencies=(
     "hyprutils"
     "hyprwayland-scanner-git"
     "hyprwire"
+    "jq"
     "kitty"
+    "network-manager-applet"
+    "networkmanager"
     "neovim"
     "noto-fonts"
+    "obsidian"
     "pamixer"
     "pavucontrol"
     "pipewire"
     "pipewire-pulse"
     "playerctl"
+    "pear-desktop"
     "pokemon-colorscripts-git"
+    "pciutils"
+    "postman-bin"
     "qt6ct"
     "ranger"
-    "rofi"
+    "rofi-lbonn-wayland-git"
     "slurp"
     "thefuck"
     "ttf-firacode-nerd"
@@ -50,10 +58,89 @@ dependencies=(
     "waybar"
     "wireplumber"
     "wl-clipboard"
+    "swww"
+    "starship"
+    "tailscale"
+    "xdg-desktop-portal"
     "xdg-desktop-portal-hyprland"
+    "zen-browser-bin"
     "zoxide"
     "zsh"
 )
+
+normal_extra_dependencies=()
+
+portable_extra_dependencies=(
+    "amd-ucode"
+    "btrfs-progs"
+    "efibootmgr"
+    "grub"
+    "linux"
+    "linux-headers"
+    "linux-lts"
+    "linux-lts-headers"
+    "linux-zen"
+    "linux-zen-headers"
+)
+
+selected_mode=""
+dependencies=()
+
+print_mode_details() {
+    echo
+    echo "Modo normal instala:"
+    echo "- Entorno Hyprland (hypr/waybar/eww), shell, nvim, apps y utilidades."
+    echo "- Sin stack extra de boot portable (kernels multiples + grub + efibootmgr)."
+    echo
+    echo "Modo portable instala:"
+    echo "- Todo lo del modo normal."
+    echo "- Kernels linux/lts/zen + headers, grub, efibootmgr y btrfs-progs."
+    echo "- Enlace simbolico de portable en ~/.local/share/mis-dotfiles-portable."
+    echo
+}
+
+select_install_mode() {
+    if [ -n "${INSTALL_MODE:-}" ]; then
+        case "$INSTALL_MODE" in
+            normal|portable)
+                selected_mode="$INSTALL_MODE"
+                ;;
+            *)
+                echo "ERROR: INSTALL_MODE debe ser 'normal' o 'portable'." >&2
+                exit 1
+                ;;
+        esac
+        return
+    fi
+
+    print_mode_details
+    echo "Selecciona tipo de instalacion:"
+    echo "1) normal"
+    echo "2) portable"
+    read -r -p "Opcion [1-2] (default 1): " choice
+
+    case "${choice:-1}" in
+        1)
+            selected_mode="normal"
+            ;;
+        2)
+            selected_mode="portable"
+            ;;
+        *)
+            echo "Opcion invalida. Se usara modo normal."
+            selected_mode="normal"
+            ;;
+    esac
+}
+
+prepare_dependencies() {
+    dependencies=("${common_dependencies[@]}")
+    if [ "$selected_mode" = "portable" ]; then
+        dependencies+=("${portable_extra_dependencies[@]}")
+    else
+        dependencies+=("${normal_extra_dependencies[@]}")
+    fi
+}
 
 require_yay() {
     if ! command -v yay &>/dev/null; then
@@ -66,12 +153,17 @@ require_yay() {
 install_dependencies() {
     require_yay
 
+    if [ "${SKIP_PACKAGE_INSTALL:-false}" = "true" ]; then
+        echo "SKIP_PACKAGE_INSTALL=true, se omite instalacion de paquetes."
+        return
+    fi
+
     local update_packages=${UPDATE_PACKAGES:-true}
     if [ "$update_packages" = "true" ]; then
-        echo "Instalando/actualizando dependencias con yay -Syu..."
+        echo "Instalando/actualizando dependencias ($selected_mode) con yay -Syu..."
         yay -Syu --noconfirm --needed "${dependencies[@]}"
     else
-        echo "Instalando dependencias (sin actualizar el sistema)..."
+        echo "Instalando dependencias ($selected_mode) sin actualizar el sistema..."
         yay -S --noconfirm --needed "${dependencies[@]}"
     fi
 }
@@ -139,6 +231,36 @@ enable_services() {
     enable_user_service wireplumber.service
     enable_user_service xdg-desktop-portal.service
     enable_user_service xdg-desktop-portal-hyprland.service
+
+    if command -v sudo &>/dev/null; then
+        echo "Habilitando servicios del sistema (NetworkManager y Bluetooth)..."
+        sudo systemctl enable NetworkManager.service >/dev/null 2>&1 || true
+        sudo systemctl enable bluetooth.service >/dev/null 2>&1 || true
+        if [ "$selected_mode" = "portable" ]; then
+            sudo systemctl enable tailscaled.service >/dev/null 2>&1 || true
+        fi
+    fi
+}
+
+create_all_symlinks() {
+    # Crear enlaces simbolicos
+    create_symlink "$DOTFILES_DIR/shell/zsh/.zshrc" "$HOME/.zshrc"
+    create_symlink "$DOTFILES_DIR/terminal/kitty" "$HOME/.config/kitty"
+    create_symlink "$DOTFILES_DIR/editors/nvim" "$HOME/.config/nvim"
+    create_symlink "$DOTFILES_DIR/editors/vsc/settings.json" "$HOME/.config/Code/User/settings.json"
+    create_symlink "$DOTFILES_DIR/editors/vsc/keybindings.json" "$HOME/.config/Code/User/keybindings.json"
+    create_symlink "$DOTFILES_DIR/gemini" "$HOME/.gemini"
+    create_symlink "$DOTFILES_DIR/wm/hyprland" "$HOME/.config/hypr"
+    create_symlink "$DOTFILES_DIR/wm/waybar" "$HOME/.config/waybar"
+    create_symlink "$DOTFILES_DIR/wm/eww" "$HOME/.config/eww"
+    create_symlink "$DOTFILES_DIR/tools/fastfetch" "$HOME/.config/fastfetch"
+    create_symlink "$DOTFILES_DIR/tools/rofi" "$HOME/.config/rofi"
+    create_symlink "$DOTFILES_DIR/tools/opencode" "$HOME/.config/opencode"
+    create_symlink "$DOTFILES_DIR/wallpapers" "$HOME/Wallpapers"
+
+    if [ "$selected_mode" = "portable" ]; then
+        create_symlink "$DOTFILES_DIR/portable" "$HOME/.local/share/mis-dotfiles-portable"
+    fi
 }
 
 # Funcion para crear enlaces simbolicos
@@ -164,6 +286,11 @@ create_symlink() {
     echo "Enlace simbolico creado para $destination"
 }
 
+select_install_mode
+prepare_dependencies
+
+echo "Modo seleccionado: $selected_mode"
+
 # Instalar/actualizar dependencias
 install_dependencies
 
@@ -171,20 +298,15 @@ install_dependencies
 install_oh_my_zsh
 install_zsh_extras
 
-# Crear enlaces simbÃ³licos
-create_symlink "$DOTFILES_DIR/shell/zsh/.zshrc" "$HOME/.zshrc"
-create_symlink "$DOTFILES_DIR/terminal/kitty" "$HOME/.config/kitty"
-create_symlink "$DOTFILES_DIR/editors/nvim" "$HOME/.config/nvim"
-create_symlink "$DOTFILES_DIR/editors/vsc/settings.json" "$HOME/.config/Code/User/settings.json"
-create_symlink "$DOTFILES_DIR/editors/vsc/keybindings.json" "$HOME/.config/Code/User/keybindings.json"
-create_symlink "$DOTFILES_DIR/gemini" "$HOME/.gemini"
-create_symlink "$DOTFILES_DIR/wm/hyprland" "$HOME/.config/hypr"
-create_symlink "$DOTFILES_DIR/wm/waybar" "$HOME/.config/waybar"
-create_symlink "$DOTFILES_DIR/wm/eww" "$HOME/.config/eww"
-create_symlink "$DOTFILES_DIR/tools/fastfetch" "$HOME/.config/fastfetch"
-create_symlink "$DOTFILES_DIR/tools/rofi" "$HOME/.config/rofi"
-create_symlink "$DOTFILES_DIR/tools/opencode" "$HOME/.config/opencode"
-create_symlink "$DOTFILES_DIR/wallpapers" "$HOME/Wallpapers"
+# Crear enlaces simbolicos
+create_all_symlinks
+
+# Asegurar permisos de ejecucion para scripts clave
+chmod +x "$HOME/.config/hypr/autostart.conf" || true
+chmod +x "$HOME/.config/hypr/scripts/detect-monitors.sh" || true
+chmod +x "$HOME/.config/hypr/scripts/detect-gpu.sh" || true
+chmod +x "$HOME/.config/hypr/scripts/portable-session.sh" || true
+chmod +x "$HOME/.config/eww/scripts/start_bars.sh" || true
 
 # Habilitar servicios necesarios
 enable_services

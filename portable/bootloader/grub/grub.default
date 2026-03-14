@@ -1,0 +1,17 @@
+GRUB_DEFAULT=0
+GRUB_SAVEDEFAULT=false
+GRUB_TIMEOUT=3
+GRUB_DISTRIBUTOR="Arch"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 zswap.enabled=1 zswap.compressor=zstd zswap.max_pool_percent=20"
+GRUB_CMDLINE_LINUX=""
+GRUB_TOP_LEVEL=/boot/vmlinuz-linux-zen
+
+# Keep menu simple for portable systems.
+GRUB_DISABLE_SUBMENU=y
+GRUB_DISABLE_OS_PROBER=true
+
+# Crossgrub theme
+GRUB_THEME=/boot/grub/themes/crossgrub/theme.txt
+
+# Optional hard RAM cap (not recommended for daily portable use):
+# add for example: mem=16G

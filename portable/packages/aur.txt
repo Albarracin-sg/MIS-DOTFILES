@@ -1,0 +1,7 @@
+hyprpicker-git
+pear-desktop
+pokemon-colorscripts-git
+postman-bin
+rofi-lbonn-wayland-git
+visual-studio-code-bin
+zen-browser-bin

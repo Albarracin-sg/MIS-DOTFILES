@@ -42,6 +42,16 @@ Un vistazo a mi rincón digital. Este repositorio contiene la configuración com
     -   **Visual Studio Code:** Ajustes para una experiencia de desarrollo limpia y sin distracciones.
 -   **Shell:** Zsh, con autocompletado, historial mejorado y un prompt minimalista.
 
+### Estado actual (normal + portable)
+
+- Instalador con selector de modo `normal` o `portable`.
+- Modo `portable` con kernels `linux`, `linux-lts`, `linux-zen` (y headers).
+- Deteccion dinamica de monitores y GPU en Hyprland.
+- EWW multi-monitor en inicio de sesion.
+- Servicios base habilitados (NetworkManager, Bluetooth; Tailscale en portable).
+- GRUB portable con tema Crossgrub (ejecucion manual, no automatica).
+- Paquetes clave incluidos: Zen Browser, Postman, Pear Desktop, Obsidian, btop, nvim.
+
 ---
 
 ### Estructura del Repositorio
@@ -51,8 +61,9 @@ Un vistazo a mi rincón digital. Este repositorio contiene la configuración com
 ├── shell/          # Configuracion de Zsh
 ├── terminal/       # Configuracion de Kitty
 ├── editors/        # Configuracion de Neovim y VSCode
-├── gemini/          # Configuracion de ia (gemini CLI)
+├── gemini/         # Configuracion de IA (Gemini CLI)
 ├── wm/             # Configuracion de Hyprland, Waybar y Eww
+├── portable/       # Perfil portable (paquetes, grub, scripts, perfiles)
 ├── tools/          # Configuracion de Rofi, Fastfetch y Opencode
 ├── wallpapers/     # Mi coleccion de fondos de pantalla
 └── install.sh      # Script de instalacion automatizada
@@ -60,9 +71,9 @@ Un vistazo a mi rincón digital. Este repositorio contiene la configuración com
 
 ---
 
-### Instalación
+### Instalacion
 
-**Advertencia:** Este script está diseñado para mi configuración personal en Arch Linux. Úsalo bajo tu propio riesgo.
+**Advertencia:** Este script esta disenado para Arch Linux y modifica symlinks en `~/.config`.
 
 1.  **Clona el repositorio:**
 
@@ -71,16 +82,48 @@ Un vistazo a mi rincón digital. Este repositorio contiene la configuración com
     cd mis-dotfiles
     ```
 
-2.  **Ejecuta el script de instalación:**
+2.  **Ejecuta el script de instalacion:**
 
     ```bash
     ./install.sh
     ```
 
+3. **Elige modo de instalacion cuando te lo pregunte:**
+
+- `normal`: entorno diario (Hyprland, Waybar, EWW, apps y herramientas).
+- `portable`: incluye `normal` + stack portable (`linux`, `linux-lts`, `linux-zen`, `grub`, `efibootmgr`, `btrfs-progs`, etc.).
+
 El script se encargará de:
 
--   Instalar y/o actualizar las dependencias necesarias usando `yay`.
--   Crear enlaces simbólicos de las configuraciones a sus directorios correspondientes.
+- Instalar y/o actualizar dependencias con `yay`.
+- Crear enlaces simbolicos de configuracion en su ruta correcta (`~/.config/...`, `~/.zshrc`, `~/.gemini`).
+- En modo `portable`, crear enlace adicional a `~/.local/share/mis-dotfiles-portable`.
+
+Opciones utiles para pruebas seguras:
+
+```bash
+INSTALL_MODE=normal SKIP_PACKAGE_INSTALL=true ENABLE_SERVICES=false ./install.sh
+INSTALL_MODE=portable SKIP_PACKAGE_INSTALL=true ENABLE_SERVICES=false ./install.sh
+```
+
+Con esto pruebas flujo y symlinks sin instalar paquetes.
+
+### Portable (M.2)
+
+En `portable/` esta la base para llevar Arch + Hyprland en disco externo:
+
+- `portable/packages/`: manifiestos de paquetes (`pacman.txt`, `aur.txt`).
+- `portable/scripts/`: setup base, cambio de perfil y verificacion de symlinks.
+- `portable/bootloader/grub/`: plantilla de GRUB + instalacion portable + Crossgrub.
+
+Para GRUB portable (manual y consciente):
+
+```bash
+cd portable/bootloader/grub
+sudo ./install-portable-grub.sh /boot
+```
+
+Esto instala GRUB en modo `--removable` y aplica tema Crossgrub.
 
 ---
 
@@ -88,7 +131,7 @@ El script se encargará de:
 
 La mayoría de los atajos de teclado están definidos en los siguientes archivos:
 
--   **Hyprland:** `wm/hyprland/configs/bind.conf`
+-   **Hyprland:** `wm/hyprland/bind.conf`
 -   **Neovim:** `editors/nvim/lua/config/keymaps.lua`
 -   **visual studio code:** `editors/vsc/keybindings.json`
 
