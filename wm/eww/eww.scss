@@ -23,7 +23,7 @@
   }
 }
 
-.power{
+power{
   margin-right:10px;
 }
 
@@ -410,12 +410,12 @@ menu {
 .pfp{
   box-shadow: 0 2px 3px 2px rgba(6,6,11,0.9);
   background-image: url('./icons/1.png');
-  background-size: 90px;
-  background-position: 50% 35%;
+  background-size: cover;
+  background-position: center;
   background-repeat:no-repeat;
   min-height: 90px;
   min-width: 90px;
-  border-radius: 100%;
+  border-radius: 50%;
   margin-right:20px;
 }
 
@@ -791,3 +791,180 @@ tooltip{
   border-radius: 10px;
 }
 
+/* Purple top-bar skin (clean, no duplicates) */
+.bar {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 4px 14px;
+}
+
+.bar-left { margin-left: 14px; }
+.bar-center { margin: 0 12px; }
+.bar-right { margin-right: 2px; }
+.menu { margin-left: 0; }
+
+.menu-eventbox {
+  background-color: #cebfff;
+  color: #2e2350;
+  border-radius: 7px;
+  min-width: 34px;
+  min-height: 34px;
+  font-size: 0;
+  padding: 0;
+  border: 1px solid rgba(229, 214, 255, 0.28);
+}
+
+.arch-wrap,
+.panel-wrap {
+  min-width: 34px;
+  min-height: 34px;
+  margin: 0;
+}
+
+.menu-eventbox label { margin: 0; }
+
+.arch-icon {
+  font-family: "Iosevka Nerd Font";
+  font-size: 18px;
+  margin-top: -1px;
+}
+
+.time-label {
+  background-color: rgba(39, 31, 61, 0.86);
+  color: #ece6ff;
+  border-radius: 9px;
+  padding: 0 14px;
+  min-width: 140px;
+  min-height: 34px;
+  font-family: "Iosevka Nerd Font";
+  margin-right: 12px;
+}
+
+.time-label:hover {
+  background-color: rgba(49, 38, 78, 0.95);
+  color: #ffffff;
+}
+
+.now-playing {
+  background-color: rgba(39, 31, 61, 0.86);
+  border: 1px solid rgba(199, 177, 255, 0.14);
+  color: #ece6ff;
+  border-radius: 9px;
+  min-height: 34px;
+  padding: 0 14px;
+  font-size: 12px;
+  margin-left: 12px;
+}
+
+.now-playing-text { font-family: "Iosevka Nerd Font"; }
+.now-playing:hover { background-color: rgba(49, 38, 78, 0.95); }
+
+/* Workspace card: less wide, more horizontal breathing */
+.ws {
+  background-color: rgba(39, 31, 61, 0.76);
+  border: 1px solid rgba(199, 177, 255, 0.14);
+  border-radius: 12px;
+  padding: 0 20px;
+  min-height: 36px;
+  min-width: 0;
+}
+
+.ws-active,
+.ws-occupied,
+.ws-empty,
+.visiting,
+.occupied,
+.free {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.ws-item {
+  min-width: 24px;
+  min-height: 26px;
+  border-radius: 10px;
+}
+
+.ws-item label {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: "Iosevka Nerd Font";
+}
+
+.ws-item.ws-active label { font-size: 24px; }
+.ws-active { color: #f5f1ff; }
+.ws-occupied { color: rgba(234, 226, 255, 0.78); }
+.ws-empty { color: rgba(234, 226, 255, 0.35); }
+
+.metrics-pack {
+  background-color: rgba(39, 31, 61, 0.86);
+  border: 1px solid rgba(199, 177, 255, 0.14);
+  border-radius: 9px;
+  padding: 0 8px;
+  min-height: 28px;
+}
+
+.mini-sep {
+  color: rgba(224, 214, 255, 0.45);
+  font-size: 15px;
+}
+
+.power { margin-right: 0; }
+
+.power-eventbox {
+  background-color: rgba(39, 31, 61, 0.9);
+  border: 1px solid rgba(199, 177, 255, 0.14);
+  color: #c9b4ff;
+  border-radius: 7px;
+  min-width: 34px;
+  min-height: 34px;
+  padding: 0;
+  font-size: 0;
+}
+
+.power-eventbox label {
+  margin: 0;
+  font-size: 18px;
+  color: #e5dcff;
+}
+
+.panel-icon {
+  font-family: "Iosevka Nerd Font";
+  margin-top: -1px;
+}
+
+.volume-short,
+.ram-short,
+.cpu-short,
+.bluetooth,
+.bsht,
+.cpu-short .icon,
+.ram-short .icon,
+.volume-short label {
+  color: #ece6ff;
+}
+
+.div { color: rgba(224, 214, 255, 0.35); }
+
+/* Extra breathing room for date/time + music cards */
+.time-label {
+  padding: 0;
+}
+
+.time-content {
+  padding: 0 16px;
+  min-height: 34px;
+}
+
+.now-playing {
+  padding: 0;
+}
+
+.now-playing-content {
+  padding: 0 16px;
+  min-height: 34px;
+}

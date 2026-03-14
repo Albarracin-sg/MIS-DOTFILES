@@ -16,42 +16,49 @@
 (defwidget bar [monitor_id]
     (box :class "bar"
          :orientation "h"
-         (box :halign "start"
-              :valign "center"
-              :spacing 10
-              :hexpand true
-              :space-evenly false
-              (menu :monitor_id monitor_id)
-              (workspaces)
-         )
-         (box :halign "center"
-              :valign "center"
-              :spacing 10
-              :hexpand true
-              :orientation "h"
-              (time :time get_time :monitor_id monitor_id)
-         )
-         (box :halign "end"
-              :valign "center"
-              :hexpand true
-              :space-evenly false
-              :spacing 10
-              (box :space-evenly false
-                   :spacing 7
-                   (tray)
-                   (volume)
-                   (ram)
-                   (cpu)
-                   (eventbox :onclick "blueman-manager &"
-                             :cursor "pointer"
-                        (box :class "bluetooth"
-                             (label :text "󰂯")
-                        )
-                   )
-              )
-              (divider)
-              (power :monitor_id monitor_id)
-         )
+          (box :class "bar-left"
+               :halign "start"
+               :valign "center"
+               :spacing 12
+               :hexpand false
+               :space-evenly false
+               (menu :monitor_id monitor_id)
+               (time :time get_time :monitor_id monitor_id)
+               (now-playing)
+            )
+           (box :class "bar-center"
+                :halign "center"
+                :valign "center"
+                :spacing 0
+                :hexpand true
+                :orientation "h"
+                (workspaces)
+           )
+          (box :class "bar-right"
+               :halign "end"
+               :valign "center"
+               :hexpand false
+               :space-evenly false
+               :spacing 6
+               (box :class "metrics-pack"
+                    :space-evenly false
+                    :spacing 4
+                    (volume)
+                    (label :class "mini-sep" :text "|")
+                    (ram)
+                    (label :class "mini-sep" :text "|")
+                    (cpu)
+                    (label :class "mini-sep" :text "|")
+                    (eventbox :onclick "blueman-manager &"
+                              :cursor "pointer"
+                         (box :class "bluetooth"
+                              (label :text "󰂯")
+                         )
+                    )
+               )
+               (divider)
+               (power :monitor_id monitor_id)
+          )
     )
 )
 
@@ -363,11 +370,16 @@
 (defwidget menu [monitor_id]
     (box :class "menu"
          :orientation "h"
-         (eventbox :onclick "~/.config/eww/scripts/menuctl.sh ${monitor_id}"
-                   :cursor "pointer"
-                   :class "menu-eventbox"
-                   (label :text " ")
-         )
+          (eventbox :onclick "~/.config/eww/scripts/menuctl.sh ${monitor_id}"
+                    :cursor "pointer"
+                    :tooltip "Apps"
+                    :width 34
+                    :height 34
+                    :class "menu-eventbox"
+                     (box :class "arch-wrap" :halign "center" :valign "center"
+                          (label :class "arch-icon" :text "")
+                     )
+           )
     )
 )
 
@@ -457,11 +469,13 @@
 (defwidget power [monitor_id]
     (box :class "power"
          :orientation "h"
-         (eventbox :onclick "~/.config/eww/scripts/usrctl.sh ${monitor_id}"
-                   :cursor "pointer"
-                   :class "power-eventbox"
-                   (label :text "󰻃 ")
-         )
+          (eventbox :onclick "~/.config/eww/scripts/usrctl.sh ${monitor_id}"
+                    :cursor "pointer"
+                    :class "power-eventbox"
+                    (box :class "panel-wrap" :halign "center" :valign "center"
+                         (label :class "panel-icon" :text "●")
+                    )
+          )
     )
 )
 
@@ -469,7 +483,7 @@
     (literal :content workspaces-output)
 )
 
-(deflisten workspaces-output :initial "(box :class \"ws\" :halign \"end\" :orientation \"h\" :spacing 5 :space-evenly \"false\" (eventbox :onclick \"hyprctl dispatch workspace 1\" :cursor \"pointer\" :class \"visiting\" (label :text \"1\")) (eventbox :onclick \"hyprctl dispatch workspace 2\" :cursor \"pointer\" :class \"free\" (label :text \"2\")) (eventbox :onclick \"hyprctl dispatch workspace 3\" :cursor \"pointer\" :class \"free\" (label :text \"3\")) (eventbox :onclick \"hyprctl dispatch workspace 4\" :cursor \"pointer\" :class \"free\" (label :text \"4\")) (eventbox :onclick \"hyprctl dispatch workspace 5\" :cursor \"pointer\" :class \"free\" (label :text \"5\")) (eventbox :onclick \"hyprctl dispatch workspace 6\" :cursor \"pointer\" :class \"free\" (label :text \"6\")))" "./scripts/workspace.sh")
+(deflisten workspaces-output :initial "(box :class \"ws\" :halign \"center\" :orientation \"h\" :spacing 12 :space-evenly \"false\" (eventbox :onclick \"hyprctl dispatch workspace 1\" :cursor \"pointer\" :class \"ws-item ws-active\" (label :text \"•\")) (eventbox :onclick \"hyprctl dispatch workspace 2\" :cursor \"pointer\" :class \"ws-item ws-empty\" (label :text \"•\")) (eventbox :onclick \"hyprctl dispatch workspace 3\" :cursor \"pointer\" :class \"ws-item ws-empty\" (label :text \"•\")) (eventbox :onclick \"hyprctl dispatch workspace 4\" :cursor \"pointer\" :class \"ws-item ws-empty\" (label :text \"•\")) (eventbox :onclick \"hyprctl dispatch workspace 5\" :cursor \"pointer\" :class \"ws-item ws-empty\" (label :text \"•\")) (eventbox :onclick \"hyprctl dispatch workspace 6\" :cursor \"pointer\" :class \"ws-item ws-empty\" (label :text \"•\")))" "./scripts/workspace.sh")
 
 (defwidget divider []
     (label :class "div" :text "|")
@@ -510,10 +524,29 @@
 (defwidget time [time monitor_id]
     (eventbox :cursor "pointer"
               :onclick "~/.config/eww/scripts/calendar.sh ${monitor_id}"
-              :width 120
-              :height 25
+              :width 0
+              :height 28
               :class "time-label"
-              (label :text "${time}")
+              (box :class "time-content" :orientation "h" :spacing 10 :space-evenly false
+                   (label :text "${get_date}")
+                   (label :text "|")
+                   (label :text "${time}")
+              )
+    )
+)
+
+(defwidget now-playing []
+    (revealer :transition "slideleft"
+              :duration "250ms"
+              :reveal {"${cmusic}" != "" && "${music.title}" != ""}
+              (eventbox :class "now-playing"
+                        :cursor "pointer"
+                        :onclick "playerctl next"
+                        :tooltip "Click: next track"
+                        (box :class "now-playing-content"
+                             (label :class "now-playing-text" :limit-width 30 :text "${music.title} - ${music.artist}")
+                        )
+              )
     )
 )
 
@@ -553,11 +586,11 @@
 )
 
 (defpoll get_date :interval "1s"
-                  "date +'%d.%m.%Y, %A'"
+                  "date +'%d.%m'"
 )
 
 (defpoll get_time :interval "1s"
-                  "date +%H:%M:%S"
+                  "date +%H:%M"
 )
 
 (defpoll get_uptime :interval "1s"
@@ -966,8 +999,8 @@
     :monitor 0
     :stacking "fg"
     :geometry (geometry :anchor "top center"
-                        :width "99.5%"
-                        :height "3.425%"
+                         :width "99.5%"
+                         :height "34px"
     )
     :exclusive true
     (bar :monitor_id "0")
@@ -977,8 +1010,8 @@
     :monitor 1
     :stacking "fg"
     :geometry (geometry :anchor "top center"
-                        :width "99.5%"
-                        :height "3.425%"
+                         :width "99.5%"
+                         :height "34px"
     )
     :exclusive true
     (bar :monitor_id "1")

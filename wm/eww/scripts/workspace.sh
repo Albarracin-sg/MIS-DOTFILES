@@ -8,7 +8,7 @@ generate_workspaces_output() {
     workspace_data=$(hyprctl workspaces -j)
     current_workspace=$(hyprctl activeworkspace -j | jq -r '.id')
 
-    output="(box :class \"ws\" :halign \"end\" :orientation \"h\" :spacing 5 :space-evenly \"false\""
+    output="(box :class \"ws\" :halign \"center\" :orientation \"h\" :spacing 12 :space-evenly \"false\""
 
     # Mostrar workspaces del 1 al 10 en orden
     for i in $(seq 1 $max_workspace); do
@@ -24,17 +24,17 @@ generate_workspaces_output() {
         fi
 
         if [[ "$current_workspace" == "$i" ]]; then
-            class="visiting"
-            icon="$i"
+            class="ws-active"
+            icon="•"
         elif [[ "$windows" -gt 0 ]]; then
-            class="occupied"
-            icon="$i"
+            class="ws-occupied"
+            icon="•"
         else
-            class="free"
-            icon="$i"
+            class="ws-empty"
+            icon="•"
         fi
 
-        output+=" (eventbox :onclick \"hyprctl dispatch workspace $i\" :cursor \"pointer\" :class \"$class\" (label :text \"$icon\"))"
+        output+=" (eventbox :onclick \"hyprctl dispatch workspace $i\" :cursor \"pointer\" :class \"ws-item $class\" (label :text \"$icon\"))"
     done
 
     output+=")"
