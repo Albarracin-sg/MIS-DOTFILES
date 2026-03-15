@@ -1,0 +1,6 @@
+[Unit]
+Description=Organize Downloads by file type
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/flock -n %t/organize-downloads.lock /usr/bin/bash -lc 'sleep 3; "$HOME/.local/bin/organize-downloads.sh"'

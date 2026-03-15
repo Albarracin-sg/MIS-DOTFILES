@@ -231,6 +231,7 @@ enable_services() {
     enable_user_service wireplumber.service
     enable_user_service xdg-desktop-portal.service
     enable_user_service xdg-desktop-portal-hyprland.service
+    enable_user_service organize-downloads.path
 
     if command -v sudo &>/dev/null; then
         echo "Habilitando servicios del sistema (NetworkManager y Bluetooth)..."
@@ -256,7 +257,11 @@ create_all_symlinks() {
     create_symlink "$DOTFILES_DIR/tools/fastfetch" "$HOME/.config/fastfetch"
     create_symlink "$DOTFILES_DIR/tools/rofi" "$HOME/.config/rofi"
     create_symlink "$DOTFILES_DIR/tools/opencode" "$HOME/.config/opencode"
-    create_symlink "$DOTFILES_DIR/wallpapers" "$HOME/Wallpapers"
+    create_symlink "$DOTFILES_DIR/tools/bin/organize-downloads.sh" "$HOME/.local/bin/organize-downloads.sh"
+    create_symlink "$DOTFILES_DIR/tools/systemd-user/organize-downloads.service" "$HOME/.config/systemd/user/organize-downloads.service"
+    create_symlink "$DOTFILES_DIR/tools/systemd-user/organize-downloads.path" "$HOME/.config/systemd/user/organize-downloads.path"
+    mkdir -p "$HOME/Imagenes"
+    create_symlink "$DOTFILES_DIR/wallpapers" "$HOME/Imagenes/Wallpapers"
 
     if [ "$selected_mode" = "portable" ]; then
         create_symlink "$DOTFILES_DIR/portable" "$HOME/.local/share/mis-dotfiles-portable"
@@ -307,6 +312,7 @@ chmod +x "$HOME/.config/hypr/scripts/detect-monitors.sh" || true
 chmod +x "$HOME/.config/hypr/scripts/detect-gpu.sh" || true
 chmod +x "$HOME/.config/hypr/scripts/portable-session.sh" || true
 chmod +x "$HOME/.config/eww/scripts/start_bars.sh" || true
+chmod +x "$HOME/.local/bin/organize-downloads.sh" || true
 
 # Habilitar servicios necesarios
 enable_services
