@@ -122,6 +122,7 @@ alias tinkpad='ssh kiwi@100.93.157.4'
 #=============================
 
 alias gci="~/scripts/vsc/copilot/commit-individual.sh"
+alias ntab='kitten @ set-tab-title'
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:/home/sandia/.dotnet/tools"
