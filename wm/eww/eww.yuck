@@ -11,6 +11,7 @@
 (defvar ctlrev_1 false)
 (defvar wifictlrev_0 false)
 (defvar wifictlrev_1 false)
+(defvar show_local_ip false)
 
 ;; Widget BAR con parámetro de monitor
 (defwidget bar [monitor_id]
@@ -39,7 +40,8 @@
                :valign "center"
                :hexpand false
                :space-evenly false
-               :spacing 6
+               :spacing 4
+               (wifi :monitor_id monitor_id)
                (box :class "metrics-pack"
                     :space-evenly false
                     :spacing 4
@@ -149,28 +151,21 @@
 (defvar wifirev false)
 (defvar wifihov false)
 
-(defpoll wifistatus :interval "1s" :initial "{\"icon\": \"睊\", \"ssid\": \"Disconnected\", \"strength\": 0}"
+(defpoll wifistatus :interval "1s" :initial "{\"icon\": \"󰤮\", \"ssid\": \"Disconnected\", \"strength\": 0}"
     "./scripts/current-wifi.sh"
 )
 
 (defwidget wifi [monitor_id]
-    (box :class "wifi"
+    (box :class "wifi network-status"
         (eventbox :cursor "pointer"
-                  :onhover "./scripts/wifi-delay.sh"
-                  :onhoverlost "bash -c '/usr/bin/eww update wifirev=false && /usr/bin/eww update wifihov=false'"
                   :onclick "~/.config/eww/scripts/wifictl.sh ${monitor_id}"
-                  (box :orientation "h"
+                  (box :class "network-status-inner"
+                       :halign "center"
+                       :valign "center"
+                       :orientation "h"
+                       :spacing 0
                        :space-evenly false
-                       (label :text "${wifistatus.icon}")
-                       (label :class "space-wifi" :text "\\u00A0")
-                       (revealer :reveal {wifirev}
-                                 :transition "slideright"
-                                 :duration "350ms"
-                                 (box :class "wifi-type" :space-evenly false
-                                      (label :class "wifi-div" :text "|")
-                                      (label :limit-width 12 :text "${wifistatus.ssid}")
-                                 )
-                       )
+                       (label :class "network-icon" :text "${wifistatus.icon}")
                   )
         )
     )
@@ -181,37 +176,85 @@
 )
 
 (defwidget wifi_event []
-    (eventbox :class "shadow-container"
-              :onhoverlost "echo 'WiFi hover lost'"
-              (box :orientation "v"
-                   :space-evenly false
-              (box :class "wifictl-container"
-                   :space-evenly false
-                   :orientation "v"
-                   (box :class "wifi-header"
-                        :space-evenly false
-                        (label :text "Network Manager")
-                   )
-                   (box :class "wifi-stats"
-                        :space-evenly false
-                        (label :text "STATUS : ")
-                        (label :class "${wifistatus.ssid=="Disconnected"?"nocon":"yescon"}"
-                               :limit-width 27
-                               :text  "${wifistatus.ssid=="Disconnected"?" Disconnected":" Connected to ${wifistatus.ssid}"}")
-                   )
-                   (scroll :vscroll true
-                           :class "network-container"
-                           (box :orientation "v" :space-evenly false
-                                (for i in {network}
-                                    (wifi-option :ssid "${i.ssid}" :inuse "${i.in_use}" :auto {i.autoconnect})
+    (box :orientation "v"
+         :space-evenly false
+         (box :class "wifictl-container"
+                     :space-evenly false
+                     :orientation "v"
+                    (box :class "wifi-card-header"
+                         :orientation "h"
+                         :space-evenly false
+                         (box :class "wifi-card-title"
+                              :hexpand true
+                              :orientation "h"
+                              :space-evenly false
+                              (label :class "wifi-status-dot ${wifistatus.ssid=="Disconnected"?"status-offline":"status-online"}" :text "●")
+                              (label :class "wifi-card-ssid" :limit-width 18 :text "${wifistatus.ssid}")
+                         )
+                         (label :class "wifi-card-signal" :text "${wifistatus.type=="ethernet"?"󰈀":"󰤨"}")
+                    )
+                    (box :class "wifi-card-divider")
+                    (box :class "wifi-ip-stack"
+                         :orientation "v"
+                         :space-evenly false
+                          (box :class "wifi-ip-row"
+                               :orientation "h"
+                               :space-evenly false
+                               (box :class "wifi-ip-icon-wrap"
+                                    (label :class "wifi-ip-icon" :text "󰩟")
+                               )
+                               (box :class "wifi-ip-copy"
+                                    :hexpand true
+                                    :orientation "v"
+                                    :space-evenly false
+                                     (box :class "wifi-ip-meta local-ip-meta"
+                                          :halign "center"
+                                          :orientation "h"
+                                          :space-evenly false
+                                           (label :class "wifi-ip-label" :text "LOCAL IP")
+                                     )
+                                     (label :class "wifi-ip-value wifi-ip-local" :halign "center" :text "${show_local_ip?wifistatus.local_ip:wifistatus.masked_local_ip}")
                                 )
-                           )
-                   )
-              )
-              (revealer :reveal {wificonfigrev}
-                        :transition "slidedown"
-                        :duration "350ms"
-                        (eventbox :onhoverlost "/usr/bin/eww update wificonfigrev=false"
+                               (eventbox :cursor "pointer"
+                                         :onclick "/usr/bin/eww update show_local_ip=${show_local_ip==true?"false":"true"}"
+                                         (box :class "wifi-eye-wrap"
+                                              (label :class "wifi-ip-toggle" :text "${show_local_ip?"󰈉":"󰈈"}")
+                                         )
+                               )
+                          )
+                         (box :class "wifi-ip-row"
+                              :orientation "h"
+                              :space-evenly false
+                              (box :class "wifi-ip-icon-wrap"
+                                   (label :class "wifi-ip-icon" :text "󰞇")
+                              )
+                                (box :class "wifi-ip-copy"
+                                     :hexpand true
+                                     :orientation "v"
+                                     :space-evenly false
+                                     (label :class "wifi-ip-label" :halign "center" :text "PUBLIC IP")
+                                     (label :class "wifi-ip-value wifi-ip-public" :halign "center" :text "${wifistatus.public_ip}")
+                                )
+                         )
+                    )
+                    (box :class "wifi-card-footer"
+                         :orientation "h"
+                         :space-evenly false
+                         (box :class "wifi-activity"
+                              :hexpand true
+                              :orientation "h"
+                              :space-evenly false
+                              (label :class "wifi-activity-icon" :text "󰀦")
+                              (label :class "wifi-activity-label" :text "${wifistatus.type=="ethernet"?"ETHERNET":"WIFI"} ${wifistatus.strength}%")
+                          )
+                         (label :class "wifi-ping" :text "${wifistatus.ping_ms=="--"?"PING N/A":"PING " + wifistatus.ping_ms}")
+                     )
+                    (box :class "wifi-footer-line")
+                )
+                (revealer :reveal {wificonfigrev}
+                         :transition "slidedown"
+                         :duration "350ms"
+                         (eventbox :onhoverlost "/usr/bin/eww update wificonfigrev=false"
                                   (box :class "wifictl-container"
                                        :space-evenly false
                                        :orientation "v"
@@ -263,10 +306,40 @@
                                             )
                                        )
                                   )
-                        )
-              ))
-    )
-)
+                         )
+                )
+    ))
+
+(defwidget wifi_popup [monitor_id]
+    (box :class "wifi-popup-layer"
+         :orientation "v"
+         :hexpand true
+         :vexpand true
+         :space-evenly false
+         (eventbox :onclick "~/.config/eww/scripts/wifictl.sh ${monitor_id} close"
+                   (box :hexpand true :height 0))
+         (box :orientation "h"
+              :hexpand true
+              :vexpand false
+              :space-evenly false
+              (eventbox :onclick "~/.config/eww/scripts/wifictl.sh ${monitor_id} close"
+                        (box :hexpand true :height 1))
+              (eventbox :onclick "~/.config/eww/scripts/wifictl.sh ${monitor_id} close"
+                        (box :width 14 :height 1)))
+         (box :orientation "h"
+              :hexpand true
+              :vexpand false
+              :space-evenly false
+              (box :hexpand true)
+              (eventbox :cursor "default"
+                        :onclick ""
+                        (box :class "wifi-popup-shell"
+                             :halign "end"
+                             :valign "start"
+                             (wifi_event)))
+              (box :width 14))
+         (eventbox :onclick "~/.config/eww/scripts/wifictl.sh ${monitor_id} close"
+                   (box :hexpand true :vexpand true))))
 
 (defvar wificonfigrev false)
 (defvar wifissidrev "")
@@ -293,18 +366,18 @@
 (defwindow wifictl_0
     :monitor 0
     :stacking "overlay"
-    :focusable "ondemand"
-    :geometry (geometry :anchor "top right"
-                        :x "5px"
-                        :y "-14px"
-                        :width "425px"
-                        :height "440px"
+    :focusable false
+    :geometry (geometry :anchor "top left"
+                        :x "0px"
+                        :y "0px"
+                        :width "100%"
+                        :height "100%"
     )
     (expander :expanded true
               (revealer :transition "slidedown"
                         :reveal wifictlrev_0
                         :duration "350ms"
-                        (wifi_event)
+                        (wifi_popup :monitor_id "0")
               )
     )
 )
@@ -312,18 +385,18 @@
 (defwindow wifictl_1
     :monitor 1
     :stacking "overlay"
-    :focusable "ondemand"
-    :geometry (geometry :anchor "top right"
-                        :x "5px"
-                        :y "-14px"
-                        :width "425px"
-                        :height "440px"
+    :focusable false
+    :geometry (geometry :anchor "top left"
+                        :x "0px"
+                        :y "0px"
+                        :width "100%"
+                        :height "100%"
     )
     (expander :expanded true
               (revealer :transition "slidedown"
                         :reveal wifictlrev_1
                         :duration "350ms"
-                        (wifi_event)
+                        (wifi_popup :monitor_id "1")
               )
     )
 )
@@ -436,12 +509,12 @@
 (defwindow menuctl_0
     :monitor 0
     :stacking "overlay"
-    :focusable "ondemand"
+    :focusable false
     :geometry (geometry :anchor "top left"
                         :x "5px"
                         :y "-4px"
-                        :width "425px"
-                        :height "993px")
+                        :width "330px"
+                        :height "88%")
     (box :space-evenly false
          (revealer :transition "slideright"
                    :reveal menurev_0
@@ -452,12 +525,12 @@
 (defwindow menuctl_1
     :monitor 1
     :stacking "overlay"
-    :focusable "ondemand"
+    :focusable false
     :geometry (geometry :anchor "top left"
                         :x "5px"
                         :y "-4px"
-                        :width "425px"
-                        :height "993px")
+                        :width "330px"
+                        :height "88%")
     (box :space-evenly false
          (revealer :transition "slideright"
                    :reveal menurev_1
@@ -544,9 +617,9 @@
                         :onclick "playerctl next"
                         :tooltip "Click: next track"
                         (box :class "now-playing-content"
-                             (label :class "now-playing-text" :limit-width 30 :text "${music.title} - ${music.artist}")
-                        )
-              )
+                             (label :class "now-playing-text" :limit-width 18 :text "${music.title} - ${music.artist}")
+                         )
+               )
     )
 )
 
@@ -598,8 +671,10 @@
 )
 
 (defwidget usrctl-widget [uptime]
-    (box :space-evenly false
-         :valign "start"
+    (scroll :vscroll true
+            :hscroll false
+            (box :space-evenly false
+                 :valign "start"
     (eventbox :class "shadow-container"
          :onhoverlost "echo 'User control hover lost'"
          (box :orientation "v"
@@ -791,7 +866,7 @@
          )
          (process-panel)
          )
-    ))
+    )))
 )
 
 ;; Ventanas User Control para cada monitor
@@ -802,8 +877,8 @@
     :geometry (geometry :anchor "top right"
                         :x "5px"
                         :y "-4px"
-                        :width "425px"
-                        :height "993px"
+                        :width "330px"
+                        :height "88%"
     )
     (box :space-evenly false
          :halign "end"
@@ -822,8 +897,8 @@
     :geometry (geometry :anchor "top right"
                         :x "5px"
                         :y "-4px"
-                        :width "425px"
-                        :height "993px"
+                        :width "330px"
+                        :height "88%"
     )
     (box :space-evenly false
          :halign "end"
@@ -880,7 +955,7 @@
                              (graph :thickness 2
                                     :dynamic true
                                     :height "100"
-                                    :width "350"
+                                     :width "300"
                                     :class "graph-display"
                                     :time-range "300s"
                                     :min 0
@@ -1000,7 +1075,7 @@
     :stacking "fg"
     :geometry (geometry :anchor "top center"
                          :width "99.5%"
-                         :height "34px"
+                         :height "44px"
     )
     :exclusive true
     (bar :monitor_id "0")
@@ -1011,7 +1086,7 @@
     :stacking "fg"
     :geometry (geometry :anchor "top center"
                          :width "99.5%"
-                         :height "34px"
+                         :height "44px"
     )
     :exclusive true
     (bar :monitor_id "1")

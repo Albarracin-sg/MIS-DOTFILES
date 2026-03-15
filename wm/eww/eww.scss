@@ -212,12 +212,23 @@ menu {
 }
 
 .wifictl-container, .menuctl-container{
-  box-shadow: 0 2px 3px 2px #06060b;
-  margin:5.5px;
-  border-radius: 20px;
-  min-width:385px;
-  background-color: rgba(24,24,37,0.92);
-  padding: 5px;
+  box-shadow: 0 18px 45px rgba(5, 6, 18, 0.55), inset 0 0 0 1px rgba(171, 70, 255, 0.14);
+  margin: 4px;
+  border-radius: 24px;
+  min-width: 430px;
+  background-color: rgba(8, 8, 16, 0.985);
+  padding: 14px 18px 12px;
+  border: 1px solid rgba(171, 70, 255, 0.28);
+}
+
+.wifi-popup-layer {
+  background-color: rgba(4, 4, 10, 0.08);
+}
+
+.wifi-popup-shell {
+  min-width: 330px;
+  margin-right: 5px;
+  margin-top: 0;
 }
 
 .wifi-header, .cpu-header, .menu-header{
@@ -226,6 +237,155 @@ menu {
   margin-top:10px;
   margin-bottom:7px;
   color:rgb(48,100,170);
+}
+
+.wifi-card-header {
+  margin-bottom: 12px;
+}
+
+.wifi-card-title {
+  min-width: 0;
+}
+
+.wifi-status-dot {
+  margin-right: 10px;
+  font-size: 15px;
+}
+
+.status-online {
+  color: #39d86f;
+}
+
+.status-offline {
+  color: #ff5c8a;
+}
+
+.wifi-card-ssid {
+  color: #f5f3ff;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: "Iosevka Nerd Font";
+}
+
+.wifi-card-signal {
+  color: #c529ff;
+  font-size: 22px;
+}
+
+.wifi-card-divider,
+.wifi-footer-line {
+  min-height: 1px;
+  background-color: rgba(166, 108, 255, 0.16);
+}
+
+.wifi-card-divider {
+  margin-bottom: 12px;
+}
+
+.wifi-ip-stack {
+  margin-bottom: 12px;
+}
+
+.wifi-ip-row {
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.wifi-ip-icon-wrap {
+  min-width: 44px;
+  min-height: 44px;
+  margin-right: 10px;
+  border-radius: 12px;
+  background-color: rgba(122, 64, 214, 0.18);
+  border: 1px solid rgba(201, 120, 255, 0.2);
+}
+
+.wifi-ip-icon {
+  color: #d56bff;
+  font-size: 18px;
+  margin-top: 11px;
+  margin-left: 12px;
+}
+
+.wifi-ip-copy {
+  min-width: 0;
+  padding-top: 4px;
+}
+
+.wifi-ip-meta {
+  min-width: 0;
+  margin-bottom: 4px;
+}
+
+.local-ip-meta {
+  margin-left: 12px;
+}
+
+.wifi-ip-label {
+  color: rgba(236, 230, 255, 0.58);
+  font-size: 11px;
+  letter-spacing: 1.2px;
+}
+
+.wifi-ip-row .wifi-ip-copy {
+  padding-right: 4px;
+}
+
+.wifi-eye-wrap {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.wifi-ip-toggle {
+  color: #cc47ff;
+  font-size: 17px;
+  margin-left: 10px;
+  margin-top: 11px;
+  font-family: "JetBrainsMono Nerd Font";
+}
+
+.wifi-ip-value {
+  color: #f4efff;
+  font-size: 17px;
+  font-family: "Iosevka Nerd Font";
+  margin-left: 0;
+}
+
+.wifi-ip-local {
+  color: #56c7ff;
+}
+
+.wifi-ip-public {
+  color: #cc47ff;
+}
+
+.wifi-card-footer {
+  margin-top: 2px;
+  margin-bottom: 8px;
+}
+
+.wifi-activity {
+  color: rgba(244, 239, 255, 0.72);
+}
+
+.wifi-activity-icon {
+  color: #ff467e;
+  margin-right: 6px;
+  font-size: 15px;
+}
+
+.wifi-activity-label {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.wifi-ping {
+  color: rgba(244, 239, 255, 0.66);
+  font-size: 11px;
+  font-family: "Iosevka Nerd Font";
 }
 
 .wifi-stats, .menu-subheader{
@@ -376,13 +536,13 @@ menu {
   box-shadow: 0 2px 3px 2px #06060b;
   margin:5.5px;
   border-radius: 20px;
-  min-width:385px;
+  min-width:290px;
   background-color: rgba(24,24,37,0.92);
   padding: 5px;
 }
 
 .profile,.graph-container{
-  min-width:370px;
+  min-width:270px;
   margin:0px 7px;
   margin-top:5px;
   padding:10px;
@@ -396,7 +556,7 @@ menu {
 }
 
 .graph-display{
-  min-width:350px;
+  min-width:250px;
 }
 
 .main-temp{
@@ -447,7 +607,7 @@ menu {
 }
 
 .ctlpanel{
-  min-width:230px;
+  min-width:180px;
   margin-top:10px;
   border-radius:20px;
   padding:5px;
@@ -516,7 +676,7 @@ tooltip{
   padding:10px;
   box-shadow: 0 2px 3px 2px rgba(6,6,11,0.9);
   background-color:rgba(0,0,0,0.28);
-  min-width:370px;
+  min-width:270px;
   border-radius:15px;
 }
 
@@ -648,7 +808,7 @@ tooltip{
   box-shadow: 0 2px 3px 2px rgba(6,6,11,0.3);
   border-radius: 50px;
   min-height: 10px;
-  min-width: 250px;
+  min-width: 190px;
   margin: 0 20px 0 20px;
 }
 
@@ -798,11 +958,11 @@ tooltip{
   border-radius: 0;
   box-shadow: none;
   margin: 0;
-  padding: 4px 14px;
+  padding: 3px 8px;
 }
 
-.bar-left { margin-left: 14px; }
-.bar-center { margin: 0 12px; }
+.bar-left { margin-left: 8px; }
+.bar-center { margin: 0 8px; }
 .bar-right { margin-right: 2px; }
 .menu { margin-left: 0; }
 
@@ -811,7 +971,7 @@ tooltip{
   color: #2e2350;
   border-radius: 7px;
   min-width: 34px;
-  min-height: 34px;
+  min-height: 32px;
   font-size: 0;
   padding: 0;
   border: 1px solid rgba(229, 214, 255, 0.28);
@@ -820,7 +980,7 @@ tooltip{
 .arch-wrap,
 .panel-wrap {
   min-width: 34px;
-  min-height: 34px;
+  min-height: 32px;
   margin: 0;
 }
 
@@ -836,11 +996,11 @@ tooltip{
   background-color: rgba(39, 31, 61, 0.86);
   color: #ece6ff;
   border-radius: 9px;
-  padding: 0 14px;
-  min-width: 140px;
-  min-height: 34px;
+  padding: 0 10px;
+  min-width: 112px;
+  min-height: 32px;
   font-family: "Iosevka Nerd Font";
-  margin-right: 12px;
+  margin-right: 8px;
 }
 
 .time-label:hover {
@@ -853,10 +1013,10 @@ tooltip{
   border: 1px solid rgba(199, 177, 255, 0.14);
   color: #ece6ff;
   border-radius: 9px;
-  min-height: 34px;
-  padding: 0 14px;
+  min-height: 32px;
+  padding: 0 10px;
   font-size: 12px;
-  margin-left: 12px;
+  margin-left: 8px;
 }
 
 .now-playing-text { font-family: "Iosevka Nerd Font"; }
@@ -867,7 +1027,7 @@ tooltip{
   background-color: rgba(39, 31, 61, 0.76);
   border: 1px solid rgba(199, 177, 255, 0.14);
   border-radius: 12px;
-  padding: 0 20px;
+  padding: 0 12px;
   min-height: 36px;
   min-width: 0;
 }
@@ -904,8 +1064,36 @@ tooltip{
   background-color: rgba(39, 31, 61, 0.86);
   border: 1px solid rgba(199, 177, 255, 0.14);
   border-radius: 9px;
-  padding: 0 8px;
+  padding: 0 6px;
   min-height: 28px;
+}
+
+.network-status {
+  background-color: rgba(39, 31, 61, 0.86);
+  border: 1px solid rgba(199, 177, 255, 0.14);
+  border-radius: 9px;
+  padding-left: 0;
+  padding-right: 0;
+  color: #ece6ff;
+  min-height: 32px;
+  margin: 0;
+  font-size: 12px;
+  min-width: 34px;
+}
+
+.network-status-inner {
+  min-height: 32px;
+  min-width: 34px;
+  padding: 0 7px;
+}
+
+.network-icon {
+  color: #cebfff;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 13px;
+  min-width: 16px;
+  margin-top: 0;
+  margin-left: 1px;
 }
 
 .mini-sep {
@@ -921,7 +1109,7 @@ tooltip{
   color: #c9b4ff;
   border-radius: 7px;
   min-width: 34px;
-  min-height: 34px;
+  min-height: 32px;
   padding: 0;
   font-size: 0;
 }
@@ -957,7 +1145,7 @@ tooltip{
 
 .time-content {
   padding: 0 16px;
-  min-height: 34px;
+  min-height: 32px;
 }
 
 .now-playing {
@@ -966,5 +1154,5 @@ tooltip{
 
 .now-playing-content {
   padding: 0 16px;
-  min-height: 34px;
+  min-height: 32px;
 }
