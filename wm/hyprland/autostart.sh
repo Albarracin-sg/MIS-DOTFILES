@@ -6,9 +6,8 @@ sleep 1
 
 pick_wallpaper() {
   local candidates=(
-    "$HOME/Wallpapers/1769684794.mp4"
-    "$HOME/Wallpapers/05. Paranoid Sweet.png"
-    "$HOME/Imagenes/wallpapers/05. Paranoid Sweet.png"
+    "$HOME/Imagenes/Wallpapers/1769684794.mp4"
+    "$HOME/Imagenes/Wallpapers/05. Paranoid Sweet.png"
   )
   local candidate
 

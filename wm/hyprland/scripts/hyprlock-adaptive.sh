@@ -4,7 +4,7 @@ set -euo pipefail
 mode="${1:-lock}"
 base_conf="$HOME/.config/hypr/hyprlock.conf"
 generated_conf="/tmp/hyprlock-generated.conf"
-fallback_image="$HOME/Wallpapers/gachakuta"
+fallback_image="$HOME/Imagenes/Wallpapers/gachakuta"
 sample_image=""
 
 extract_background_path() {

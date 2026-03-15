@@ -82,6 +82,35 @@ export GITHUB_TOKEN="${GITHUB_TOKEN}"
 # ALIASES
 # ========================
 
+alias ls='eza --icons'
+alias ll='eza --icons -l'
+alias la='eza --icons -la'
+alias lt='eza --icons --tree'
+alias lta='eza --icons --tree -a'
+alias clone='git clone'
+
+if command -v bat >/dev/null 2>&1; then
+  alias cat='bat --style=plain'
+fi
+
+if command -v rg >/dev/null 2>&1; then
+  alias grep='rg'
+fi
+
+if command -v dust >/dev/null 2>&1; then
+  alias du='dust'
+fi
+
+if command -v btop >/dev/null 2>&1; then
+  alias top='btop'
+fi
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias mkdir='mkdir -pv'
+alias c='clear'
+
 #=========================
 # APAGADO O ENSENDIDO
 #========================
@@ -139,6 +168,12 @@ wtab() {
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:/home/sandia/.dotnet/tools"
+
+if command -v dircolors >/dev/null 2>&1; then
+  eval "$(dircolors -b)"
+fi
+
+export EZA_COLORS="di=1;36:ex=1;32:ln=1;35:or=1;31"
 
 
 #===================================
