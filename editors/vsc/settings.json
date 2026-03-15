@@ -70,7 +70,12 @@
   // ================================
   // Terminal integrada
   // ================================
-  "terminal.integrated.defaultProfile.linux": "zsh (2)",
+  "terminal.integrated.profiles.linux": {
+    "zsh": {
+      "path": "/usr/bin/zsh"
+    }
+  },
+  "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono",
   "terminal.integrated.suggest.enabled": true,
 
