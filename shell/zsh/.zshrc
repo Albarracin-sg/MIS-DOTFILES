@@ -123,6 +123,19 @@ alias tinkpad='ssh kiwi@100.93.157.4'
 
 alias gci="~/scripts/vsc/copilot/commit-individual.sh"
 alias ntab='kitten @ set-tab-title'
+alias ntabi='kitten @ set-tab-title " "'
+alias rtab='kitten @ set-tab-title ""'
+
+ptab() {
+  local title="${1:-${PWD:t}}"
+  kitten @ set-tab-title "$title"
+}
+
+wtab() {
+  local title="${1:-${PWD:t}}"
+  kitten @ set-tab-title "$title"
+  kitten @ set-window-title "$title"
+}
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:/home/sandia/.dotnet/tools"
