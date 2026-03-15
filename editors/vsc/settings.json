@@ -2,7 +2,7 @@
   // ================================
   // Apariencia general (Tema e iconos)
   // ================================
-  "workbench.colorTheme": "Tokyo Night",
+  "workbench.colorTheme": "Tokyo Night Dark",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.statusBar.visible": false,
   "workbench.sideBar.location": "right",
@@ -33,7 +33,7 @@
   // ================================
   // Editor
   // ================================
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
   "editor.formatOnSave": true,
   "editor.cursorBlinking": "expand",
   "editor.cursorSmoothCaretAnimation": "explicit",
@@ -63,7 +63,7 @@
   },
   "editor.suggestOnTriggerCharacters": true,
   "editor.parameterHints.enabled": true,
-  "editor.hover.enabled": true,
+  "editor.hover.enabled": "on",
   "editor.matchBrackets": "always",
   "editor.selectionHighlight": true,
 
