@@ -67,17 +67,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH=$PATH:/home/sandia/.spicetify
 
 
-#=========================
-#variables de entorno
-#=========================
-if [ -f "$HOME/MIS-DOTFILES/.env" ]; then
-  set -a
-  . "$HOME/MIS-DOTFILES/.env"
-  set +a
-fi
-
-export GITHUB_TOKEN="${GITHUB_TOKEN}"
-
 # ========================
 # ALIASES
 # ========================
@@ -88,6 +77,9 @@ alias la='eza --icons -la'
 alias lt='eza --icons --tree'
 alias lta='eza --icons --tree -a'
 alias clone='git clone'
+alias opencode='npm --prefix "$HOME/tools/MIS-DOTFILES/tools/opencode" run -s portable --'
+alias ocp='npm --prefix "$HOME/tools/MIS-DOTFILES/tools/opencode" run -s portable --'
+alias ocl='npm --prefix "$HOME/tools/MIS-DOTFILES/tools/opencode" run -s local --'
 
 if command -v bat >/dev/null 2>&1; then
   alias cat='bat --style=plain'
