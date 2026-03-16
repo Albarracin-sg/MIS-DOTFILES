@@ -35,6 +35,8 @@ plugins=(
   git
 )
 
+autoload -Uz add-zsh-hook
+
 source $ZSH/oh-my-zsh.sh
 
 # ========================
@@ -157,6 +159,116 @@ wtab() {
   kitten @ set-tab-title "$title"
   kitten @ set-window-title "$title"
 }
+
+_kitty_set_title() {
+  [[ -n ${KITTY_WINDOW_ID:-} ]] || return 0
+  local title="$1"
+  printf '\e]2;%s\a' "$title"
+  kitten @ set-window-title "$title" >/dev/null 2>&1 || true
+  kitten @ set-tab-title "$title" >/dev/null 2>&1 || true
+}
+
+_kitty_command_icon() {
+  local command_name="$1"
+
+  case "$command_name" in
+    nvim|vim|vi)
+      printf ''
+      ;;
+    yazi|ranger|lf)
+      printf ''
+      ;;
+    btop|htop|top)
+      printf '󰄪'
+      ;;
+    lazygit|git|gitui|tig|gh)
+      printf '󰊢'
+      ;;
+    ssh|scp|sftp|sshfs)
+      printf '󰣀'
+      ;;
+    docker|docker-compose|lazydocker|podman)
+      printf '󰡨'
+      ;;
+    python|python3|uv|pytest|pip|pip3|poetry)
+      printf '󰌠'
+      ;;
+    node|nodejs|npm|pnpm|yarn|bun|npx|tsx|ts-node|vite|vitest|next|astro|nuxt)
+      printf '󰎙'
+      ;;
+    java|javac|gradle|mvn)
+      printf ''
+      ;;
+    go)
+      printf ''
+      ;;
+    cargo|rustc)
+      printf ''
+      ;;
+    code|code-insiders)
+      printf '󰨞'
+      ;;
+    mysql|mariadb|mysqldump|psql|pg_dump|sqlite3|mongosh|redis-cli)
+      printf '󰆼'
+      ;;
+    kubectl|k9s|kubens|kubectx|helm)
+      printf '󱃾'
+      ;;
+    terraform|tofu|terragrunt)
+      printf '󱁢'
+      ;;
+    ansible)
+      printf '󱂚'
+      ;;
+    opencode|ocp|ocl)
+      printf '󰚩'
+      ;;
+    *)
+      printf '󰣇'
+      ;;
+  esac
+}
+
+_kitty_extract_command_name() {
+  local raw_command="$1"
+  local -a words
+  words=( ${(z)raw_command} )
+
+  local word
+  for word in "${words[@]}"; do
+    case "$word" in
+      sudo|env|command|builtin|nohup|time)
+        continue
+        ;;
+      *=*)
+        continue
+        ;;
+      *)
+        printf '%s' "$word"
+        return 0
+        ;;
+    esac
+  done
+
+  printf 'shell'
+}
+
+_kitty_title_precmd() {
+  local current_dir="${PWD:t}"
+  [[ -n "$current_dir" ]] || current_dir="~"
+  _kitty_set_title "󰣇 $current_dir"
+}
+
+_kitty_title_preexec() {
+  local command_name icon
+  command_name="$(_kitty_extract_command_name "$1")"
+  icon="$(_kitty_command_icon "$command_name")"
+  _kitty_set_title "$icon $command_name"
+}
+
+add-zsh-hook precmd _kitty_title_precmd
+add-zsh-hook preexec _kitty_title_preexec
+_kitty_title_precmd
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:/home/sandia/.dotnet/tools"
