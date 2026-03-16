@@ -6,6 +6,21 @@ Files:
 - `grub.default`: template to copy into `/etc/default/grub`.
 - `install-portable-grub.sh`: installs GRUB in removable mode for UEFI.
 - `install-crossgrub-theme.sh`: installs Crossgrub and sets it as theme.
+- `wallpapers/`: wallpapers para GRUB (symlinks a `wallpapers/icons`).
+
+## Wallpaper
+
+```bash
+# Copiar wallpaper a /boot/grub/
+sudo cp ~/tools/MIS-DOTFILES/portable/bootloader/grub/wallpapers/mclovin.jpg /boot/grub/mclovin.jpg
+
+# Editar /etc/default/grub y agregar:
+GRUB_BACKGROUND="/boot/grub/mclovin.jpg"
+GRUB_GFXMODE=1920x1080
+
+# Actualizar GRUB
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+```
 
 Notes:
 - For maximum portability on external M.2, use `--removable`.
