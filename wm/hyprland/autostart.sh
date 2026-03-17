@@ -12,6 +12,10 @@ pick_wallpaper() {
   local candidate
 
   for candidate in "${candidates[@]}"; do
+    if is_video_wallpaper "$candidate" && ! command -v mpvpaper >/dev/null 2>&1; then
+      continue
+    fi
+
     if [ -f "$candidate" ]; then
       printf '%s\n' "$candidate"
       return 0
@@ -50,9 +54,13 @@ if wallpaper=$(pick_wallpaper); then
 fi
 
 # --- EWW ---
-pkill -x eww 2>/dev/null || true
-eww kill 2>/dev/null || true
-sleep 1
-eww daemon >/dev/null 2>&1 &
-sleep 1
-"$HOME/.config/eww/scripts/start_bars.sh" >/dev/null 2>&1 || true
+if command -v eww >/dev/null 2>&1; then
+  pkill -x eww 2>/dev/null || true
+  eww kill 2>/dev/null || true
+  sleep 1
+  eww daemon >/dev/null 2>&1 &
+  sleep 1
+  "$HOME/.config/eww/scripts/start_bars.sh" >/dev/null 2>&1 || true
+else
+  echo "WARN: eww no esta instalado; se omite la barra." >&2
+fi

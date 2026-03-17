@@ -88,6 +88,12 @@ Un vistazo a mi rincón digital. Este repositorio contiene la configuración com
     ./install.sh
     ```
 
+    Para reaplicar solo los symlinks y refrescar Hyprland/Waybar sin reinstalar paquetes:
+
+    ```bash
+    ./apply.sh
+    ```
+
 3. **Elige modo de instalacion cuando te lo pregunte:**
 
 - `normal`: entorno diario (Hyprland, Waybar, EWW, apps y herramientas).
@@ -107,6 +113,12 @@ INSTALL_MODE=portable SKIP_PACKAGE_INSTALL=true ENABLE_SERVICES=false ./install.
 ```
 
 Con esto pruebas flujo y symlinks sin instalar paquetes.
+
+Uso diario recomendado:
+
+- Edita los archivos dentro de este repo; los symlinks hacen que `~/.config` y `~/.zshrc` apunten aqui.
+- Cuando quieras reaplicar todo, corre `./apply.sh`.
+- Si estas dentro de una sesion Hyprland, `./apply.sh` tambien lanza `hyprctl reload` y recarga Waybar.
 
 ### Portable (M.2)
 

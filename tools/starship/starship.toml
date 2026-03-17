@@ -1,0 +1,129 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = true
+palette = "purple_soft"
+
+format = """
+[](p1)\
+$os\
+$directory\
+[](fg:p1 bg:p2)\
+$git_branch\
+$git_status\
+[](fg:p2 bg:p3)\
+$nodejs\
+$python\
+$rust\
+$golang\
+$java\
+$php\
+$docker_context\
+$kubernetes\
+$sudo\
+[](fg:p3)\
+$fill\
+$time\
+$line_break\
+$character
+"""
+
+[palettes.purple_soft]
+p1 = "#c4b5fd"
+p2 = "#a78bfa"
+p3 = "#8b5cf6"
+fg = "#241d33"
+text = "#faf5ff"
+muted = "#e9ddff"
+red = "#fda4af"
+
+[os]
+disabled = false
+style = "bg:p1 fg:fg"
+format = "[  ]($style)"
+
+[directory]
+style = "bg:p1 fg:fg"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+home_symbol = "~"
+
+[directory.substitutions]
+Documents = "󰈙 docs"
+Downloads = " dl"
+Desktop = " desk"
+Pictures = " pics"
+Videos = "󰈫 vid"
+Music = "󰝚 music"
+
+[git_branch]
+symbol = ""
+style = "bg:p2 fg:text"
+format = "[ $symbol $branch ]($style)"
+
+[git_status]
+style = "bg:p2 fg:muted"
+format = "[ $all_status$ahead_behind ]($style)"
+
+[nodejs]
+symbol = "󰎙"
+style = "bg:p3 fg:text"
+format = "[ $symbol $version ]($style)"
+
+[python]
+symbol = "󰌠"
+style = "bg:p3 fg:text"
+format = "[ $symbol $version ]($style)"
+
+[rust]
+symbol = "󱘗"
+style = "bg:p3 fg:text"
+format = "[ $symbol $version ]($style)"
+
+[golang]
+symbol = ""
+style = "bg:p3 fg:text"
+format = "[ $symbol $version ]($style)"
+
+[java]
+symbol = ""
+style = "bg:p3 fg:text"
+format = "[ $symbol $version ]($style)"
+
+[php]
+symbol = ""
+style = "bg:p3 fg:text"
+format = "[ $symbol $version ]($style)"
+
+[docker_context]
+symbol = ""
+style = "bg:p3 fg:text"
+format = "[ $symbol $context ]($style)"
+detect_files = ["Dockerfile", "docker-compose.yml", "docker-compose.yaml"]
+
+[kubernetes]
+symbol = "󱃾"
+style = "bg:p3 fg:text"
+format = "[ $symbol $context ]($style)"
+disabled = false
+
+[sudo]
+disabled = false
+style = "bg:p3 fg:text"
+format = "[ 󰈸 ]($style)"
+
+[fill]
+symbol = " "
+
+[time]
+disabled = false
+time_format = "%H:%M"
+style = "bold #d8c8f7"
+format = "[󰥔 $time]($style)"
+
+[character]
+success_symbol = "[❯](bold p1)"
+error_symbol = "[❯](bold red)"
+
+[line_break]
+disabled = false

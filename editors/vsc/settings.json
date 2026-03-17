@@ -1,8 +1,4 @@
 {
-  // ================================
-  // Apariencia general (Tema e iconos)
-  // ================================
-  "workbench.colorTheme": "Tokyo Night Dark",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.statusBar.visible": false,
   "workbench.sideBar.location": "right",
@@ -33,18 +29,19 @@
   // ================================
   // Editor
   // ================================
-  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.cursorBlinking": "expand",
+  "workbench.activityBar.location": "hidden",
   "editor.cursorSmoothCaretAnimation": "explicit",
   "editor.linkedEditing": true,
   "editor.guides.bracketPairs": true,
   "editor.glyphMargin": false,
   "editor.minimap.enabled": false,
-  "editor.scrollbar.vertical": "visible",
+  "editor.scrollbar.vertical": "hidden",
   "editor.overviewRulerBorder": false,
   "editor.fontSize": 16,
-  "editor.fontFamily": "'FiraCode Nerd Font Mono', 'Fira Code', Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.smoothScrolling": true,
   "editor.renderWhitespace": "none",
@@ -70,13 +67,8 @@
   // ================================
   // Terminal integrada
   // ================================
-  "terminal.integrated.profiles.linux": {
-    "zsh": {
-      "path": "/usr/bin/zsh"
-    }
-  },
-  "terminal.integrated.defaultProfile.linux": "zsh",
-  "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "terminal.integrated.fontFamily": "FiraCode Nerd Font",
   "terminal.integrated.suggest.enabled": true,
 
   // ================================
@@ -101,43 +93,14 @@
   "liveServer.settings.donotVerifyTags": true,
   "liveServer.settings.donotShowInfoMsg": true,
   "tabnine.experimentalAutoImports": true,
-  "python.createEnvironment.trigger": "off",
-
-  // =================================
-  // obsidian
-  // =================================
-  "obsidian-md.defaultVault": "sandia",
-  "obsidian-md.defaultVaultPath": "/home/sandia/obsidian/sandia",
-  "obsidian-md.defaultNote": "Inbox",
   "chat.instructionsFilesLocations": {
     ".github/instructions": true,
-    "/tmp/postman-collections-post-response.instructions.md": true,
-    "/tmp/postman-collections-pre-request.instructions.md": true,
-    "/tmp/postman-folder-post-response.instructions.md": true,
-    "/tmp/postman-folder-pre-request.instructions.md": true,
-    "/tmp/postman-http-request-post-response.instructions.md": true,
-    "/tmp/postman-http-request-pre-request.instructions.md": true
+    "C:\\Users\\JUANCA~1\\AppData\\Local\\Temp\\postman-collections-post-response.instructions.md": true,
+    "C:\\Users\\JUANCA~1\\AppData\\Local\\Temp\\postman-collections-pre-request.instructions.md": true,
+    "C:\\Users\\JUANCA~1\\AppData\\Local\\Temp\\postman-folder-post-response.instructions.md": true,
+    "C:\\Users\\JUANCA~1\\AppData\\Local\\Temp\\postman-folder-pre-request.instructions.md": true,
+    "C:\\Users\\JUANCA~1\\AppData\\Local\\Temp\\postman-http-request-post-response.instructions.md": true,
+    "C:\\Users\\JUANCA~1\\AppData\\Local\\Temp\\postman-http-request-pre-request.instructions.md": true,
   },
-
-  // ================================
-  // Asociaciones de editores
-  // ================================
-  "workbench.editorAssociations": {
-    "*.copilotmd": "vscode.markdown.preview.editor",
-    "*.html": "default",
-  },
-
-  // ================================
-  // GitLens AI
-  // ================================
-  "gitlens.ai.model": "vscode",
-  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
-
-  // ================================
-  // UI extra
-  // ================================
-  "window.commandCenter": true,
-  "diffEditor.ignoreTrimWhitespace": false,
-  "git.confirmSync": false,
-  "vscodeGoogleTranslate.preferredLanguage": "Spanish",
+  "workbench.colorTheme": "Tokyo Night Dark",
 }

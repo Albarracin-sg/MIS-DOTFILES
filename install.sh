@@ -3,6 +3,7 @@ set -euo pipefail
 
 # Directorio de origen
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$DOTFILES_DIR/lib/symlinks.sh"
 
 # Dependencias comunes
 common_dependencies=(
@@ -243,54 +244,6 @@ enable_services() {
     fi
 }
 
-create_all_symlinks() {
-    # Crear enlaces simbolicos
-    create_symlink "$DOTFILES_DIR/shell/zsh/.zshrc" "$HOME/.zshrc"
-    create_symlink "$DOTFILES_DIR/terminal/kitty" "$HOME/.config/kitty"
-    create_symlink "$DOTFILES_DIR/editors/nvim" "$HOME/.config/nvim"
-    create_symlink "$DOTFILES_DIR/editors/vsc/settings.json" "$HOME/.config/Code/User/settings.json"
-    create_symlink "$DOTFILES_DIR/editors/vsc/keybindings.json" "$HOME/.config/Code/User/keybindings.json"
-    create_symlink "$DOTFILES_DIR/gemini" "$HOME/.gemini"
-    create_symlink "$DOTFILES_DIR/wm/hyprland" "$HOME/.config/hypr"
-    create_symlink "$DOTFILES_DIR/wm/waybar" "$HOME/.config/waybar"
-    create_symlink "$DOTFILES_DIR/wm/eww" "$HOME/.config/eww"
-    create_symlink "$DOTFILES_DIR/tools/fastfetch" "$HOME/.config/fastfetch"
-    create_symlink "$DOTFILES_DIR/tools/rofi" "$HOME/.config/rofi"
-    create_symlink "$DOTFILES_DIR/tools/opencode" "$HOME/.config/opencode"
-    create_symlink "$DOTFILES_DIR/tools/bin/organize-downloads.sh" "$HOME/.local/bin/organize-downloads.sh"
-    create_symlink "$DOTFILES_DIR/tools/systemd-user/organize-downloads.service" "$HOME/.config/systemd/user/organize-downloads.service"
-    create_symlink "$DOTFILES_DIR/tools/systemd-user/organize-downloads.path" "$HOME/.config/systemd/user/organize-downloads.path"
-    mkdir -p "$HOME/Imagenes"
-    create_symlink "$DOTFILES_DIR/wallpapers" "$HOME/Imagenes/Wallpapers"
-
-    if [ "$selected_mode" = "portable" ]; then
-        create_symlink "$DOTFILES_DIR/portable" "$HOME/.local/share/mis-dotfiles-portable"
-    fi
-}
-
-# Funcion para crear enlaces simbolicos
-create_symlink() {
-    local source=$1
-    local destination=$2
-
-    if [ ! -e "$source" ]; then
-        echo "WARN: No existe el origen $source, se omite el symlink."
-        return
-    fi
-    
-    # Crear directorio de destino si no existe
-    mkdir -p "$(dirname "$destination")"
-    
-    # Eliminar archivo o enlace simbÃ³lico existente
-    if [ -L "$destination" ] || [ -e "$destination" ]; then
-        rm -rf "$destination"
-    fi
-    
-    # Crear nuevo enlace simbolico
-    ln -s "$source" "$destination"
-    echo "Enlace simbolico creado para $destination"
-}
-
 select_install_mode
 prepare_dependencies
 
@@ -304,7 +257,8 @@ install_oh_my_zsh
 install_zsh_extras
 
 # Crear enlaces simbolicos
-create_all_symlinks
+create_all_symlinks "$selected_mode"
+verify_symlinks "$selected_mode"
 
 # Asegurar permisos de ejecucion para scripts clave
 chmod +x "$HOME/.config/hypr/autostart.conf" || true
@@ -312,7 +266,15 @@ chmod +x "$HOME/.config/hypr/scripts/detect-monitors.sh" || true
 chmod +x "$HOME/.config/hypr/scripts/detect-gpu.sh" || true
 chmod +x "$HOME/.config/hypr/scripts/portable-session.sh" || true
 chmod +x "$HOME/.config/eww/scripts/start_bars.sh" || true
+chmod +x "$HOME/.local/bin/opencode-profile" || true
+chmod +x "$HOME/.local/bin/open-browser.sh" || true
 chmod +x "$HOME/.local/bin/organize-downloads.sh" || true
+chmod +x "$DOTFILES_DIR/tools/bin/install-tableplus.sh" || true
+
+# Instalar aplicaciones adicionales
+if [ -f "$DOTFILES_DIR/tools/bin/install-tableplus.sh" ]; then
+  "$DOTFILES_DIR/tools/bin/install-tableplus.sh"
+fi
 
 # Habilitar servicios necesarios
 enable_services

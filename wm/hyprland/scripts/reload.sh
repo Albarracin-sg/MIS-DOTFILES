@@ -1,9 +1,7 @@
-hyprctl reload
+#!/usr/bin/env bash
 
-if command -v eww >/dev/null 2>&1; then
-  "$HOME/.config/eww/reload.sh" >/dev/null 2>&1 || true
+hyprctl reload >/dev/null 2>&1 || true
+
+if [ -x "$HOME/.config/hypr/autostart.sh" ]; then
+  nohup "$HOME/.config/hypr/autostart.sh" >/dev/null 2>&1 &
 fi
-
-killall hyprpaper
-
-hyprpaper
