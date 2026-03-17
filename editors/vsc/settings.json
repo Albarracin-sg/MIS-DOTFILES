@@ -103,4 +103,5 @@
     "C:\\Users\\JUANCA~1\\AppData\\Local\\Temp\\postman-http-request-pre-request.instructions.md": true,
   },
   "workbench.colorTheme": "Tokyo Night Dark",
+  "security.workspace.trust.untrustedFiles": "open",
 }

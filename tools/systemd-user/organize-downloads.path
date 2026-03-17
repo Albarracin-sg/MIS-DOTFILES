@@ -2,7 +2,8 @@
 Description=Watch Downloads for new files
 
 [Path]
-PathChanged=/home/guayaba/Downloads
+PathChanged=%h/Descargas
+PathChanged=%h/Descargas/zen
 Unit=organize-downloads.service
 
 [Install]
