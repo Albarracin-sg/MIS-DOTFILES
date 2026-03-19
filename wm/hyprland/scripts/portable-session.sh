@@ -2,7 +2,7 @@
 set -euo pipefail
 
 "$HOME/.config/hypr/scripts/detect-gpu.sh"
-"$HOME/.config/hypr/scripts/detect-monitors.sh"
+#"$HOME/.config/hypr/scripts/detect-monitors.sh"
 
 # Apply generated monitor/GPU config in this session.
 hyprctl reload >/dev/null 2>&1 || true
