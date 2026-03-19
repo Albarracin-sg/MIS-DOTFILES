@@ -1148,6 +1148,8 @@
 )
 
 ;; ==================== VENTANAS DE BARRAS ====================
+;; Crimson Void replaces the normal top bar windows with left-side vertical windows.
+;; The widget itself is independent from Tokyo Night so this theme can diverge freely.
 (defwindow bar_widget_0
     :monitor 0
     :stacking "fg"

@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+# Runtime files generated from the selected theme.
+# The source of truth lives in `themes/<slug>/...` inside the dotfiles repo.
 themes_dir="$HOME/.config/hypr/themes"
 kitty_current="$HOME/.config/kitty/current-theme.conf"
 rofi_current="$HOME/.config/rofi/themes/current.rasi"
@@ -46,10 +48,14 @@ is_video_wallpaper() {
 # shellcheck disable=SC1090
 source "$theme_file"
 
+# Persist the active theme metadata for Hyprland/Eww helper scripts.
 cp "$theme_file" "$current_conf"
+
+# Apply app-specific runtime files.
 cp "$THEME_KITTY_FILE" "$kitty_current"
 
 mkdir -p "$eww_config_dir"
+# Reuse the shared Eww scripts directory but swap the visual config per theme.
 ln -sfn "$HOME/.config/eww/scripts" "$eww_config_dir/scripts"
 
 if [[ -n "${THEME_EWW_YUCK_FILE:-}" ]] && [[ -f "$THEME_EWW_YUCK_FILE" ]]; then
@@ -64,6 +70,7 @@ cat > "$rofi_current" <<EOF
 @theme "${THEME_ROFI_FILE}"
 EOF
 
+# Export variables consumed by hyprpaper/hyprlock wrappers.
 cat > "$current_theme" <<EOF
 \$theme_wallpaper = "${THEME_WALLPAPER}"
 \$theme_hyprlock_wallpaper = "${THEME_HYPRLOCK_WALLPAPER}"
@@ -80,6 +87,10 @@ if command -v kitty >/dev/null 2>&1; then
   kitty @ set-colors -a "$kitty_current" >/dev/null 2>&1 || true
 fi
 
+# Wallpaper priority:
+# 1. mpvpaper for video themes
+# 2. swww for image themes
+# 3. hyprpaper as final fallback
 if is_video_wallpaper "$THEME_WALLPAPER" && command -v mpvpaper >/dev/null 2>&1; then
   pkill -f mpvpaper >/dev/null 2>&1 || true
   pkill hyprpaper >/dev/null 2>&1 || true

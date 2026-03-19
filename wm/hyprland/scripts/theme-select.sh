@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+# Runtime dir stores the currently applied theme.
+# Repo dir stores every available theme definition.
 themes_runtime_dir="$HOME/.config/hypr/themes"
 script_dir="$(cd "$(dirname "$(realpath "$0")")" && pwd)"
 repo_root="$(cd "$script_dir/../../.." && pwd)"
@@ -20,6 +22,7 @@ if [[ -f "$themes_runtime_dir/current.conf" ]]; then
   current_slug="${THEME_SLUG:-}"
 fi
 
+# Show every theme from the repo and mark the one that is already active.
 selection="$({
   while IFS= read -r theme_file; do
     unset THEME_SLUG THEME_NAME THEME_DESCRIPTION
