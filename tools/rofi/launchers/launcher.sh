@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
-theme='tokyonight' # nombre del archivo sin extensión .rasi
+dir="$HOME/.config/rofi/themes"
+theme='tokyonight'
 
-## Run
+pkill -x rofi >/dev/null 2>&1 || true
+sleep 0.12
+
 rofi \
   -show drun \
-  -theme "$theme"
+  -show-icons \
+  -matching fuzzy \
+  -theme "${dir}/${theme}.rasi"
