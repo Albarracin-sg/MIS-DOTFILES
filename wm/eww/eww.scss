@@ -1156,3 +1156,162 @@ tooltip{
   padding: 0 16px;
   min-height: 32px;
 }
+
+.bar-vertical {
+  box-shadow: 0 24px 60px rgba(10, 2, 6, 0.5);
+  background-color: rgba(24, 8, 13, 0.94);
+  border: 1px solid rgba(159, 47, 81, 0.24);
+  border-radius: 24px;
+  padding: 14px 10px;
+  margin: 0;
+}
+
+.bar-vertical .bar-left,
+.bar-vertical .bar-center,
+.bar-vertical .bar-right {
+  min-width: 60px;
+}
+
+.bar-vertical .bar-left,
+.bar-vertical .bar-center,
+.bar-vertical .bar-right {
+  margin: 0;
+}
+
+.bar-vertical .menu-eventbox,
+.bar-vertical .time-label,
+.bar-vertical .network-status,
+.bar-vertical .power-eventbox,
+.bar-vertical .bluetooth,
+.bar-vertical .volume-short,
+.bar-vertical .ram-short,
+.bar-vertical .cpu-short {
+  min-width: 60px;
+  min-height: 52px;
+  border-radius: 18px;
+  padding: 0;
+  margin: 0;
+}
+
+.bar-vertical .menu-eventbox {
+  background-color: rgba(101, 14, 38, 0.92);
+  border: 1px solid rgba(212, 73, 111, 0.28);
+  color: #ffe7ef;
+}
+
+.bar-vertical .menu-eventbox:hover {
+  color: #ffffff;
+  background-color: rgba(132, 24, 52, 0.96);
+}
+
+.bar-vertical .time-label,
+.bar-vertical .network-status,
+.bar-vertical .metrics-pack,
+.bar-vertical .power-eventbox {
+  background-color: rgba(58, 18, 31, 0.9);
+  border: 1px solid rgba(201, 71, 111, 0.16);
+}
+
+.bar-vertical .time-content {
+  padding: 10px 0;
+  min-height: 58px;
+}
+
+.bar-vertical .time-content label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffe7ef;
+}
+
+.bar-vertical .ws {
+  padding: 8px 0;
+  min-width: 42px;
+  border-radius: 0;
+  background-color: transparent;
+  border: none;
+}
+
+.bar-vertical .ws-item {
+  min-width: 14px;
+  min-height: 14px;
+  border-radius: 999px;
+  background-color: rgba(255, 236, 242, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  margin: 4px 0;
+}
+
+.bar-vertical .ws-item label {
+  color: transparent;
+  font-size: 1px;
+}
+
+.bar-vertical .ws-active {
+  background-color: rgba(182, 39, 78, 0.95);
+  border-color: rgba(255, 214, 226, 0.22);
+  box-shadow: 0 0 0 3px rgba(182, 39, 78, 0.16);
+}
+
+.bar-vertical .ws-occupied {
+  background-color: rgba(118, 24, 50, 0.62);
+  border-color: rgba(255, 194, 214, 0.12);
+}
+
+.bar-vertical .ws-empty {
+  background-color: rgba(255, 240, 245, 0.08);
+  border-color: rgba(255, 255, 255, 0.02);
+}
+
+.bar-vertical .metrics-pack {
+  padding: 10px 0;
+  border-radius: 20px;
+}
+
+.bar-vertical .volume-short,
+.bar-vertical .ram-short,
+.bar-vertical .cpu-short,
+.bar-vertical .bluetooth,
+.bar-vertical .wifi {
+  background-color: transparent;
+}
+
+.bar-vertical .volume-short box,
+.bar-vertical .ram-short box,
+.bar-vertical .cpu-short box {
+  min-width: 60px;
+  min-height: 52px;
+}
+
+.bar-vertical .volume-short label,
+.bar-vertical .ram-short label,
+.bar-vertical .cpu-short label,
+.bar-vertical .bluetooth-icon,
+.bar-vertical .network-icon {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffe7ef;
+}
+
+.bar-vertical .icon {
+  margin-right: 0;
+}
+
+.bar-vertical .menu-eventbox,
+.bar-vertical .time-label,
+.bar-vertical .network-status,
+.bar-vertical .metrics-pack,
+.bar-vertical .power-eventbox {
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.bar-vertical .menu-eventbox:hover,
+.bar-vertical .time-label:hover,
+.bar-vertical .network-status:hover,
+.bar-vertical .power-eventbox:hover {
+  background-color: rgba(88, 24, 43, 0.96);
+}
+
+.bar-vertical .divider,
+.bar-vertical .mini-sep,
+.bar-vertical .div {
+  color: rgba(246, 219, 226, 0.2);
+}

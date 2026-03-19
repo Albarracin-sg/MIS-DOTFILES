@@ -3,7 +3,7 @@
 set -euo pipefail
 
 dir="$HOME/.config/rofi/themes"
-theme='tokyonight'
+theme='current'
 tmp_file="$(mktemp)"
 trap 'rm -f "$tmp_file"' EXIT
 

@@ -1,2 +1,8 @@
 .env
 wm/eww/image.jpg
+wm/eww/current/
+terminal/kitty/current-theme.conf
+tools/rofi/themes/current.rasi
+wm/eww/current-theme.scss
+wm/hyprland/themes/current.conf
+wm/hyprland/themes/current.theme

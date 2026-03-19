@@ -5,11 +5,21 @@ set -euo pipefail
 sleep 1
 
 pick_wallpaper() {
+  local current_theme_file="$HOME/.config/hypr/themes/current.conf"
   local candidates=(
     "$HOME/Imagenes/Wallpapers/1769684794.mp4"
     "$HOME/Imagenes/Wallpapers/05. Paranoid Sweet.png"
   )
   local candidate
+
+  if [ -f "$current_theme_file" ]; then
+    # shellcheck disable=SC1090
+    source "$current_theme_file"
+    if [ -n "${THEME_WALLPAPER:-}" ] && [ -f "$THEME_WALLPAPER" ]; then
+      printf '%s\n' "$THEME_WALLPAPER"
+      return 0
+    fi
+  fi
 
   for candidate in "${candidates[@]}"; do
     if is_video_wallpaper "$candidate" && ! command -v mpvpaper >/dev/null 2>&1; then
@@ -39,10 +49,13 @@ is_video_wallpaper() {
 if wallpaper=$(pick_wallpaper); then
   if is_video_wallpaper "$wallpaper" && command -v mpvpaper >/dev/null 2>&1; then
     pkill swww-daemon 2>/dev/null || true
-    pkill mpvpaper 2>/dev/null || true
-    mpvpaper -f -p -o "no-audio loop keepaspect=yes panscan=1.0" "*" "$wallpaper" >/dev/null 2>&1 || true
+    pkill -f mpvpaper 2>/dev/null || true
+    while IFS= read -r monitor; do
+      [ -n "$monitor" ] || continue
+      mpvpaper -f -p -o "no-audio loop keepaspect=yes panscan=1.0" "$monitor" "$wallpaper" >/dev/null 2>&1 &
+    done < <(hyprctl monitors -j | jq -r '.[].name')
   else
-    pkill mpvpaper 2>/dev/null || true
+    pkill -f mpvpaper 2>/dev/null || true
     pkill swww-daemon 2>/dev/null || true
     swww-daemon >/dev/null 2>&1 &
     sleep 1

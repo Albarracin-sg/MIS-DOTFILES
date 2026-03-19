@@ -1,0 +1,1317 @@
+*{
+  all: unset;
+  font-family:"Monocraft Nerd Font";
+}
+
+.bar{
+  box-shadow: 0 2px 3px 1px rgba(6,6,11,0.9);
+  border-radius: 10px;
+  background-color: rgba(24,24,37,0.94);
+  padding: 5px;
+  margin:6.5px;
+}
+
+.menu{
+  margin-left:12px;
+}
+
+.menu-eventbox{
+  color:#1793d1;
+  transition: color 0.3s;
+  &:hover{
+    color:#cdd6f4;
+  }
+}
+
+power{
+  margin-right:10px;
+}
+
+.power-eventbox{
+  color:rgb(230,100,100);
+  font-weight:bold;
+  font-size:20px;
+  font-family: "JetBrainsMono Nerd Font";
+  transition: color 0.3s;
+  &:hover{
+    color:rgb(245,162,96);
+  }
+}
+
+.ws{
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 16px;
+  color: #cdd6f4;
+}
+
+.div{
+  font-size:25px;
+  font-weight:100;
+  color:rgba(205,212,246,0.3);
+}
+
+.free{
+  opacity:0.2;
+  transition: opacity 0.3s;
+  &:hover{
+    opacity:1;
+  }
+}
+
+.workspace-item{
+  margin: 0px 3px;
+}
+
+.visiting{
+  background-color: rgba(70,70,220,0.9);
+  border-radius: 8px;
+  padding: 2px 10px;
+  font-weight: bold;
+  transition: all 0.2s;
+  &:hover{
+    background-color: rgba(90,90,240,0.95);
+  }
+}
+
+.occupied{
+  background-color: rgba(100,100,180,0.3);
+  border-radius: 6px;
+  padding: 2px 8px;
+  transition: all 0.2s;
+  &:hover{
+    background-color: rgba(120,120,200,0.5);
+  }
+}
+
+.free{
+  background-color: rgba(60,60,60,0.2);
+  border-radius: 6px;
+  padding: 2px 8px;
+  transition: all 0.2s;
+  opacity: 0.7;
+  &:hover{
+    background-color: rgba(80,80,80,0.4);
+    opacity: 1;
+  }
+}
+
+.time-label{
+  background-color:rgba(0,0,0,0.38);
+  color:rgb(78,200,200);
+  border-radius:20px;
+  transition: color 0.3s;
+  transition: background-color 0.3s;
+  &:hover{
+    color:rgb(255,255,255);
+    background-color:rgb(78,200,200);
+  }
+}
+
+.keyboard,.battery,.volume-short, .ram-short{
+  background-color:rgba(0,0,0,0.38);
+  padding:0px 13px;
+  border-radius:20px;
+  font-size:11px;
+  margin:3px 0px;
+}
+
+.volume-short{
+  color: #a9b3cd;  // Tokyo Night purple
+}
+
+.ram-short{
+  color: #7aa2f7;  // Tokyo Night blue
+}
+
+.cpu-short{
+  color: #9d7cd8;  // Tokyo Night mauve
+  background-color:rgba(0,0,0,0.38);
+  padding:0px 13px;
+  border-radius:20px;
+  font-size:11px;
+  margin:3px 0px;
+}
+
+.cpu-short label,
+.ram-short label,
+.volume-short label{
+  font-family: "JetBrainsMono Nerd Font";
+}
+
+.icon{
+  margin-right: 3px;
+}
+
+.keyboard{
+  color:rgb(245,162,96);
+}
+
+.kb-div,.wifi-div{
+  margin:0px 3px;
+}
+
+.kb-type,.wifi-type{
+  color:rgb(205,212,246);
+}
+
+.tray-button{
+  font-size:20px;
+  font-family:"JetBrainsMono Nerd Font";
+  color: #cdd6f4;
+  border-radius:10px;
+  transition: background-color 0.6s;
+  &:hover{
+    background-color:rgba(0,0,0,0.38);
+  }
+}
+
+.systray-shadow{
+  background-color:rgba(0,0,0,0.38);
+  margin-right:5px;
+  margin-top:3px;
+  margin-bottom:3px;
+  padding:0px 8px;
+  border-radius:20px;
+}
+
+image{
+  margin: 0px 3px;
+}
+
+menu {
+  border-radius:15px;
+  padding: 10px;
+  background-color: red;
+  color:#cdd6f4;
+  background-color: rgba(0,0,0,0.68);
+  menuitem {
+    border-radius: 10px;
+    padding: 8px 12px;
+  }
+  menuitem:hover {
+    background-color: rgba(70,70,220,0.85);
+  }
+}
+
+.tray-text{
+  margin-bottom:4px;
+}
+
+.wifi{
+  background-color:rgba(0,0,0,0.38);
+  padding-left: 13px;
+  padding-right: 13px;
+  color:rgb(245,162,96);
+  border-radius:20px;
+  font-size:11px;
+  margin:3px 0px;
+}
+
+.space-wifi{
+  font-size:4px;
+}
+
+.wifictl-container, .menuctl-container{
+  box-shadow: 0 18px 45px rgba(5, 6, 18, 0.55), inset 0 0 0 1px rgba(171, 70, 255, 0.14);
+  margin: 4px;
+  border-radius: 24px;
+  min-width: 430px;
+  background-color: rgba(8, 8, 16, 0.985);
+  padding: 14px 18px 12px;
+  border: 1px solid rgba(171, 70, 255, 0.28);
+}
+
+.wifi-popup-layer {
+  background-color: rgba(4, 4, 10, 0.08);
+}
+
+.wifi-popup-shell {
+  min-width: 330px;
+  margin-right: 5px;
+  margin-top: 0;
+}
+
+.wifi-header, .cpu-header, .menu-header{
+  font-size:25px;
+  margin-left:15px;
+  margin-top:10px;
+  margin-bottom:7px;
+  color:rgb(48,100,170);
+}
+
+.wifi-card-header {
+  margin-bottom: 12px;
+}
+
+.wifi-card-title {
+  min-width: 0;
+}
+
+.wifi-status-dot {
+  margin-right: 10px;
+  font-size: 15px;
+}
+
+.status-online {
+  color: #39d86f;
+}
+
+.status-offline {
+  color: #ff5c8a;
+}
+
+.wifi-card-ssid {
+  color: #f5f3ff;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: "Iosevka Nerd Font";
+}
+
+.wifi-card-signal {
+  color: #c529ff;
+  font-size: 22px;
+}
+
+.wifi-card-divider,
+.wifi-footer-line {
+  min-height: 1px;
+  background-color: rgba(166, 108, 255, 0.16);
+}
+
+.wifi-card-divider {
+  margin-bottom: 12px;
+}
+
+.wifi-ip-stack {
+  margin-bottom: 12px;
+}
+
+.wifi-ip-row {
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.wifi-ip-icon-wrap {
+  min-width: 44px;
+  min-height: 44px;
+  margin-right: 10px;
+  border-radius: 12px;
+  background-color: rgba(122, 64, 214, 0.18);
+  border: 1px solid rgba(201, 120, 255, 0.2);
+}
+
+.wifi-ip-icon {
+  color: #d56bff;
+  font-size: 18px;
+  margin-top: 11px;
+  margin-left: 12px;
+}
+
+.wifi-ip-copy {
+  min-width: 0;
+  padding-top: 4px;
+}
+
+.wifi-ip-meta {
+  min-width: 0;
+  margin-bottom: 4px;
+}
+
+.local-ip-meta {
+  margin-left: 12px;
+}
+
+.wifi-ip-label {
+  color: rgba(236, 230, 255, 0.58);
+  font-size: 11px;
+  letter-spacing: 1.2px;
+}
+
+.wifi-ip-row .wifi-ip-copy {
+  padding-right: 4px;
+}
+
+.wifi-eye-wrap {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.wifi-ip-toggle {
+  color: #cc47ff;
+  font-size: 17px;
+  margin-left: 10px;
+  margin-top: 11px;
+  font-family: "JetBrainsMono Nerd Font";
+}
+
+.wifi-ip-value {
+  color: #f4efff;
+  font-size: 17px;
+  font-family: "Iosevka Nerd Font";
+  margin-left: 0;
+}
+
+.wifi-ip-local {
+  color: #56c7ff;
+}
+
+.wifi-ip-public {
+  color: #cc47ff;
+}
+
+.wifi-card-footer {
+  margin-top: 2px;
+  margin-bottom: 8px;
+}
+
+.wifi-activity {
+  color: rgba(244, 239, 255, 0.72);
+}
+
+.wifi-activity-icon {
+  color: #ff467e;
+  margin-right: 6px;
+  font-size: 15px;
+}
+
+.wifi-activity-label {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.wifi-ping {
+  color: rgba(244, 239, 255, 0.66);
+  font-size: 11px;
+  font-family: "Iosevka Nerd Font";
+}
+
+.wifi-stats, .menu-subheader{
+  color: #cdd6f4;
+  margin-left:15px;
+}
+
+.nocon{
+  color:#E74C3C;
+}
+
+.yescon{
+  color: #2ECC71;
+}
+
+.network-container, .app-container{
+  min-height:15rem;
+  margin:7px;
+  margin-top:17px;
+  border-radius:15px;
+  box-shadow: 0 2px 3px 2px rgba(6,6,11,0.9);
+  background-color:rgba(0,0,0,0.28);
+}
+
+.app-container{
+  min-height:25rem;
+}
+
+.wifi-option-box, .app-option-box{
+  font-size:16px;
+  margin:5px 5px;
+  border-radius:15px;
+  padding:10px;
+  background-color:rgba(65,72,86,0.3);
+  box-shadow: 0 2px 3px 2px rgba(6,6,11,0.9);
+}
+
+.wifi-ssid{
+  margin:2px 15px;
+}
+
+.app-display{
+  margin:2px 2px;
+}
+
+.app-name{
+  margin-left:15px;
+}
+
+.wifi-ssid-01{
+  color: #cdd6f4;
+}
+
+.wifi-ssid-02{
+  color: #4D9FEC;
+}
+
+.wifi-ssid-03{
+  color: #2ECC71;
+}
+
+.wifi-buttons{
+  color: #cdd6f4;
+  border-radius:10px;
+  background-color: rgba(0,0,0,0.52);
+}
+
+.wifi-bcon{
+  margin:10px;
+}
+
+.iwifi{
+  margin-top:2px;
+  margin-left:10px;
+}
+
+.swifi-header{
+  font-size:15px;
+  margin-left:15px;
+  margin-top:10px;
+  margin-bottom:7px;
+  color: #cdd6f4;
+}
+
+.calendar-container{
+  box-shadow: 0 2px 3px 2px #06060b;
+  margin:5.5px;
+  margin-bottom:10px;
+  border-radius: 20px;
+  background-color: rgba(24,24,37,0.92);
+  padding: 5px;
+}
+
+.time-box{
+  box-shadow: 0 2px 3px 2px #06060b;
+  border-radius:15px;
+  margin-top:8px;
+  padding-left:25px;
+  padding-right:25px;
+  padding-bottom:20px;
+  background-color:rgba(0,0,0,0.28);
+}
+
+.time-inner{
+  color:rgb(48,100,170);
+  font-size:50px;
+  margin-left:4px;
+  margin-top:10px;
+}
+
+.date-inner{
+  color:#cdd4f6;
+  margin-top:20px;
+  font-size:18px;
+}
+
+.calendar-box{
+  box-shadow: 0 2px 3px 2px rgba(6,6,11,0.9);
+  border-radius:15px;
+  padding-top:10px;
+  padding-left:10px;
+  padding-right:10px;
+  margin-bottom:9px;
+  background-color:rgba(0,0,0,0.28);
+}
+
+.cal{
+  padding:5px;
+  color:rgb(205,212,246);
+  &.header{
+    color:rgb(219,193,117);
+  }
+  &.button{
+    color:rgb(219,193,117);
+    &:hover{
+      color:rgb(230,100,100);
+    }
+  }
+  &:indeterminate{
+    color:rgba(205,212,246,0.4);
+  }
+  &.highlight{
+    color:rgb(245,162,96);
+  }
+}
+
+.main-container, .music-container, .cpu-container{
+  box-shadow: 0 2px 3px 2px #06060b;
+  margin:5.5px;
+  border-radius: 20px;
+  min-width:290px;
+  background-color: rgba(24,24,37,0.92);
+  padding: 5px;
+}
+
+.profile,.graph-container{
+  min-width:270px;
+  margin:0px 7px;
+  margin-top:5px;
+  padding:10px;
+  border-radius:15px;
+  box-shadow: 0 2px 3px 2px rgba(6,6,11,0.9);
+  background-color:rgba(0,0,0,0.28);
+}
+
+.graph-container{
+  color: #FF6B6B;
+}
+
+.graph-display{
+  min-width:250px;
+}
+
+.main-temp{
+  border-radius:10px;
+  background-color:rgba(65,72,86,0.3);
+  margin-left:3px;
+  padding:5px 10px;
+}
+
+
+.pfp{
+  box-shadow: 0 2px 3px 2px rgba(6,6,11,0.9);
+  background-image: url('./icons/1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat:no-repeat;
+  min-height: 90px;
+  min-width: 90px;
+  border-radius: 50%;
+  margin-right:20px;
+}
+
+.username{
+  font-size:30px;
+  color:rgb(48,100,170);
+}
+
+.uptime{
+  color:rgb(205,212,246);
+}
+
+.minicore-container{
+  margin-top:20px;
+  margin-bottom:5px;
+}
+
+.minicores{
+  padding:7px;
+}
+
+.C0,.C1,.C2,.C3{
+  margin:0px 7px;
+  padding:10px;
+  border-radius:15px;
+  box-shadow: 0 2px 3px 2px rgba(6,6,11,0.9);
+  background-color:rgba(0,0,0,0.28);
+  color:#88C0D0;
+}
+
+.ctlpanel{
+  min-width:180px;
+  margin-top:10px;
+  border-radius:20px;
+  padding:5px;
+  background-color:rgba(65,72,86,0.3);
+  font-family: "JetBrainsMono Nerd Font";
+  box-shadow: 0 2px 3px 2px rgba(6,6,11,0.9);
+}
+
+.shutdown{
+  color:#e06c75;
+  transition:color 0.3s;
+  &:hover{
+    color:#f38b91;
+  }
+}
+
+.logout{
+  color:#d19a66;
+  transition:color 0.3s;
+  &:hover{
+    color:#e5b07b;
+  }
+}
+
+.lockscr{
+  color:#61afef;
+  transition:color 0.3s;
+  &:hover{
+    color:#79c0ff;
+  }
+}
+
+.reboot{
+  color:#c678dd;
+  transition: color 0.3s;
+  &:hover{
+    color:#d896f0;
+  }
+}
+
+.suspend{
+  color:#56b6c2;
+  transition:color 0.3s;
+  &:hover{
+    color:#6edddf;
+  }
+}
+
+.hibernate {
+  color: #5fb3b3;
+  transition: color 0.3s;
+  &:hover {
+    color: #a1e3e3;
+  }
+}
+
+tooltip{
+  padding:10px;
+  border-radius:20px;
+  background-color: rgba(24,24,37,0.75);
+}
+
+.sysctl{
+  margin:0px 7px;
+  margin-top:17px;
+  padding:10px;
+  box-shadow: 0 2px 3px 2px rgba(6,6,11,0.9);
+  background-color:rgba(0,0,0,0.28);
+  min-width:270px;
+  border-radius:15px;
+}
+
+.BAT1, .BAT2, .BAT3{
+  color: #2ECC71;
+}
+
+.BAT4, .BAT5{
+  color:#E74C3C;
+}
+
+.CHARGING{
+  color: #F1C40F;
+}
+
+.batico-main{
+  margin-left:10px;
+  margin-right:15px;
+  font-size:50px;
+}
+
+.batico-short{
+  margin-right:6px;
+  margin-top:6px;
+}
+
+.volico{
+  color:rgb(144, 104, 220);
+  margin-left:3px;
+}
+
+.bsht{
+  color: #cdd6f4;
+}
+
+.bat-percent{
+  font-size:20px;
+  color:rgb(205,212,246);
+}
+
+.bat-status{
+  color:rgba(255,255,255,0.5)
+}
+
+.bat-btn{
+  font-size:13px;
+}
+
+.divider-h{
+  min-height:3px;
+  margin:15px 5px;
+  background-color:rgb(0,0,0);
+}
+
+.sys{
+  margin:0px 10px;
+}
+
+.cpu-box, .ram-box, .disk-box{
+  margin:0px 10px;
+  border-radius:15px;
+  box-shadow: 0 2px 3px 2px rgba(6,6,11,0.9);
+  background-color:rgba(45,52,66,0.3);
+}
+
+.cpu, .ram, .disk{
+  border-radius:100px;
+  margin-top:20px;
+}
+.cpu, .cpu01{ color: #FF6B6B;}
+.ram, .ram01{ color: #4D9FEC; }
+.disk, .disk01{ color: #43E97B; }
+.cpu02, .ram02, .disk02{ color: rgb(205,212,246); }
+
+.ramico, .diskico, .cpuico{
+  margin-right: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size:20px;
+}
+
+.cpuico{
+  margin-left:20px;
+}
+
+.ramico, .diskico{
+  margin-left:25px;
+}
+
+.cpu, .ram, .disk{
+  background-color:rgb(0,0,0);
+}
+
+.cpu-text, .ram-text, .disk-text{
+  margin-bottom:10px;
+}
+
+.ram-text, .disk-text{
+  margin-top:3.2px;
+}
+
+.sliderctl{
+  border-radius:15px;
+  box-shadow: 0 2px 3px 2px rgba(6,6,11,0.9);
+  background-color:rgba(45,52,66,0.3);
+  margin-left:20px;
+  margin-right:20px;
+  margin-top:20px;
+  margin-bottom:10px;
+}
+
+.monitor-container{
+  margin-bottom:6px;
+}
+
+.volume-slider{
+  margin-top:10px;
+  margin-left:13px;
+}
+
+.light-slider{
+  margin-bottom:10px;
+  margin-left:13px;
+}
+
+.vol trough {
+  all: unset;
+  background-color: rgba(0,0,0,0.3);
+  box-shadow: 0 2px 3px 2px rgba(6,6,11,0.3);
+  border-radius: 50px;
+  min-height: 10px;
+  min-width: 190px;
+  margin: 0 20px 0 20px;
+}
+
+.vol trough highlight {
+  all: unset;
+  background-color:rgb(144, 104, 190);
+  border-radius: 10px;
+}
+
+.volume-slider,.volume-short{
+  color:rgb(144, 104, 190);
+}
+
+.lig trough {
+  all: unset;
+  background-color: rgba(0,0,0,0.3);
+  box-shadow: 0 2px 3px 2px rgba(6,6,11,0.3);
+  border-radius: 50px;
+  min-height: 10px;
+  min-width: 250px;
+  margin: 0 20px 0 20px;
+}
+
+.lig trough highlight {
+  all: unset;
+  background-color:rgb(219,193,117);
+  border-radius: 10px;
+}
+
+.light-slider{
+  color:rgb(219,193,117);
+}
+
+.clear-container{
+  margin:6px 10px;
+}
+
+.nheader{
+  font-size:20px;
+  color:rgb(205,212,246);
+}
+
+.clear{
+  color:rgb(230,100,100);
+  font-size:30px;
+  transition: color 0.3s;
+  &:hover{
+    color:rgb(219,193,117);
+  }
+}
+
+.music-title{
+  margin-left:7px;
+  margin-right:7px;
+  margin-top:7px;
+}
+
+.music-thumbnail {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 6rem;
+    min-width: 6rem;
+    border-radius: 1rem;
+    transition: transform 0.3s;
+}
+
+.music-thumbnail.spinning {
+    animation: spin 3s linear infinite;
+}
+
+.app-ico{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 2.5rem;
+    min-width: 2.5rem;
+}
+
+.main-title{
+  margin-top:15px;
+  margin-bottom:12px;
+  margin-left:15px;
+  font-size:20px;
+  color: #4D9FEC;
+}
+
+.artist{
+  color: rgb(205,212,246);
+  font-size:13px;
+  margin-left:15px;
+}
+
+.music-slider{
+  margin-top:10px;
+}
+
+.music-slider trough {
+  all: unset;
+  background-color: rgba(0,0,0,0.3);
+  box-shadow: 0 2px 3px 2px rgba(6,6,11,0.3);
+  border-radius: 50px;
+  min-height: 5px;
+  min-width: 270px;
+  margin: 0 20px 0 20px;
+}
+
+.music-slider trough highlight {
+  all: unset;
+  background-color:rgb(48,100,170);
+  border-radius: 10px;
+}
+
+.music-timer{
+  color: rgb(205,212,246);
+  margin:3px 20px;
+}
+
+.mico{
+  font-size:30px;
+  margin-left:10px;
+  transition:color 0.3s;
+  &:hover{
+    color:rgb(48,100,170);
+  }
+}
+
+.vol-mini trough {
+  all: unset;
+  margin-left:7px;
+  background-color: rgba(70,70,70,0.4);
+  border-radius: 50px;
+  min-height: 5px;
+  min-width: 100px;
+}
+
+.vol-mini trough highlight {
+  all: unset;
+  background-color:rgb(144, 104, 220);
+  border-radius: 10px;
+}
+
+/* Purple top-bar skin (clean, no duplicates) */
+.bar {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 3px 8px;
+}
+
+.bar-left { margin-left: 8px; }
+.bar-center { margin: 0 8px; }
+.bar-right { margin-right: 2px; }
+.menu { margin-left: 0; }
+
+.menu-eventbox {
+  background-color: #cebfff;
+  color: #2e2350;
+  border-radius: 7px;
+  min-width: 34px;
+  min-height: 32px;
+  font-size: 0;
+  padding: 0;
+  border: 1px solid rgba(229, 214, 255, 0.28);
+}
+
+.arch-wrap,
+.panel-wrap {
+  min-width: 34px;
+  min-height: 32px;
+  margin: 0;
+}
+
+.menu-eventbox label { margin: 0; }
+
+.arch-icon {
+  font-family: "Iosevka Nerd Font";
+  font-size: 18px;
+  margin-top: -1px;
+}
+
+.time-label {
+  background-color: rgba(39, 31, 61, 0.86);
+  color: #ece6ff;
+  border-radius: 9px;
+  padding: 0 10px;
+  min-width: 112px;
+  min-height: 32px;
+  font-family: "Iosevka Nerd Font";
+  margin-right: 8px;
+}
+
+.time-label:hover {
+  background-color: rgba(49, 38, 78, 0.95);
+  color: #ffffff;
+}
+
+.now-playing {
+  background-color: rgba(39, 31, 61, 0.86);
+  border: 1px solid rgba(199, 177, 255, 0.14);
+  color: #ece6ff;
+  border-radius: 9px;
+  min-height: 32px;
+  padding: 0 10px;
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.now-playing-text { font-family: "Iosevka Nerd Font"; }
+.now-playing:hover { background-color: rgba(49, 38, 78, 0.95); }
+
+/* Workspace card: less wide, more horizontal breathing */
+.ws {
+  background-color: rgba(39, 31, 61, 0.76);
+  border: 1px solid rgba(199, 177, 255, 0.14);
+  border-radius: 12px;
+  padding: 0 12px;
+  min-height: 36px;
+  min-width: 0;
+}
+
+.ws-active,
+.ws-occupied,
+.ws-empty,
+.visiting,
+.occupied,
+.free {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.ws-item {
+  min-width: 24px;
+  min-height: 26px;
+  border-radius: 10px;
+}
+
+.ws-item label {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: "Iosevka Nerd Font";
+}
+
+.ws-item.ws-active label { font-size: 24px; }
+.ws-active { color: #f5f1ff; }
+.ws-occupied { color: rgba(234, 226, 255, 0.78); }
+.ws-empty { color: rgba(234, 226, 255, 0.35); }
+
+.metrics-pack {
+  background-color: rgba(39, 31, 61, 0.86);
+  border: 1px solid rgba(199, 177, 255, 0.14);
+  border-radius: 9px;
+  padding: 0 6px;
+  min-height: 28px;
+}
+
+.network-status {
+  background-color: rgba(39, 31, 61, 0.86);
+  border: 1px solid rgba(199, 177, 255, 0.14);
+  border-radius: 9px;
+  padding-left: 0;
+  padding-right: 0;
+  color: #ece6ff;
+  min-height: 32px;
+  margin: 0;
+  font-size: 12px;
+  min-width: 34px;
+}
+
+.network-status-inner {
+  min-height: 32px;
+  min-width: 34px;
+  padding: 0 7px;
+}
+
+.network-icon {
+  color: #cebfff;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 13px;
+  min-width: 16px;
+  margin-top: 0;
+  margin-left: 1px;
+}
+
+.mini-sep {
+  color: rgba(224, 214, 255, 0.45);
+  font-size: 15px;
+}
+
+.power { margin-right: 0; }
+
+.power-eventbox {
+  background-color: rgba(39, 31, 61, 0.9);
+  border: 1px solid rgba(199, 177, 255, 0.14);
+  color: #c9b4ff;
+  border-radius: 7px;
+  min-width: 34px;
+  min-height: 32px;
+  padding: 0;
+  font-size: 0;
+}
+
+.power-eventbox label {
+  margin: 0;
+  font-size: 18px;
+  color: #e5dcff;
+}
+
+.panel-icon {
+  font-family: "Iosevka Nerd Font";
+  margin-top: -1px;
+}
+
+.volume-short,
+.ram-short,
+.cpu-short,
+.bluetooth,
+.bsht,
+.cpu-short .icon,
+.ram-short .icon,
+.volume-short label {
+  color: #ece6ff;
+}
+
+.div { color: rgba(224, 214, 255, 0.35); }
+
+/* Extra breathing room for date/time + music cards */
+.time-label {
+  padding: 0;
+}
+
+.time-content {
+  padding: 0 16px;
+  min-height: 32px;
+}
+
+.now-playing {
+  padding: 0;
+}
+
+.now-playing-content {
+  padding: 0 16px;
+  min-height: 32px;
+}
+
+.bar-vertical {
+  box-shadow: 0 24px 60px rgba(10, 2, 6, 0.5);
+  background-color: rgba(24, 8, 13, 0.94);
+  border: 1px solid rgba(159, 47, 81, 0.24);
+  border-radius: 24px;
+  padding: 14px 10px;
+  margin: 0;
+}
+
+.bar-vertical .bar-left,
+.bar-vertical .bar-center,
+.bar-vertical .bar-right {
+  min-width: 60px;
+}
+
+.bar-vertical .bar-left,
+.bar-vertical .bar-center,
+.bar-vertical .bar-right {
+  margin: 0;
+}
+
+.bar-vertical .menu-eventbox,
+.bar-vertical .time-label,
+.bar-vertical .network-status,
+.bar-vertical .power-eventbox,
+.bar-vertical .bluetooth,
+.bar-vertical .volume-short,
+.bar-vertical .ram-short,
+.bar-vertical .cpu-short {
+  min-width: 60px;
+  min-height: 52px;
+  border-radius: 18px;
+  padding: 0;
+  margin: 0;
+}
+
+.bar-vertical .menu-eventbox {
+  background-color: rgba(101, 14, 38, 0.92);
+  border: 1px solid rgba(212, 73, 111, 0.28);
+  color: #ffe7ef;
+}
+
+.bar-vertical .menu-eventbox:hover {
+  color: #ffffff;
+  background-color: rgba(132, 24, 52, 0.96);
+}
+
+.bar-vertical .time-label,
+.bar-vertical .network-status,
+.bar-vertical .metrics-pack,
+.bar-vertical .power-eventbox {
+  background-color: rgba(58, 18, 31, 0.9);
+  border: 1px solid rgba(201, 71, 111, 0.16);
+}
+
+.bar-vertical .time-content {
+  padding: 10px 0;
+  min-height: 58px;
+}
+
+.bar-vertical .time-content label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffe7ef;
+}
+
+.bar-vertical .ws {
+  padding: 8px 0;
+  min-width: 42px;
+  border-radius: 0;
+  background-color: transparent;
+  border: none;
+}
+
+.bar-vertical .ws-item {
+  min-width: 14px;
+  min-height: 14px;
+  border-radius: 999px;
+  background-color: rgba(255, 236, 242, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  margin: 4px 0;
+}
+
+.bar-vertical .ws-item label {
+  color: transparent;
+  font-size: 1px;
+}
+
+.bar-vertical .ws-active {
+  background-color: rgba(182, 39, 78, 0.95);
+  border-color: rgba(255, 214, 226, 0.22);
+  box-shadow: 0 0 0 3px rgba(182, 39, 78, 0.16);
+}
+
+.bar-vertical .ws-occupied {
+  background-color: rgba(118, 24, 50, 0.62);
+  border-color: rgba(255, 194, 214, 0.12);
+}
+
+.bar-vertical .ws-empty {
+  background-color: rgba(255, 240, 245, 0.08);
+  border-color: rgba(255, 255, 255, 0.02);
+}
+
+.bar-vertical .metrics-pack {
+  padding: 10px 0;
+  border-radius: 20px;
+}
+
+.bar-vertical .volume-short,
+.bar-vertical .ram-short,
+.bar-vertical .cpu-short,
+.bar-vertical .bluetooth,
+.bar-vertical .wifi {
+  background-color: transparent;
+}
+
+.bar-vertical .volume-short box,
+.bar-vertical .ram-short box,
+.bar-vertical .cpu-short box {
+  min-width: 60px;
+  min-height: 52px;
+}
+
+.bar-vertical .volume-short label,
+.bar-vertical .ram-short label,
+.bar-vertical .cpu-short label,
+.bar-vertical .bluetooth-icon,
+.bar-vertical .network-icon {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffe7ef;
+}
+
+.bar-vertical .icon {
+  margin-right: 0;
+}
+
+.bar-vertical .menu-eventbox,
+.bar-vertical .time-label,
+.bar-vertical .network-status,
+.bar-vertical .metrics-pack,
+.bar-vertical .power-eventbox {
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.bar-vertical .menu-eventbox:hover,
+.bar-vertical .time-label:hover,
+.bar-vertical .network-status:hover,
+.bar-vertical .power-eventbox:hover {
+  background-color: rgba(88, 24, 43, 0.96);
+}
+
+.bar-vertical .divider,
+.bar-vertical .mini-sep,
+.bar-vertical .div {
+  color: rgba(246, 219, 226, 0.2);
+}

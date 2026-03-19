@@ -12,48 +12,70 @@
 (defvar wifictlrev_0 false)
 (defvar wifictlrev_1 false)
 (defvar show_local_ip false)
+(defvar current_theme_name "Tokyo Night")
+(defvar current_theme_bar_orientation "h")
+(defvar current_theme_bar_class "")
+(defvar current_theme_section_orientation "h")
+(defvar current_theme_center_orientation "h")
+(defvar current_theme_metrics_orientation "h")
+(defvar current_theme_workspaces_orientation "h")
+(defvar current_theme_show_now_playing true)
+(defvar current_theme_show_time_date true)
+(defvar current_theme_metrics_show_separators true)
+(defvar current_theme_bar_anchor "top center")
+(defvar current_theme_bar_width "99.5%")
+(defvar current_theme_bar_height "44px")
+(defvar current_theme_bar_x "0px")
+(defvar current_theme_bar_y "0px")
 
 ;; Widget BAR con parámetro de monitor
 (defwidget bar [monitor_id]
     (box :class "bar"
-         :orientation "h"
-          (box :class "bar-left"
-               :halign "start"
-               :valign "center"
-               :spacing 12
-               :hexpand false
-               :space-evenly false
-               (menu :monitor_id monitor_id)
-               (time :time get_time :monitor_id monitor_id)
-               (now-playing)
-            )
-           (box :class "bar-center"
-                :halign "center"
+         :orientation current_theme_bar_orientation
+         :hexpand true
+         :vexpand true
+         :spacing {current_theme_bar_orientation == "v" ? 10 : 0}
+           (box :class "bar-left"
+                :halign "start"
                 :valign "center"
-                :spacing 0
-                :hexpand true
-                :orientation "h"
-                (workspaces)
-           )
-          (box :class "bar-right"
-               :halign "end"
-               :valign "center"
-               :hexpand false
-               :space-evenly false
-               :spacing 4
-               (wifi :monitor_id monitor_id)
-               (box :class "metrics-pack"
-                    :space-evenly false
-                    :spacing 4
-                    (volume)
-                    (label :class "mini-sep" :text "|")
-                    (ram)
-                    (label :class "mini-sep" :text "|")
-                    (cpu)
-                    (label :class "mini-sep" :text "|")
-                    (eventbox :onclick "blueman-manager &"
-                              :cursor "pointer"
-                         (box :class "bluetooth"
+                :orientation current_theme_section_orientation
+                :spacing 12
+                :hexpand false
+                :space-evenly false
+                (menu :monitor_id monitor_id)
+                (time :time get_time :monitor_id monitor_id)
+                (box :visible current_theme_show_now_playing
+                     (now-playing))
+             )
+            (box :class "bar-center"
+                 :halign "center"
+                 :valign "center"
+                 :spacing 0
+                 :hexpand true
+                 :orientation current_theme_center_orientation
+                 (workspaces)
+            )
+           (box :class "bar-right"
+                :halign "end"
+                :valign "center"
+                :orientation current_theme_section_orientation
+                :hexpand false
+                :space-evenly false
+                :spacing 4
+                (wifi :monitor_id monitor_id)
+                (box :class "metrics-pack"
+                     :orientation current_theme_metrics_orientation
+                     :space-evenly false
+                     :spacing 4
+                     (volume)
+                     (label :visible current_theme_metrics_show_separators :class "mini-sep" :text "|")
+                     (ram)
+                     (label :visible current_theme_metrics_show_separators :class "mini-sep" :text "|")
+                     (cpu)
+                     (label :visible current_theme_metrics_show_separators :class "mini-sep" :text "|")
+                     (eventbox :onclick "blueman-manager &"
+                               :cursor "pointer"
+                          (box :class "bluetooth"
                               (label :text "󰂯")
                          )
                     )
@@ -444,8 +466,9 @@
     (box :class "menu"
          :orientation "h"
           (eventbox :onclick "~/.config/eww/scripts/menuctl.sh ${monitor_id}"
+                    :onrightclick "~/.config/hypr/scripts/theme-select.sh"
                     :cursor "pointer"
-                    :tooltip "Apps"
+                    :tooltip "Apps / Themes"
                     :width 34
                     :height 34
                     :class "menu-eventbox"
@@ -600,9 +623,9 @@
               :width 0
               :height 28
               :class "time-label"
-              (box :class "time-content" :orientation "h" :spacing 10 :space-evenly false
-                   (label :text "${get_date}")
-                   (label :text "|")
+              (box :class "time-content" :orientation {current_theme_show_time_date ? "h" : "v"} :spacing 10 :space-evenly false
+                   (label :visible current_theme_show_time_date :text "${get_date}")
+                   (label :visible current_theme_show_time_date :text "|")
                    (label :text "${time}")
               )
     )
@@ -778,6 +801,7 @@
                )
      )
 )
+
                             (box :class "ram-box"
      :orientation "v"
      :space-evenly false
@@ -1069,6 +1093,57 @@
          ))
 )
 
+(defwidget bar-vertical [monitor_id]
+    (box :class "bar bar-vertical"
+         :orientation "v"
+         :hexpand true
+         :vexpand true
+         :spacing 10
+         (box :class "bar-left"
+              :halign "center"
+              :valign "start"
+              :orientation "v"
+              :spacing 12
+              :hexpand false
+              :space-evenly false
+              (menu :monitor_id monitor_id)
+              (time :time get_time :monitor_id monitor_id)
+         )
+         (box :class "bar-center"
+              :halign "center"
+              :valign "center"
+              :spacing 0
+              :hexpand true
+              :orientation "v"
+              (workspaces)
+         )
+         (box :class "bar-right"
+              :halign "center"
+              :valign "end"
+              :orientation "v"
+              :hexpand false
+              :space-evenly false
+              :spacing 8
+              (wifi :monitor_id monitor_id)
+              (box :class "metrics-pack"
+                   :orientation "v"
+                   :space-evenly false
+                   :spacing 4
+                   (volume)
+                   (ram)
+                   (cpu)
+                   (eventbox :onclick "blueman-manager &"
+                             :cursor "pointer"
+                        (box :class "bluetooth"
+                             (label :text "󰂯")
+                        )
+                   )
+              )
+              (power :monitor_id monitor_id)
+         )
+    )
+)
+
 ;; ==================== VENTANAS DE BARRAS ====================
 (defwindow bar_widget_0
     :monitor 0
@@ -1090,6 +1165,32 @@
     )
     :exclusive true
     (bar :monitor_id "1")
+)
+
+(defwindow bar_widget_vertical_0
+    :monitor 0
+    :stacking "fg"
+    :geometry (geometry :anchor "center left"
+                         :x "6px"
+                         :y "0px"
+                         :width "64px"
+                         :height "97%"
+    )
+    :exclusive true
+    (bar-vertical :monitor_id "0")
+)
+
+(defwindow bar_widget_vertical_1
+    :monitor 1
+    :stacking "fg"
+    :geometry (geometry :anchor "center left"
+                         :x "6px"
+                         :y "0px"
+                         :width "64px"
+                         :height "97%"
+    )
+    :exclusive true
+    (bar-vertical :monitor_id "1")
 )
 
 (defvar show_cpu_percent false)

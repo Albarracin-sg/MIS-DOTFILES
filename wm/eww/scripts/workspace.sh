@@ -4,11 +4,23 @@
 generate_workspaces_output() {
     local output=""
     local max_workspace=10
+    local theme_file="$HOME/.config/hypr/themes/current.conf"
+    local ws_orientation="h"
+    local ws_spacing="12"
+
+    if [[ -f "$theme_file" ]]; then
+        # shellcheck disable=SC1090
+        source "$theme_file"
+        ws_orientation="${THEME_EWW_WORKSPACES_ORIENTATION:-$ws_orientation}"
+        if [[ "$ws_orientation" == "v" ]]; then
+            ws_spacing="8"
+        fi
+    fi
 
     workspace_data=$(hyprctl workspaces -j)
     current_workspace=$(hyprctl activeworkspace -j | jq -r '.id')
 
-    output="(box :class \"ws\" :halign \"center\" :orientation \"h\" :spacing 12 :space-evenly \"false\""
+    output="(box :class \"ws\" :halign \"center\" :orientation \"${ws_orientation}\" :spacing ${ws_spacing} :space-evenly \"false\""
 
     # Mostrar workspaces del 1 al 10 en orden
     for i in $(seq 1 $max_workspace); do

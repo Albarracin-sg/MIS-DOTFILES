@@ -1,0 +1,109 @@
+* {
+    bg: #17080d;
+    hv: #8f2946;
+    primary: #f9dbe2;
+    ug: #2a0f18;
+    font: "Monospace 11";
+    background-color: @bg;
+    border: 0px;
+    kl: #ffb3c7;
+    black: #080203;
+    transparent: rgba(23,8,13,0);
+}
+
+window {
+    width: 720;
+    orientation: horizontal;
+    location: center;
+    anchor: center;
+    transparency: "screenshot";
+    border-color: @hv;
+    border: 2px;
+    border-radius: 16px;
+    spacing: 0;
+    background-color: rgba(23, 8, 13, 0.92);
+    children: [ mainbox ];
+}
+
+mainbox {
+    spacing: 0;
+    children: [ inputbar, message, listview ];
+}
+
+inputbar {
+    color: @kl;
+    padding: 14px;
+    border: 0 0 1px 0;
+    border-color: rgba(255, 179, 199, 0.18);
+}
+
+message {
+    padding: 0;
+}
+
+textbox {
+    color: @kl;
+    padding: 10px 14px;
+}
+
+entry, prompt, case-indicator {
+    text-font: inherit;
+    text-color: inherit;
+}
+
+entry {
+    cursor: text;
+}
+
+prompt {
+    margin: 0px 8px 0px 0px;
+}
+
+listview {
+    layout: vertical;
+    padding: 10px;
+    spacing: 8px;
+    lines: 12;
+    columns: 1;
+    dynamic: false;
+}
+
+element {
+    padding: 10px 12px;
+    border-radius: 12px;
+    vertical-align: 0.5;
+    color: @primary;
+    background-color: rgba(64, 18, 30, 0.72);
+    border: 1px solid rgba(255, 179, 199, 0.05);
+}
+
+element-text {
+    background-color: inherit;
+    text-color: inherit;
+}
+
+element selected.normal {
+    color: #fff6f8;
+    background-color: @hv;
+}
+
+element normal active {
+    background-color: rgba(143, 41, 70, 0.24);
+    color: @primary;
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color: inherit;
+}
+
+element selected active {
+    background: @hv;
+    foreground: #fff6f8;
+}
+
+scrollbar {
+    enabled: true;
+    handle-width: 4px;
+    handle-color: @hv;
+}
