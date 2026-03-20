@@ -68,12 +68,7 @@ fi
 
 # --- EWW ---
 if command -v eww >/dev/null 2>&1; then
-  pkill -x eww 2>/dev/null || true
-  eww kill 2>/dev/null || true
-  sleep 1
-  eww daemon >/dev/null 2>&1 &
-  sleep 1
-  "$HOME/.config/eww/scripts/start_bars.sh" >/dev/null 2>&1 || true
+  "$HOME/.config/eww/reload.sh" >/dev/null 2>&1 || true
 else
   echo "WARN: eww no esta instalado; se omite la barra." >&2
 fi

@@ -1161,15 +1161,15 @@ tooltip{
   box-shadow: 0 24px 60px rgba(10, 2, 6, 0.5);
   background-color: rgba(24, 8, 13, 0.94);
   border: 1px solid rgba(159, 47, 81, 0.24);
-  border-radius: 24px;
-  padding: 14px 10px;
+  border-radius: 20px;
+  padding: 10px 6px;
   margin: 0;
 }
 
 .bar-vertical .bar-left,
 .bar-vertical .bar-center,
 .bar-vertical .bar-right {
-  min-width: 60px;
+  min-width: 48px;
 }
 
 .bar-vertical .bar-left,
@@ -1186,9 +1186,9 @@ tooltip{
 .bar-vertical .volume-short,
 .bar-vertical .ram-short,
 .bar-vertical .cpu-short {
-  min-width: 60px;
-  min-height: 52px;
-  border-radius: 18px;
+  min-width: 48px;
+  min-height: 42px;
+  border-radius: 14px;
   padding: 0;
   margin: 0;
 }
@@ -1213,12 +1213,12 @@ tooltip{
 }
 
 .bar-vertical .time-content {
-  padding: 10px 0;
-  min-height: 58px;
+  padding: 7px 0;
+  min-height: 46px;
 }
 
 .bar-vertical .time-content label {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: #ffe7ef;
 }
@@ -1262,8 +1262,8 @@ tooltip{
 }
 
 .bar-vertical .metrics-pack {
-  padding: 10px 0;
-  border-radius: 20px;
+  padding: 8px 0;
+  border-radius: 16px;
 }
 
 .bar-vertical .volume-short,
@@ -1277,8 +1277,8 @@ tooltip{
 .bar-vertical .volume-short box,
 .bar-vertical .ram-short box,
 .bar-vertical .cpu-short box {
-  min-width: 60px;
-  min-height: 52px;
+  min-width: 48px;
+  min-height: 42px;
 }
 
 .bar-vertical .volume-short label,
@@ -1286,7 +1286,7 @@ tooltip{
 .bar-vertical .cpu-short label,
 .bar-vertical .bluetooth-icon,
 .bar-vertical .network-icon {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   color: #ffe7ef;
 }

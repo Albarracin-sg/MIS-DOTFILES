@@ -23,6 +23,10 @@ source "$ZSH/oh-my-zsh.sh"
 eval "$(atuin init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(thefuck --alias)"
+
+export STARSHIP_CONFIG="$HOME/.config/starship/current.toml"
+[[ -f "$STARSHIP_CONFIG" ]] || export STARSHIP_CONFIG="$HOME/.config/starship.toml"
+
 eval "$(starship init zsh)"
 
 if [[ -o interactive ]] && [[ -z "${OPENCODE:-}" ]] && [[ -t 1 ]] && command -v pokemon-colorscripts >/dev/null 2>&1; then

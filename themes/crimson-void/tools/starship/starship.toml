@@ -1,0 +1,129 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = true
+palette = "crimson_void"
+
+format = """
+[](p1)\
+$os\
+$directory\
+[](fg:p1 bg:p2)\
+$git_branch\
+$git_status\
+[](fg:p2 bg:p3)\
+$nodejs\
+$python\
+$rust\
+$golang\
+$java\
+$php\
+$docker_context\
+$kubernetes\
+$sudo\
+[](fg:p3)\
+$fill\
+$time\
+$line_break\
+$character
+"""
+
+[palettes.crimson_void]
+p1 = "#8f2946"
+p2 = "#b03058"
+p3 = "#d46a32"
+fg = "#17080d"
+text = "#fff1f5"
+muted = "#f6d7e0"
+red = "#ff8fab"
+
+[os]
+disabled = false
+style = "bg:p1 fg:text"
+format = "[  ]($style)"
+
+[directory]
+style = "bg:p1 fg:text"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = ".../"
+home_symbol = "~"
+
+[directory.substitutions]
+Documents = "docs"
+Downloads = "dl"
+Desktop = "desk"
+Pictures = "pics"
+Videos = "vid"
+Music = "music"
+
+[git_branch]
+symbol = "git"
+style = "bg:p2 fg:text"
+format = "[ $symbol $branch ]($style)"
+
+[git_status]
+style = "bg:p2 fg:muted"
+format = "[ $all_status$ahead_behind ]($style)"
+
+[nodejs]
+symbol = "node"
+style = "bg:p3 fg:text"
+format = "[ $symbol $version ]($style)"
+
+[python]
+symbol = "py"
+style = "bg:p3 fg:text"
+format = "[ $symbol $version ]($style)"
+
+[rust]
+symbol = "rs"
+style = "bg:p3 fg:text"
+format = "[ $symbol $version ]($style)"
+
+[golang]
+symbol = "go"
+style = "bg:p3 fg:text"
+format = "[ $symbol $version ]($style)"
+
+[java]
+symbol = "java"
+style = "bg:p3 fg:text"
+format = "[ $symbol $version ]($style)"
+
+[php]
+symbol = "php"
+style = "bg:p3 fg:text"
+format = "[ $symbol $version ]($style)"
+
+[docker_context]
+symbol = "docker"
+style = "bg:p3 fg:text"
+format = "[ $symbol $context ]($style)"
+detect_files = ["Dockerfile", "docker-compose.yml", "docker-compose.yaml"]
+
+[kubernetes]
+symbol = "k8s"
+style = "bg:p3 fg:text"
+format = "[ $symbol $context ]($style)"
+disabled = false
+
+[sudo]
+disabled = false
+style = "bg:p3 fg:text"
+format = "[ sudo ]($style)"
+
+[fill]
+symbol = " "
+
+[time]
+disabled = false
+time_format = "%H:%M"
+style = "bold #ffd0dd"
+format = "[time $time]($style)"
+
+[character]
+success_symbol = "[>](bold p1)"
+error_symbol = "[>](bold red)"
+
+[line_break]
+disabled = false

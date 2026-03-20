@@ -9,6 +9,7 @@ eww kill 2>/dev/null || true
 sleep 1
 
 config_dir="$HOME/.config/eww/current"
+rm -f "$config_dir/eww.css"
 if [[ ! -f "$config_dir/eww.yuck" ]]; then
   mkdir -p "$config_dir"
   ln -sfn "$HOME/.config/eww/scripts" "$config_dir/scripts"
@@ -22,6 +23,6 @@ eww -c "$config_dir" daemon >/dev/null 2>&1 &
 sleep 1
 
 echo "Levantando barras correctas..."
-"$HOME/.config/eww/scripts/start_bars.sh"
+EWW_CONFIG_DIR="$config_dir" "$HOME/.config/eww/scripts/start_bars.sh"
 
 echo "Listo"

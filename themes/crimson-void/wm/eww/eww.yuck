@@ -1097,7 +1097,7 @@
 )
 
 (defwidget bar-vertical [monitor_id]
-    (box :class "bar bar-vertical"
+    (box :class "bar-vertical"
          :orientation "v"
          :hexpand true
          :vexpand true
@@ -1154,9 +1154,9 @@
     :monitor 0
     :stacking "fg"
     :geometry (geometry :anchor "center left"
-                         :x "8px"
+                         :x "4px"
                          :y "0px"
-                         :width "84px"
+                         :width "72px"
                          :height "96%"
     )
     :exclusive true
@@ -1167,9 +1167,9 @@
     :monitor 1
     :stacking "fg"
     :geometry (geometry :anchor "center left"
-                         :x "8px"
+                         :x "4px"
                          :y "0px"
-                         :width "84px"
+                         :width "72px"
                          :height "96%"
     )
     :exclusive true

@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+eww_cmd=(eww -c "${EWW_CONFIG_DIR:-$HOME/.config/eww/current}")
+
 theme_file="$HOME/.config/hypr/themes/current.conf"
 theme_name="Tokyo Night"
 theme_bar_orientation="h"
@@ -40,14 +42,9 @@ if [[ -f "$theme_file" ]]; then
 fi
 
 # Cerrar instancias previas
-eww close-all 2>/dev/null || true
+"${eww_cmd[@]}" close-all 2>/dev/null || true
 
-window_prefix="bar_widget"
-if [[ "$theme_bar_orientation" == "v" ]]; then
-  window_prefix="bar_widget_vertical"
-fi
-
-eww update \
+"${eww_cmd[@]}" update \
   current_theme_name="$theme_name" \
   current_theme_bar_orientation="$theme_bar_orientation" \
   current_theme_bar_class="$theme_bar_class" \
@@ -69,9 +66,9 @@ monitor_count=$(hyprctl monitors -j 2>/dev/null | jq 'length' || echo "1")
 
 # Abrir barras según monitores disponibles
 if [ "$monitor_count" -ge 1 ]; then
-    eww open "${window_prefix}_0"
+    "${eww_cmd[@]}" open "bar_widget_0"
 fi
 
 if [ "$monitor_count" -ge 2 ]; then
-    eww open "${window_prefix}_1"
+    "${eww_cmd[@]}" open "bar_widget_1"
 fi

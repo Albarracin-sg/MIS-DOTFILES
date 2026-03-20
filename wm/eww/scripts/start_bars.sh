@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+eww_cmd=(eww -c "${EWW_CONFIG_DIR:-$HOME/.config/eww/current}")
+
 echo "Iniciando EWW..."
 
 theme_file="$HOME/.config/hypr/themes/current.conf"
@@ -40,7 +42,7 @@ if [[ -f "$theme_file" ]]; then
   theme_bar_y="${THEME_EWW_BAR_Y:-$theme_bar_y}"
 fi
 
-eww update \
+"${eww_cmd[@]}" update \
   current_theme_name="$theme_name" \
   current_theme_bar_orientation="$theme_bar_orientation" \
   current_theme_bar_class="$theme_bar_class" \
@@ -57,29 +59,24 @@ eww update \
   current_theme_bar_x="$theme_bar_x" \
   current_theme_bar_y="$theme_bar_y" 2>/dev/null || true
 
-eww close-all || true
+"${eww_cmd[@]}" close-all || true
 for window in bar_widget_0 bar_widget_1 bar_widget_vertical_0 bar_widget_vertical_1; do
-  eww close "$window" 2>/dev/null || true
+  "${eww_cmd[@]}" close "$window" 2>/dev/null || true
 done
 sleep 0.5
 
 monitor_count=$(hyprctl monitors -j | jq 'length')
 opened=0
-window_prefix="bar_widget"
-
-if [[ "$theme_bar_orientation" == "v" ]]; then
-  window_prefix="bar_widget_vertical"
-fi
 
 if [ "$monitor_count" -ge 1 ]; then
-  echo "Abriendo ${window_prefix}_0 en monitor 0"
-  eww open "${window_prefix}_0" || true
+  echo "Abriendo bar_widget_0 en monitor 0"
+  "${eww_cmd[@]}" open "bar_widget_0" || true
   opened=$((opened + 1))
 fi
 
 if [ "$monitor_count" -ge 2 ]; then
-  echo "Abriendo ${window_prefix}_1 en monitor 1"
-  eww open "${window_prefix}_1" || true
+  echo "Abriendo bar_widget_1 en monitor 1"
+  "${eww_cmd[@]}" open "bar_widget_1" || true
   opened=$((opened + 1))
 fi
 

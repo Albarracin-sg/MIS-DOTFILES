@@ -10,6 +10,9 @@ rofi_current="$HOME/.config/rofi/themes/current.rasi"
 eww_config_dir="$HOME/.config/eww/current"
 eww_current_yuck="$eww_config_dir/eww.yuck"
 eww_current_scss="$eww_config_dir/eww.scss"
+eww_current_css="$eww_config_dir/eww.css"
+starship_runtime_dir="$HOME/.config/starship"
+starship_current="$starship_runtime_dir/current.toml"
 current_conf="$themes_dir/current.conf"
 current_theme="$themes_dir/current.theme"
 script_dir="$(cd "$(dirname "$(realpath "$0")")" && pwd)"
@@ -49,14 +52,19 @@ is_video_wallpaper() {
 source "$theme_file"
 
 # Persist the active theme metadata for Hyprland/Eww helper scripts.
+mkdir -p "$themes_dir"
 cp "$theme_file" "$current_conf"
 
 # Apply app-specific runtime files.
 cp "$THEME_KITTY_FILE" "$kitty_current"
+cp "$THEME_ROFI_FILE" "$rofi_current"
 
 mkdir -p "$eww_config_dir"
 # Reuse the shared Eww scripts directory but swap the visual config per theme.
 ln -sfn "$HOME/.config/eww/scripts" "$eww_config_dir/scripts"
+
+# Remove any stale compiled CSS so Eww always uses the theme SCSS we just copied.
+rm -f "$eww_current_css"
 
 if [[ -n "${THEME_EWW_YUCK_FILE:-}" ]] && [[ -f "$THEME_EWW_YUCK_FILE" ]]; then
   cp "$THEME_EWW_YUCK_FILE" "$eww_current_yuck"
@@ -66,12 +74,15 @@ if [[ -n "${THEME_EWW_FILE:-}" ]] && [[ -f "$THEME_EWW_FILE" ]]; then
   cp "$THEME_EWW_FILE" "$eww_current_scss"
 fi
 
-cat > "$rofi_current" <<EOF
-@theme "${THEME_ROFI_FILE}"
-EOF
+mkdir -p "$starship_runtime_dir"
+if [[ -n "${THEME_STARSHIP_FILE:-}" ]] && [[ -f "$THEME_STARSHIP_FILE" ]]; then
+  cp "$THEME_STARSHIP_FILE" "$starship_current"
+fi
 
 # Export variables consumed by hyprpaper/hyprlock wrappers.
 cat > "$current_theme" <<EOF
+\$theme_active_border = ${THEME_HYPR_ACTIVE_BORDER}
+\$theme_inactive_border = ${THEME_HYPR_INACTIVE_BORDER}
 \$theme_wallpaper = "${THEME_WALLPAPER}"
 \$theme_hyprlock_wallpaper = "${THEME_HYPRLOCK_WALLPAPER}"
 \$theme_hyprlock_font_color = ${THEME_HYPRLOCK_FONT_COLOR}
