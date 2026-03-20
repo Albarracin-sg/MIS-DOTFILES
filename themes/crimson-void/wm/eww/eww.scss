@@ -1461,6 +1461,15 @@ tooltip{
   background-color: rgba(8, 3, 5, 0.12);
 }
 
+.usrctl-shell,
+.usrctl-scroll {
+  background-color: transparent;
+}
+
+.usrctl-shell {
+  padding: 6px;
+}
+
 .menuctl-container,
 .calendar-container,
 .main-container,

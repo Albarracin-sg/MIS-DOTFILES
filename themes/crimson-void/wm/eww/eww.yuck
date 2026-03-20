@@ -697,15 +697,15 @@
 )
 
 (defwidget usrctl-widget [uptime]
-    (scroll :vscroll true
-            :hscroll false
-            (box :space-evenly false
-                 :valign "start"
-    (eventbox :class "shadow-container"
-         :onhoverlost "echo 'User control hover lost'"
-         (box :orientation "v"
-              :space-evenly false
-         (box :class "main-container"
+    (box :class "usrctl-scroll"
+         :orientation "v"
+         :space-evenly false
+         :valign "start"
+         (eventbox :class "shadow-container"
+                   :onhoverlost "echo 'User control hover lost'"
+              (box :orientation "v"
+                   :space-evenly false
+                   (box :class "main-container"
               :orientation "v"
               :halign "center"
               :space-evenly false
@@ -899,8 +899,9 @@
                )
           )
          (process-panel)
+                   )
+              )
          )
-    )))
 )
 
 ;; Ventanas User Control para cada monitor
@@ -909,16 +910,21 @@
     :stacking "fg"
     :exclusive false
     :geometry (geometry :anchor "top right"
-                        :x "5px"
-                        :y "-4px"
-                        :width "330px"
-                        :height "88%"
+                         :x "5px"
+                         :y "-4px"
+                         :width "330px"
+                         :height "76%"
     )
-    (box :space-evenly false
+    (box :class "usrctl-shell"
+         :orientation "v"
+         :space-evenly false
          :halign "end"
-              (revealer :transition "slideleft"
-                        :reveal ctlrev_0
-                        :duration "350ms"
+         :valign "fill"
+         :hexpand true
+         :vexpand true
+               (revealer :transition "slideleft"
+                         :reveal ctlrev_0
+                         :duration "350ms"
                         (usrctl-widget :uptime get_uptime)
               )
     )
@@ -929,16 +935,21 @@
     :stacking "fg"
     :exclusive false
     :geometry (geometry :anchor "top right"
-                        :x "5px"
-                        :y "-4px"
-                        :width "330px"
-                        :height "88%"
+                         :x "5px"
+                         :y "-4px"
+                         :width "330px"
+                         :height "76%"
     )
-    (box :space-evenly false
+    (box :class "usrctl-shell"
+         :orientation "v"
+         :space-evenly false
          :halign "end"
-              (revealer :transition "slideleft"
-                        :reveal ctlrev_1
-                        :duration "350ms"
+         :valign "fill"
+         :hexpand true
+         :vexpand true
+               (revealer :transition "slideleft"
+                         :reveal ctlrev_1
+                         :duration "350ms"
                         (usrctl-widget :uptime get_uptime)
               )
     )
