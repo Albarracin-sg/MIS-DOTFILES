@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-# Current Theme
-dir="$HOME/.config/rofi/powermenu/type-2"
-theme='style-5'
+rofi_theme="$HOME/.config/rofi/themes/current.rasi"
+if [[ ! -f "$rofi_theme" ]]; then
+	rofi_theme="$HOME/.config/rofi/themes/tokyonight.rasi"
+fi
 
 # CMDs
 uptime="`uptime -p | sed -e 's/up //g'`"
@@ -22,7 +23,7 @@ rofi_cmd() {
 	rofi -dmenu \
 		-p "Uptime: $uptime" \
 		-mesg "Uptime: $uptime" \
-		-theme ${dir}/${theme}.rasi
+		-theme "$rofi_theme"
 }
 
 # Confirmation CMD
@@ -35,7 +36,7 @@ confirm_cmd() {
 		-dmenu \
 		-p 'Confirmation' \
 		-mesg 'Are you Sure?' \
-		-theme ${dir}/${theme}.rasi
+		-theme "$rofi_theme"
 }
 
 # Ask for confirmation

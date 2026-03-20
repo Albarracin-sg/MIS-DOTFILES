@@ -4,6 +4,11 @@ set -euo pipefail
 
 window_title="hypr-keybinds-help"
 config_file="$HOME/.config/hypr/bind.conf"
+rofi_theme="$HOME/.config/rofi/themes/current.rasi"
+
+if [[ ! -f "$rofi_theme" ]]; then
+  rofi_theme="$HOME/.config/rofi/themes/tokyonight.rasi"
+fi
 
 if pgrep -f "rofi.*${window_title}" >/dev/null; then
   pkill -f "rofi.*${window_title}"
@@ -245,5 +250,5 @@ printf '%s\n' "$entries" | rofi \
   -i \
   -no-custom \
   -p "Atajos" \
-  -theme tokyonight \
+  -theme "$rofi_theme" \
   -theme-str "window { title: \"${window_title}\"; width: 980px; } listview { lines: 28; }"

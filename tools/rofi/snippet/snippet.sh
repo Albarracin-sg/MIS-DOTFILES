@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 # Make sure to edit the path of snippets.txt.
 # Then, create snippets.txt and add important snippet text.
 # You can store and copy text snippets that you frequently use here.
@@ -15,7 +17,12 @@
 #                                                 | |    | |               
 #                                                 |_|    |_|               
 
-selection=$(rofi -i -theme "$HOME/.config/rofi/style-1.rasi" -dmenu $@ < /path-to-your/snippets.txt -p "󰅍")
+rofi_theme="$HOME/.config/rofi/themes/current.rasi"
+if [[ ! -f "$rofi_theme" ]]; then
+  rofi_theme="$HOME/.config/rofi/themes/tokyonight.rasi"
+fi
+
+selection=$(rofi -i -theme "$rofi_theme" -dmenu "$@" < /path-to-your/snippets.txt -p "󰅍")
 snippet=$(echo $selection)
 echo -n "$snippet" | wl-copy
 sleep 0.1

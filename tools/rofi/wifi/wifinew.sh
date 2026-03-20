@@ -1,8 +1,12 @@
 #!/bin/bash
 # SCRIPT TO CONNECT TO NEW WIFI USING DMENU | ROFI
 
-dir="$HOME/.config/rofi"
-theme='style-1'
+set -euo pipefail
+
+rofi_theme="$HOME/.config/rofi/themes/current.rasi"
+if [[ ! -f "$rofi_theme" ]]; then
+    rofi_theme="$HOME/.config/rofi/themes/tokyonight.rasi"
+fi
 
 # bssid=$(nmcli device wifi list | sed -n '1!P'| cut -b 9- | dmenu -p "Wifi" -l 10 | awk '{print $1}')
 # [ -z "$bssid" ] && exit 1
@@ -11,9 +15,9 @@ theme='style-1'
 # nmcli device wifi connect $bssid password $pass
 # notify-send "📶 New WiFi Connected"
 
-bssid=$(nmcli device wifi list | sed -n '1!P' | cut -b 9- | rofi -dmenu -theme ${dir}/${theme}.rasi -p " " -lines 10 | awk '{print $1}')
+bssid=$(nmcli device wifi list | sed -n '1!P' | cut -b 9- | rofi -dmenu -theme "$rofi_theme" -p " " -lines 10 | awk '{print $1}')
 [ -z "$bssid" ] && exit 1
-pass=$(echo "" | rofi -dmenu -theme-str 'textbox-prompt-colon {str: "";}' -theme ${dir}/${theme}.rasi -p "Enter password")
+pass=$(echo "" | rofi -dmenu -theme-str 'textbox-prompt-colon {str: "";}' -theme "$rofi_theme" -p "Enter password")
 [ -z "$pass" ] && notify-send "🔑 Password not entered" && exit 1
 nmcli device wifi connect $bssid password $pass
 notify-send "📶 New WiFi Connected"

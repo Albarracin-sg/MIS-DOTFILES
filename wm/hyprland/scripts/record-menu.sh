@@ -8,6 +8,11 @@ PID_FILE="$STATE_DIR/wf-recorder.pid"
 OUT_FILE="$STATE_DIR/current-output.txt"
 LOG_FILE="$STATE_DIR/wf-recorder.log"
 AUDIO_ARGS=()
+ROFI_THEME="$HOME/.config/rofi/themes/current.rasi"
+
+if [[ ! -f "$ROFI_THEME" ]]; then
+  ROFI_THEME="$HOME/.config/rofi/themes/tokyonight.rasi"
+fi
 
 mkdir -p "$SCREENSHOT_DIR" "$RECORD_DIR" "$STATE_DIR"
 
@@ -30,7 +35,7 @@ choose_audio_mode() {
     "Sin audio" \
     "Audio del PC" \
     "Microfono" \
-    | rofi -dmenu -i -p "Audio grabacion")
+    | rofi -dmenu -i -p "Audio grabacion" -theme "$ROFI_THEME")
 
   [[ -z "$mode" ]] && return 1
 
@@ -160,7 +165,7 @@ menu=$(printf '%s
   "Grabar pantalla" \
   "Grabar region" \
   "Detener grabacion" \
-  | rofi -dmenu -i -p "Pantalla")
+  | rofi -dmenu -i -p "Pantalla" -theme "$ROFI_THEME")
 
 if [[ -z "$menu" ]]; then
   exit 0

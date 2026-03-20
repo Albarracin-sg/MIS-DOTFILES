@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-dir="$HOME/.config/rofi"
-theme='style-1'
+rofi_theme="$HOME/.config/rofi/themes/current.rasi"
+if [[ ! -f "$rofi_theme" ]]; then
+    rofi_theme="$HOME/.config/rofi/themes/tokyonight.rasi"
+fi
 
-## Run
 rofi \
     -show emoji \
-    -theme ${dir}/${theme}.rasi
+    -theme "$rofi_theme"

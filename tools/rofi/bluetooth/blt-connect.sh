@@ -19,8 +19,10 @@
 # Constants
 divider="---------"
 goback="Back"
-dir="$HOME/.config/rofi"
-theme='style-1'
+rofi_theme="$HOME/.config/rofi/themes/current.rasi"
+if [[ ! -f "$rofi_theme" ]]; then
+    rofi_theme="$HOME/.config/rofi/themes/tokyonight.rasi"
+fi
 
 # Checks if bluetooth controller is powered on
 power_on() {
@@ -307,7 +309,7 @@ show_menu() {
 }
 
 # Rofi command to pipe into, can add any options here
-rofi_command="rofi -dmenu $* -theme ${dir}/${theme}.rasi -p "󰂯" "
+rofi_command="rofi -dmenu $* -theme $rofi_theme -p 󰂯"
 
 case "$1" in
     --status)
