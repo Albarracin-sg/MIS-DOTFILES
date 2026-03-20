@@ -6,3 +6,5 @@ tools/rofi/themes/current.rasi
 wm/eww/current-theme.scss
 wm/hyprland/themes/current.conf
 wm/hyprland/themes/current.theme
+tools/starship/current.toml
+tools/grub/themes/Matrix-Morpheus/
