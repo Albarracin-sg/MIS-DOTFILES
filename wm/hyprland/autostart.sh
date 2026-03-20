@@ -66,6 +66,15 @@ if wallpaper=$(pick_wallpaper); then
   fi
 fi
 
+if [ -f "$HOME/.config/hypr/themes/current.conf" ]; then
+  # shellcheck disable=SC1090
+  source "$HOME/.config/hypr/themes/current.conf"
+  if command -v hyprctl >/dev/null 2>&1; then
+    hyprctl keyword general:col.active_border "${THEME_HYPR_ACTIVE_BORDER:-0xffcba6f7}" >/dev/null 2>&1 || true
+    hyprctl keyword general:col.inactive_border "${THEME_HYPR_INACTIVE_BORDER:-0xff313244}" >/dev/null 2>&1 || true
+  fi
+fi
+
 # --- EWW ---
 if command -v eww >/dev/null 2>&1; then
   "$HOME/.config/eww/reload.sh" >/dev/null 2>&1 || true

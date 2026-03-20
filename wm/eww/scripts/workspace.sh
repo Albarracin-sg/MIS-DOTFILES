@@ -1,5 +1,7 @@
 #!/bin/bash
 
+eww_cmd="$HOME/.config/eww/scripts/ewwctl.sh"
+
 # Función para generar la salida de workspaces (solo con los 10 primeros workspaces)
 generate_workspaces_output() {
     local output=""
@@ -52,7 +54,7 @@ generate_workspaces_output() {
     output+=")"
 
     # Actualizar la variable de Eww
-    /usr/bin/eww update workspaces-output="$output"
+    "${eww_cmd}" update workspaces-output="$output"
 }
 
 # Generar estado inicial

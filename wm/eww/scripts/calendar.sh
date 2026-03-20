@@ -1,10 +1,12 @@
 #!/bin/bash
+
+eww_cmd="$HOME/.config/eww/scripts/ewwctl.sh"
 MONITOR="${1:-0}"
 
-if [[ $(eww get calrev_${MONITOR}) == "true" ]]; then
-    eww update calrev_${MONITOR}=false
-    eww close calendar_${MONITOR}
+if [[ $("${eww_cmd}" get calrev_${MONITOR}) == "true" ]]; then
+    "${eww_cmd}" update calrev_${MONITOR}=false
+    "${eww_cmd}" close calendar_${MONITOR}
 else
-    eww update calrev_${MONITOR}=true
-    eww open calendar_${MONITOR}
+    "${eww_cmd}" update calrev_${MONITOR}=true
+    "${eww_cmd}" open calendar_${MONITOR}
 fi

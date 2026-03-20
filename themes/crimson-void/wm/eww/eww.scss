@@ -1315,3 +1315,299 @@ tooltip{
 .bar-vertical .div {
   color: rgba(246, 219, 226, 0.2);
 }
+
+.bar-vertical-compact {
+  box-shadow: 0 18px 40px rgba(10, 2, 6, 0.42);
+  background-color: rgba(24, 8, 13, 0.94);
+  border: 1px solid rgba(159, 47, 81, 0.24);
+  border-radius: 16px;
+  padding: 8px 4px;
+  margin: 0;
+}
+
+.bar-vertical-compact .bar-left,
+.bar-vertical-compact .bar-center,
+.bar-vertical-compact .bar-right {
+  min-width: 36px;
+  margin: 0;
+}
+
+.bar-vertical-compact .menu-eventbox,
+.bar-vertical-compact .time-label,
+.bar-vertical-compact .network-status,
+.bar-vertical-compact .power-eventbox,
+.bar-vertical-compact .bluetooth,
+.bar-vertical-compact .volume-short,
+.bar-vertical-compact .ram-short,
+.bar-vertical-compact .cpu-short,
+.bar-vertical-compact .arch-wrap,
+.bar-vertical-compact .panel-wrap,
+.bar-vertical-compact .time-content,
+.bar-vertical-compact .network-status-inner {
+  min-width: 36px;
+  min-height: 34px;
+  border-radius: 11px;
+  padding: 0;
+  margin: 0;
+}
+
+.bar-vertical-compact .menu-eventbox {
+  background-color: rgba(101, 14, 38, 0.92);
+  border: 1px solid rgba(212, 73, 111, 0.22);
+  color: #ffe7ef;
+}
+
+.bar-vertical-compact .time-label,
+.bar-vertical-compact .network-status,
+.bar-vertical-compact .metrics-pack,
+.bar-vertical-compact .power-eventbox,
+.bar-vertical-compact .arch-wrap,
+.bar-vertical-compact .panel-wrap,
+.bar-vertical-compact .time-content,
+.bar-vertical-compact .network-status-inner {
+  background-color: rgba(58, 18, 31, 0.9);
+  border: 1px solid rgba(201, 71, 111, 0.14);
+}
+
+.bar-vertical-compact .time-content {
+  padding: 5px 0;
+  min-height: 38px;
+}
+
+.bar-vertical-compact .time-content label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #ffe7ef;
+}
+
+.bar-vertical-compact .ws {
+  padding: 5px 0;
+  min-width: 34px;
+  border-radius: 0;
+  background-color: transparent;
+  border: none;
+}
+
+.bar-vertical-compact .ws-item {
+  min-width: 10px;
+  min-height: 10px;
+  border-radius: 999px;
+  background-color: rgba(255, 236, 242, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  margin: 3px 0;
+}
+
+.bar-vertical-compact .ws-item label {
+  color: transparent;
+  font-size: 1px;
+}
+
+.bar-vertical-compact .ws-active {
+  background-color: rgba(182, 39, 78, 0.95);
+  border-color: rgba(255, 214, 226, 0.18);
+}
+
+.bar-vertical-compact .ws-occupied {
+  background-color: rgba(118, 24, 50, 0.58);
+}
+
+.bar-vertical-compact .ws-empty {
+  background-color: rgba(255, 240, 245, 0.07);
+}
+
+.bar-vertical-compact .metrics-pack {
+  padding: 6px 0;
+  border-radius: 12px;
+}
+
+.bar-vertical-compact .volume-short,
+.bar-vertical-compact .ram-short,
+.bar-vertical-compact .cpu-short,
+.bar-vertical-compact .bluetooth,
+.bar-vertical-compact .wifi {
+  background-color: transparent;
+}
+
+.bar-vertical-compact .volume-short box,
+.bar-vertical-compact .ram-short box,
+.bar-vertical-compact .cpu-short box {
+  min-width: 36px;
+  min-height: 34px;
+}
+
+.bar-vertical-compact .volume-short label,
+.bar-vertical-compact .ram-short label,
+.bar-vertical-compact .cpu-short label,
+.bar-vertical-compact .bluetooth-icon,
+.bar-vertical-compact .network-icon {
+  font-size: 9px;
+  font-weight: 700;
+  color: #ffe7ef;
+}
+
+.bar-vertical-compact .arch-icon,
+.bar-vertical-compact .panel-icon,
+.bar-vertical-compact .network-icon {
+  font-size: 13px;
+}
+
+.bar-vertical-compact .icon {
+  margin-right: 0;
+}
+
+/* Crimson popup surfaces: Arch menu, calendar and user panel */
+.shadow-container,
+.wifi-popup-layer {
+  background-color: rgba(8, 3, 5, 0.12);
+}
+
+.menuctl-container,
+.calendar-container,
+.main-container,
+.music-container,
+.cpu-container,
+.wifictl-container {
+  box-shadow: 0 20px 45px rgba(10, 2, 6, 0.5);
+  background-color: rgba(22, 8, 13, 0.96);
+  border: 1px solid rgba(180, 58, 89, 0.22);
+}
+
+.wifi-popup-shell {
+  margin-right: 2px;
+}
+
+.menu-header,
+.wifi-header,
+.cpu-header,
+.main-title,
+.time-inner {
+  color: #ffb08a;
+}
+
+.menu-subheader,
+.wifi-stats,
+.date-inner,
+.artist,
+.nheader,
+.app-name {
+  color: #f6d7e0;
+}
+
+.network-container,
+.app-container,
+.calendar-box,
+.time-box,
+.profile,
+.graph-container,
+.wifi-option-box,
+.app-option-box {
+  background-color: rgba(58, 18, 31, 0.88);
+  border: 1px solid rgba(201, 71, 111, 0.16);
+  box-shadow: none;
+}
+
+.wifi-buttons {
+  background-color: rgba(176, 58, 86, 0.22);
+  border: 1px solid rgba(255, 176, 138, 0.14);
+  color: #fff1f5;
+}
+
+.wifi-buttons:hover,
+.app-option-box:hover {
+  background-color: rgba(176, 58, 86, 0.34);
+}
+
+.app-option-box,
+.wifi-option-box {
+  border-radius: 14px;
+}
+
+.app-display,
+.wifi-ssid {
+  color: #fff1f5;
+}
+
+.cal {
+  color: #f7d9e2;
+}
+
+.cal.header,
+.cal.button {
+  color: #ffb08a;
+}
+
+.cal.button:hover,
+.cal.highlight {
+  color: #ff7a9d;
+}
+
+.profile,
+.graph-container {
+  min-width: 270px;
+}
+
+.sysctl-head {
+  margin: 8px 12px 10px;
+}
+
+.sysctl-title {
+  color: #ffb08a;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.sysctl-subtitle {
+  color: rgba(247, 217, 226, 0.72);
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  margin-top: 4px;
+}
+
+.music-panel-card {
+  margin: 10px 12px 8px;
+  padding: 10px;
+  border-radius: 16px;
+  background-color: rgba(58, 18, 31, 0.88);
+  border: 1px solid rgba(201, 71, 111, 0.16);
+}
+
+.music-panel-top {
+  spacing: 10px;
+}
+
+.music-panel-thumb {
+  min-width: 56px;
+  min-height: 56px;
+  border-radius: 12px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.music-panel-meta {
+  min-width: 0;
+}
+
+.music-panel-title {
+  color: #fff1f5;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.music-panel-artist {
+  color: rgba(247, 217, 226, 0.8);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.music-panel-time {
+  color: #ffb08a;
+  font-size: 11px;
+  margin-top: 6px;
+}
+
+.music-slider trough highlight,
+.vol-mini trough highlight,
+.lig trough highlight {
+  background-color: #d46a32;
+}

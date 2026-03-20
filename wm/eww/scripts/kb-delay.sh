@@ -1,4 +1,6 @@
 #!/bin/bash
 
-/usr/bin/eww update keyhov=true
-(sleep 0.45 && /usr/bin/eww update keyrev="$(/usr/bin/eww get keyhov)") &
+eww_cmd="$HOME/.config/eww/scripts/ewwctl.sh"
+
+"${eww_cmd}" update keyhov=true
+(sleep 0.45 && "${eww_cmd}" update keyrev="$("${eww_cmd}" get keyhov)") &

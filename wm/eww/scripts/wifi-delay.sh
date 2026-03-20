@@ -1,4 +1,6 @@
 #!/bin/bash
 
-/usr/bin/eww update wifihov=true
-(sleep 0.45 && /usr/bin/eww update wifirev="$(/usr/bin/eww get wifihov)") &
+eww_cmd="$HOME/.config/eww/scripts/ewwctl.sh"
+
+"${eww_cmd}" update wifihov=true
+(sleep 0.45 && "${eww_cmd}" update wifirev="$("${eww_cmd}" get wifihov)") &

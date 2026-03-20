@@ -110,7 +110,7 @@
          )
          (eventbox :class "tray-button"
                    :width 20
-                   :onclick "${trayrev==false?"/usr/bin/eww update trayrev=true":"/usr/bin/eww update trayrev=false"}"
+                   :onclick "${trayrev==false?"$HOME/.config/eww/scripts/ewwctl.sh update trayrev=true":"$HOME/.config/eww/scripts/ewwctl.sh update trayrev=false"}"
                    :cursor "pointer"
                    (label :class "tray-text" :text "${trayrev==false?"‹":"›"}")
          )
@@ -238,7 +238,7 @@
                                      (label :class "wifi-ip-value wifi-ip-local" :halign "center" :text "${show_local_ip?wifistatus.local_ip:wifistatus.masked_local_ip}")
                                 )
                                (eventbox :cursor "pointer"
-                                         :onclick "/usr/bin/eww update show_local_ip=${show_local_ip==true?"false":"true"}"
+                                         :onclick "$HOME/.config/eww/scripts/ewwctl.sh update show_local_ip=${show_local_ip==true?"false":"true"}"
                                          (box :class "wifi-eye-wrap"
                                               (label :class "wifi-ip-toggle" :text "${show_local_ip?"󰈉":"󰈈"}")
                                          )
@@ -276,7 +276,7 @@
                 (revealer :reveal {wificonfigrev}
                          :transition "slidedown"
                          :duration "350ms"
-                         (eventbox :onhoverlost "/usr/bin/eww update wificonfigrev=false"
+                         (eventbox :onhoverlost "$HOME/.config/eww/scripts/ewwctl.sh update wificonfigrev=false"
                                   (box :class "wifictl-container"
                                        :space-evenly false
                                        :orientation "v"
@@ -292,7 +292,7 @@
                                                    :space-evenly false
                                                    :class "iwifi"
                                                    :height 30
-                                                   :onaccept "/usr/bin/eww update wificonfigrev=false && nmcli device wifi connect \"${wifissidrev}\" password \"{}\""
+                                                   :onaccept "$HOME/.config/eww/scripts/ewwctl.sh update wificonfigrev=false && nmcli device wifi connect \"${wifissidrev}\" password \"{}\""
                                             ))
                                        )
                                        (box :orientation "h"
@@ -302,12 +302,12 @@
                                             (eventbox :cursor "pointer"
                                                       :height 30
                                                       :class "wifi-buttons"
-                                                      :onclick "/usr/bin/eww update wificonfigrev=false && nmcli device wifi connect \"${wifissidrev}\""
+                                                      :onclick "$HOME/.config/eww/scripts/ewwctl.sh update wificonfigrev=false && nmcli device wifi connect \"${wifissidrev}\""
                                                       (label :text "Connect")
                                             )
                                             (eventbox :cursor "pointer"
                                                       :class "wifi-buttons"
-                                                      :onclick "/usr/bin/eww update wificonfigrev=false && nmcli connection delete \"${wifissidrev}\""
+                                                      :onclick "$HOME/.config/eww/scripts/ewwctl.sh update wificonfigrev=false && nmcli connection delete \"${wifissidrev}\""
                                                       (label :text "Remove")
                                             )
                                        )
@@ -317,13 +317,13 @@
                                             :class "wifi-bcon"
                                             (eventbox :cursor "pointer"
                                                       :class "wifi-buttons"
-                                                      :onclick "/usr/bin/eww update wificonfigrev=false && nmcli device disconnect wlp0s20f3"
+                                                      :onclick "$HOME/.config/eww/scripts/ewwctl.sh update wificonfigrev=false && nmcli device disconnect wlp0s20f3"
                                                       :height 30
                                                       (label :text "Disconnect")
                                             )
                                             (eventbox :cursor "pointer"
                                                       :class "wifi-buttons"
-                                                      :onclick "/usr/bin/eww update wificonfigrev=false && nmcli connection delete \"${wifissidrev}\""
+                                                      :onclick "$HOME/.config/eww/scripts/ewwctl.sh update wificonfigrev=false && nmcli connection delete \"${wifissidrev}\""
                                                       (label :text "Remove")
                                             )
                                        )
@@ -369,7 +369,7 @@
 
 (defwidget wifi-option [ssid auto inuse]
     (eventbox :cursor "pointer"
-              :onclick "/usr/bin/eww update wificonfigrev=false && /usr/bin/eww update wificonfigrev=true && /usr/bin/eww update wificlass=${auto==false?"1":inuse==false?"2":"3"} && /usr/bin/eww update wifissidrev=\"${ssid}\""
+              :onclick "$HOME/.config/eww/scripts/ewwctl.sh update wificonfigrev=false && $HOME/.config/eww/scripts/ewwctl.sh update wificonfigrev=true && $HOME/.config/eww/scripts/ewwctl.sh update wificlass=${auto==false?"1":inuse==false?"2":"3"} && $HOME/.config/eww/scripts/ewwctl.sh update wifissidrev=\"${ssid}\""
               (box :class "wifi-option-box"
                    :orientation "v"
                    (box :class "wifi-ssid"
@@ -431,7 +431,7 @@
 (defwidget keyboard []
     (box :class "keyboard"
         (eventbox :onhover "./scripts/kb-delay.sh"
-                  :onhoverlost "bash -c '/usr/bin/eww update keyrev=false && /usr/bin/eww update keyhov=false'"
+                  :onhoverlost "bash -c '$HOME/.config/eww/scripts/ewwctl.sh update keyrev=false && $HOME/.config/eww/scripts/ewwctl.sh update keyhov=false'"
                   :onclick "hyprctl switchxkblayout at-translated-set-2-keyboard next"
                   :cursor "pointer"
                   (box :orientation "h"
@@ -790,7 +790,7 @@
                )
      )
      (eventbox :cursor "pointer"
-               :onclick "bash -c '/usr/bin/eww update show_cpu_percent=${show_cpu_percent==true?'false':'true'} && if ! pgrep -x \"btop\" > /dev/null; then kitty -e btop & fi'"
+               :onclick "bash -c '$HOME/.config/eww/scripts/ewwctl.sh update show_cpu_percent=${show_cpu_percent==true?'false':'true'} && if ! pgrep -x \"btop\" > /dev/null; then kitty -e btop & fi'"
                (box :class "cpu-text"
                     :space-evenly false
                     :halign "center"
@@ -816,7 +816,7 @@
                )
      )
      (eventbox :cursor "pointer"
-               :onclick "/usr/bin/eww update show_ram_percent=${show_ram_percent==true?'false':'true'}"
+               :onclick "$HOME/.config/eww/scripts/ewwctl.sh update show_ram_percent=${show_ram_percent==true?'false':'true'}"
                (box :class "ram-text"
                     :space-evenly false
                     :halign "center"
@@ -841,7 +841,7 @@
                )
      )
      (eventbox :cursor "pointer"
-               :onclick "/usr/bin/eww update show_disk_percent=${show_disk_percent==true?'false':'true'}"
+               :onclick "$HOME/.config/eww/scripts/ewwctl.sh update show_disk_percent=${show_disk_percent==true?'false':'true'}"
                (box :class "disk-text"
                     :space-evenly false
                     :halign "center"
@@ -960,7 +960,7 @@
               :class "cpu-header"
               :space-evenly false
               (eventbox :cursor "pointer"
-                        :onclick "bash -c '/usr/bin/eww update show_processes=${show_processes==true?'false':'true'} && if ! pgrep -x \"btop\" > /dev/null; then kitty -e btop & fi'"
+                        :onclick "bash -c '$HOME/.config/eww/scripts/ewwctl.sh update show_processes=${show_processes==true?'false':'true'} && if ! pgrep -x \"btop\" > /dev/null; then kitty -e btop & fi'"
                         (label :text "${show_processes ? '󰍹 Top Processes' : ' Core Temperature'}"
                                :style "color:#cdd6f4;font-size:20px;")
               )

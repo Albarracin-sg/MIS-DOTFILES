@@ -110,7 +110,7 @@
          )
          (eventbox :class "tray-button"
                    :width 20
-                   :onclick "${trayrev==false?"/usr/bin/eww update trayrev=true":"/usr/bin/eww update trayrev=false"}"
+                   :onclick "${trayrev==false?"$HOME/.config/eww/scripts/ewwctl.sh update trayrev=true":"$HOME/.config/eww/scripts/ewwctl.sh update trayrev=false"}"
                    :cursor "pointer"
                    (label :class "tray-text" :text "${trayrev==false?"‹":"›"}")
          )
@@ -241,7 +241,7 @@
                                      (label :class "wifi-ip-value wifi-ip-local" :halign "center" :text "${show_local_ip?wifistatus.local_ip:wifistatus.masked_local_ip}")
                                 )
                                (eventbox :cursor "pointer"
-                                         :onclick "/usr/bin/eww update show_local_ip=${show_local_ip==true?"false":"true"}"
+                                         :onclick "$HOME/.config/eww/scripts/ewwctl.sh update show_local_ip=${show_local_ip==true?"false":"true"}"
                                          (box :class "wifi-eye-wrap"
                                               (label :class "wifi-ip-toggle" :text "${show_local_ip?"󰈉":"󰈈"}")
                                          )
@@ -279,7 +279,7 @@
                 (revealer :reveal {wificonfigrev}
                          :transition "slidedown"
                          :duration "350ms"
-                         (eventbox :onhoverlost "/usr/bin/eww update wificonfigrev=false"
+                         (eventbox :onhoverlost "$HOME/.config/eww/scripts/ewwctl.sh update wificonfigrev=false"
                                   (box :class "wifictl-container"
                                        :space-evenly false
                                        :orientation "v"
@@ -295,7 +295,7 @@
                                                    :space-evenly false
                                                    :class "iwifi"
                                                    :height 30
-                                                   :onaccept "/usr/bin/eww update wificonfigrev=false && nmcli device wifi connect \"${wifissidrev}\" password \"{}\""
+                                                   :onaccept "$HOME/.config/eww/scripts/ewwctl.sh update wificonfigrev=false && nmcli device wifi connect \"${wifissidrev}\" password \"{}\""
                                             ))
                                        )
                                        (box :orientation "h"
@@ -305,12 +305,12 @@
                                             (eventbox :cursor "pointer"
                                                       :height 30
                                                       :class "wifi-buttons"
-                                                      :onclick "/usr/bin/eww update wificonfigrev=false && nmcli device wifi connect \"${wifissidrev}\""
+                                                      :onclick "$HOME/.config/eww/scripts/ewwctl.sh update wificonfigrev=false && nmcli device wifi connect \"${wifissidrev}\""
                                                       (label :text "Connect")
                                             )
                                             (eventbox :cursor "pointer"
                                                       :class "wifi-buttons"
-                                                      :onclick "/usr/bin/eww update wificonfigrev=false && nmcli connection delete \"${wifissidrev}\""
+                                                      :onclick "$HOME/.config/eww/scripts/ewwctl.sh update wificonfigrev=false && nmcli connection delete \"${wifissidrev}\""
                                                       (label :text "Remove")
                                             )
                                        )
@@ -320,13 +320,13 @@
                                             :class "wifi-bcon"
                                             (eventbox :cursor "pointer"
                                                       :class "wifi-buttons"
-                                                      :onclick "/usr/bin/eww update wificonfigrev=false && nmcli device disconnect wlp0s20f3"
+                                                      :onclick "$HOME/.config/eww/scripts/ewwctl.sh update wificonfigrev=false && nmcli device disconnect wlp0s20f3"
                                                       :height 30
                                                       (label :text "Disconnect")
                                             )
                                             (eventbox :cursor "pointer"
                                                       :class "wifi-buttons"
-                                                      :onclick "/usr/bin/eww update wificonfigrev=false && nmcli connection delete \"${wifissidrev}\""
+                                                      :onclick "$HOME/.config/eww/scripts/ewwctl.sh update wificonfigrev=false && nmcli connection delete \"${wifissidrev}\""
                                                       (label :text "Remove")
                                             )
                                        )
@@ -372,7 +372,7 @@
 
 (defwidget wifi-option [ssid auto inuse]
     (eventbox :cursor "pointer"
-              :onclick "/usr/bin/eww update wificonfigrev=false && /usr/bin/eww update wificonfigrev=true && /usr/bin/eww update wificlass=${auto==false?"1":inuse==false?"2":"3"} && /usr/bin/eww update wifissidrev=\"${ssid}\""
+              :onclick "$HOME/.config/eww/scripts/ewwctl.sh update wificonfigrev=false && $HOME/.config/eww/scripts/ewwctl.sh update wificonfigrev=true && $HOME/.config/eww/scripts/ewwctl.sh update wificlass=${auto==false?"1":inuse==false?"2":"3"} && $HOME/.config/eww/scripts/ewwctl.sh update wifissidrev=\"${ssid}\""
               (box :class "wifi-option-box"
                    :orientation "v"
                    (box :class "wifi-ssid"
@@ -434,7 +434,7 @@
 (defwidget keyboard []
     (box :class "keyboard"
         (eventbox :onhover "./scripts/kb-delay.sh"
-                  :onhoverlost "bash -c '/usr/bin/eww update keyrev=false && /usr/bin/eww update keyhov=false'"
+                  :onhoverlost "bash -c '$HOME/.config/eww/scripts/ewwctl.sh update keyrev=false && $HOME/.config/eww/scripts/ewwctl.sh update keyhov=false'"
                   :onclick "hyprctl switchxkblayout at-translated-set-2-keyboard next"
                   :cursor "pointer"
                   (box :orientation "h"
@@ -768,17 +768,56 @@
                         )
                    )
               )
-              (box :class "monitor-container"
-                   :orientation "v"
-                   :space-evenly false
-                   (box :class "sysctl"
-                        :orientation "v"
-                        :space-evenly false
-                        (music-player)
-                        (box :class "divider-h")
-                        (box :class "sys"
-                            (box :class "cpu-box"
-     :orientation "v"
+               (box :class "monitor-container"
+                    :orientation "v"
+                    :space-evenly false
+                    (box :class "sysctl"
+                         :orientation "v"
+                         :space-evenly false
+                         (box :class "sysctl-head"
+                              :orientation "v"
+                              :space-evenly false
+                              (label :class "sysctl-title" :text "Crimson Control")
+                              (label :class "sysctl-subtitle" :text "quick actions + system")
+                          )
+                         (music-panel)
+                         (box :class "divider-h")
+                         (box :class "sliderctl"
+      :orientation "v"
+      :spacing 15
+      (box :class "volume-slider"
+           :space-evenly false
+           :halign "center"
+           :orientation "h"
+           (label :text "${volico}")
+           (scale :class "vol"
+                  :value get_vol
+                  :max 101
+                  :min 0
+                  :round-digits 0
+                  :onchange "pamixer --set-volume {}"
+           )
+           (label :class "vol-percent" :text "${get_vol}%")
+      )
+      (box :class "light-slider"
+           :space-evenly false
+           :halign "center"
+           :orientation "h"
+           (label :text "")
+           (scale :value get_light
+                  :class "lig"
+                  :max 101
+                  :min 1
+                  :round-digits 0
+                  :onchange "brightnessctl set {}%"
+           )
+           (label :class "light-percent" :text "${get_light}%")
+      )
+)
+                         (box :class "divider-h")
+                         (box :class "sys"
+                             (box :class "cpu-box"
+      :orientation "v"
      :space-evenly false
      (eventbox :class "cpu-hover"
                :tooltip " ${round(EWW_CPU.avg,1)}% used / ${temperature_data.CORETEMP_PACKAGE_ID_0}°C "
@@ -793,7 +832,7 @@
                )
      )
      (eventbox :cursor "pointer"
-               :onclick "bash -c '/usr/bin/eww update show_cpu_percent=${show_cpu_percent==true?'false':'true'} && if ! pgrep -x \"btop\" > /dev/null; then kitty -e btop & fi'"
+               :onclick "bash -c '$HOME/.config/eww/scripts/ewwctl.sh update show_cpu_percent=${show_cpu_percent==true?'false':'true'} && if ! pgrep -x \"btop\" > /dev/null; then kitty -e btop & fi'"
                (box :class "cpu-text"
                     :space-evenly false
                     :halign "center"
@@ -819,7 +858,7 @@
                )
      )
      (eventbox :cursor "pointer"
-               :onclick "/usr/bin/eww update show_ram_percent=${show_ram_percent==true?'false':'true'}"
+               :onclick "$HOME/.config/eww/scripts/ewwctl.sh update show_ram_percent=${show_ram_percent==true?'false':'true'}"
                (box :class "ram-text"
                     :space-evenly false
                     :halign "center"
@@ -844,7 +883,7 @@
                )
      )
      (eventbox :cursor "pointer"
-               :onclick "/usr/bin/eww update show_disk_percent=${show_disk_percent==true?'false':'true'}"
+               :onclick "$HOME/.config/eww/scripts/ewwctl.sh update show_disk_percent=${show_disk_percent==true?'false':'true'}"
                (box :class "disk-text"
                     :space-evenly false
                     :halign "center"
@@ -853,44 +892,12 @@
                       "${show_disk_percent ? round(EWW_DISK['/'].used_perc,0) + '%' : round(EWW_DISK['/'].used/1073741824,1) + 'GB'}"
                     )
                )
-     )
+      )
 )
                         )
-                        (box :class "sliderctl"
-     :orientation "v"
-     :spacing 15
-     (box :class "volume-slider"
-          :space-evenly false
-          :halign "center"
-          :orientation "h"
-          (label :text "${volico}")
-          (scale :class "vol"
-                 :value get_vol
-                 :max 101
-                 :min 0
-                 :round-digits 0
-                 :onchange "pamixer --set-volume {}"
+                    )
+               )
           )
-          (label :class "vol-percent" :text "${get_vol}%")
-     )
-     (box :class "light-slider"
-          :space-evenly false
-          :halign "center"
-          :orientation "h"
-          (label :text "")
-          (scale :value get_light
-                 :class "lig"
-                 :max 101
-                 :min 1
-                 :round-digits 0
-                 :onchange "brightnessctl set {}%"
-          )
-          (label :class "light-percent" :text "${get_light}%")
-     )
-)
-                   )
-              )
-         )
          (process-panel)
          )
     )))
@@ -963,7 +970,7 @@
               :class "cpu-header"
               :space-evenly false
               (eventbox :cursor "pointer"
-                        :onclick "bash -c '/usr/bin/eww update show_processes=${show_processes==true?'false':'true'} && if ! pgrep -x \"btop\" > /dev/null; then kitty -e btop & fi'"
+                        :onclick "bash -c '$HOME/.config/eww/scripts/ewwctl.sh update show_processes=${show_processes==true?'false':'true'} && if ! pgrep -x \"btop\" > /dev/null; then kitty -e btop & fi'"
                         (label :text "${show_processes ? '󰍹 Top Processes' : ' Core Temperature'}"
                                :style "color:#cdd6f4;font-size:20px;")
               )
@@ -1091,9 +1098,32 @@
                    :spacing 45
                    (eventbox :class "mico" :cursor "pointer" :onclick "playerctl previous" "󰒮")
                    (eventbox :class "mico" :cursor "pointer" :onclick "playerctl play-pause" {music.status == "Playing" ? "󰓛" : "󰐊"})
-                   (eventbox :class "mico" :cursor "pointer" :onclick "playerctl next" "󰒭")
+                    (eventbox :class "mico" :cursor "pointer" :onclick "playerctl next" "󰒭")
+               )
+          ))
+)
+
+(defwidget music-panel []
+    (revealer :transition "slidedown"
+              :reveal {"${cmusic}" == "" || "${music.title}" == "" ? false : true}
+         (box :class "music-panel-card"
+              :orientation "v"
+              :space-evenly false
+              (box :class "music-panel-top"
+                   :orientation "h"
+                   :space-evenly false
+                   (box :class "music-panel-thumb"
+                        :style "background-image: url('${music.thumbnail}');")
+                   (box :class "music-panel-meta"
+                        :orientation "v"
+                        :space-evenly false
+                        (label :class "music-panel-title" :limit-width 24 :text "${music.title}")
+                        (label :class "music-panel-artist" :limit-width 28 :text "${music.artist}")
+                        (label :class "music-panel-time" :text "${pmusic.positionStr} / ${music.lengthStr}")
+                   )
               )
-         ))
+         )
+    )
 )
 
 (defwidget bar-vertical [monitor_id]
@@ -1147,6 +1177,57 @@
     )
 )
 
+(defwidget bar-vertical-compact [monitor_id]
+    (box :class "bar-vertical-compact"
+         :orientation "v"
+         :hexpand true
+         :vexpand true
+         :spacing 6
+         (box :class "bar-left"
+              :halign "center"
+              :valign "start"
+              :orientation "v"
+              :spacing 6
+              :hexpand false
+              :space-evenly false
+              (menu :monitor_id monitor_id)
+              (time :time get_time :monitor_id monitor_id)
+         )
+         (box :class "bar-center"
+              :halign "center"
+              :valign "center"
+              :spacing 0
+              :hexpand true
+              :orientation "v"
+              (workspaces)
+         )
+         (box :class "bar-right"
+              :halign "center"
+              :valign "end"
+              :orientation "v"
+              :hexpand false
+              :space-evenly false
+              :spacing 6
+              (wifi :monitor_id monitor_id)
+              (box :class "metrics-pack"
+                   :orientation "v"
+                   :space-evenly false
+                   :spacing 3
+                   (volume)
+                   (ram)
+                   (cpu)
+                   (eventbox :onclick "blueman-manager &"
+                             :cursor "pointer"
+                        (box :class "bluetooth"
+                             (label :text "󰂯")
+                        )
+                   )
+              )
+              (power :monitor_id monitor_id)
+         )
+    )
+)
+
 ;; ==================== VENTANAS DE BARRAS ====================
 ;; Crimson Void replaces the normal top bar windows with left-side vertical windows.
 ;; The widget itself is independent from Tokyo Night so this theme can diverge freely.
@@ -1167,13 +1248,13 @@
     :monitor 1
     :stacking "fg"
     :geometry (geometry :anchor "center left"
-                         :x "4px"
+                         :x "1px"
                          :y "0px"
-                         :width "72px"
-                         :height "96%"
+                         :width "54px"
+                         :height "92%"
     )
     :exclusive true
-    (bar-vertical :monitor_id "1")
+    (bar-vertical-compact :monitor_id "1")
 )
 
 (defvar show_cpu_percent false)

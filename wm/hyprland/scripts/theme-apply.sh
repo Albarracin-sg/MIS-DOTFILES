@@ -98,6 +98,11 @@ if command -v kitty >/dev/null 2>&1; then
   kitty @ set-colors -a "$kitty_current" >/dev/null 2>&1 || true
 fi
 
+if command -v hyprctl >/dev/null 2>&1; then
+  hyprctl keyword general:col.active_border "$THEME_HYPR_ACTIVE_BORDER" >/dev/null 2>&1 || true
+  hyprctl keyword general:col.inactive_border "$THEME_HYPR_INACTIVE_BORDER" >/dev/null 2>&1 || true
+fi
+
 # Wallpaper priority:
 # 1. mpvpaper for video themes
 # 2. swww for image themes
