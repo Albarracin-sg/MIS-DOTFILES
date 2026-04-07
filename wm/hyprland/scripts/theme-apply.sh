@@ -48,12 +48,125 @@ is_video_wallpaper() {
   esac
 }
 
+is_static_wallpaper() {
+  case "$1" in
+    *.png|*.jpg|*.jpeg|*.webp|*.bmp)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+resolve_static_wallpaper() {
+  local requested_wallpaper="$1"
+  local wallpapers_dir="$HOME/Imagenes/Wallpapers"
+  local preferred_fallback="$wallpapers_dir/tokyo.jpg"
+  local candidates=()
+
+  if [[ -n "$requested_wallpaper" ]] && [[ -f "$requested_wallpaper" ]] && is_static_wallpaper "$requested_wallpaper"; then
+    printf '%s\n' "$requested_wallpaper"
+    return 0
+  fi
+
+  if [[ -f "$preferred_fallback" ]] && is_static_wallpaper "$preferred_fallback"; then
+    printf '%s\n' "$preferred_fallback"
+    return 0
+  fi
+
+  if [[ -d "$wallpapers_dir" ]]; then
+    shopt -s nullglob
+    candidates=(
+      "$wallpapers_dir"/*.png
+      "$wallpapers_dir"/*.jpg
+      "$wallpapers_dir"/*.jpeg
+      "$wallpapers_dir"/*.webp
+      "$wallpapers_dir"/*.bmp
+    )
+    shopt -u nullglob
+
+    if [[ ${#candidates[@]} -gt 0 ]]; then
+      printf '%s\n' "${candidates[0]}"
+      return 0
+    fi
+  fi
+
+  return 1
+}
+
+apply_wallpaper_with_swww() {
+  local wallpaper="$1"
+
+  pkill -f mpvpaper >/dev/null 2>&1 || true
+  pkill hyprpaper >/dev/null 2>&1 || true
+  pkill swww-daemon >/dev/null 2>&1 || true
+
+  swww-daemon >/dev/null 2>&1 &
+  sleep 0.8
+
+  while IFS= read -r monitor; do
+    [[ -n "$monitor" ]] || continue
+    swww img -o "$monitor" "$wallpaper" --transition-type none >/dev/null 2>&1 || true
+  done < <(hyprctl monitors -j | jq -r '.[].name')
+}
+
+apply_wallpaper_with_hyprpaper() {
+  local wallpaper="$1"
+  local runtime_config="$HOME/.config/hypr/.runtime-hyprpaper.conf"
+  local safe_wallpaper_link="$HOME/.cache/hyprpaper-current-wallpaper"
+
+  mkdir -p "$HOME/.cache"
+  ln -sfn "$wallpaper" "$safe_wallpaper_link"
+
+  {
+    printf 'wallpaper {\n'
+    printf '  monitor = \n'
+    printf '  path = %s\n' "$safe_wallpaper_link"
+    printf '  fit_mode = cover\n'
+    printf '}\n'
+    printf 'splash = false\n'
+    printf 'ipc = true\n'
+  } > "$runtime_config"
+
+  pkill -f mpvpaper >/dev/null 2>&1 || true
+  pkill swww-daemon >/dev/null 2>&1 || true
+  pkill hyprpaper >/dev/null 2>&1 || true
+  sleep 0.2
+
+  hyprpaper -c "$runtime_config" >/dev/null 2>&1 & disown
+}
+
 # shellcheck disable=SC1090
 source "$theme_file"
+
+if resolved_wallpaper=$(resolve_static_wallpaper "${THEME_WALLPAPER:-}"); then
+  THEME_WALLPAPER="$resolved_wallpaper"
+fi
 
 # Persist the active theme metadata for Hyprland/Eww helper scripts.
 mkdir -p "$themes_dir"
 cp "$theme_file" "$current_conf"
+
+python - "$current_conf" "$THEME_WALLPAPER" <<'PY'
+from pathlib import Path
+import re
+import sys
+
+path = Path(sys.argv[1])
+wallpaper = sys.argv[2]
+text = path.read_text()
+replacement = f'THEME_WALLPAPER="{wallpaper}"'
+
+if re.search(r'^THEME_WALLPAPER=.*$', text, flags=re.MULTILINE):
+    text = re.sub(r'^THEME_WALLPAPER=.*$', replacement, text, flags=re.MULTILINE)
+else:
+    if text and not text.endswith('\n'):
+        text += '\n'
+    text += replacement + '\n'
+
+path.write_text(text)
+PY
 
 # Apply app-specific runtime files.
 cp "$THEME_KITTY_FILE" "$kitty_current"
@@ -104,34 +217,12 @@ if command -v hyprctl >/dev/null 2>&1; then
 fi
 
 # Wallpaper priority:
-# 1. mpvpaper for video themes
-# 2. swww for image themes
-# 3. hyprpaper as final fallback
-if is_video_wallpaper "$THEME_WALLPAPER" && command -v mpvpaper >/dev/null 2>&1; then
-  pkill -f mpvpaper >/dev/null 2>&1 || true
-  pkill hyprpaper >/dev/null 2>&1 || true
-  pkill swww-daemon >/dev/null 2>&1 || true
-  sleep 0.2
-  while IFS= read -r monitor; do
-    [[ -n "$monitor" ]] || continue
-    mpvpaper -f -p -o "no-audio loop keepaspect=yes panscan=1.0" "$monitor" "$THEME_WALLPAPER" >/dev/null 2>&1 & disown
-  done < <(hyprctl monitors -j | jq -r '.[].name')
-elif command -v swww >/dev/null 2>&1; then
-  pkill -f mpvpaper >/dev/null 2>&1 || true
-  pkill hyprpaper >/dev/null 2>&1 || true
-  pkill swww-daemon >/dev/null 2>&1 || true
-  swww-daemon >/dev/null 2>&1 &
-  sleep 0.8
-  while IFS= read -r monitor; do
-    [[ -n "$monitor" ]] || continue
-    swww img -o "$monitor" "$THEME_WALLPAPER" --transition-type none >/dev/null 2>&1 || true
-  done < <(hyprctl monitors -j | jq -r '.[].name')
+# 1. swww for static images
+# 2. hyprpaper as fallback for static images
+if command -v swww >/dev/null 2>&1; then
+  apply_wallpaper_with_swww "$THEME_WALLPAPER"
 elif command -v hyprpaper >/dev/null 2>&1; then
-  pkill -f mpvpaper >/dev/null 2>&1 || true
-  pkill swww-daemon >/dev/null 2>&1 || true
-  pkill hyprpaper >/dev/null 2>&1 || true
-  sleep 0.2
-  hyprpaper >/dev/null 2>&1 & disown
+  apply_wallpaper_with_hyprpaper "$THEME_WALLPAPER"
 fi
 
 if command -v eww >/dev/null 2>&1; then

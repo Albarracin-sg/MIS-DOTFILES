@@ -1,24 +1,41 @@
 {
+  "general": {
+    "defaultApprovalMode": "auto_edit",
+    "disableAutoUpdate": true,
+    "vimMode": false
+  },
   "ide": {
-    "hasSeenNudge": true,
-    "enabled": true
+    "enabled": true,
+    "hasSeenNudge": true
+  },
+  "mcpServers": {
+    "context7": {
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "command": "npx"
+    },
+    "engram": {
+      "args": [
+        "mcp",
+        "--tools=agent"
+      ],
+      "command": "/home/guayaba/.local/bin/engram"
+    }
   },
   "security": {
     "auth": {
       "selectedType": "oauth-personal"
     }
   },
-  "ui": {
-    "showCitations": true
-  },
-  "general": {
-    "vimMode": false,
-    "disableAutoUpdate": true
-  },
   "tools": {
+    "autoAccept": false,
     "shell": {
       "showColor": true
-    },
-    "autoAccept": false
+    }
+  },
+  "ui": {
+    "showCitations": true
   }
 }

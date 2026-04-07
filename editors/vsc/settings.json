@@ -67,7 +67,12 @@
   // ================================
   // Terminal integrada
   // ================================
-  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "terminal.integrated.profiles.linux": {
+    "zsh": {
+      "path": "/usr/bin/zsh",
+    },
+  },
+  "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.fontFamily": "FiraCode Nerd Font",
   "terminal.integrated.suggest.enabled": true,
 
@@ -104,4 +109,5 @@
   },
   "workbench.colorTheme": "Tokyo Night Dark",
   "security.workspace.trust.untrustedFiles": "open",
+  "git.confirmSync": false,
 }

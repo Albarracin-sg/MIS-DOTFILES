@@ -216,3 +216,6 @@ if command -v dircolors >/dev/null 2>&1; then
 fi
 
 export EZA_COLORS="di=1;36:ex=1;32:ln=1;35:or=1;31"
+export PATH="$HOME/.npm-global/bin:$PATH"
+source <(kubectl completion zsh)
+export PATH="$HOME/go/bin:$PATH"
