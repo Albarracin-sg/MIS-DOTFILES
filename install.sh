@@ -269,6 +269,7 @@ chmod +x "$HOME/.config/eww/scripts/start_bars.sh" || true
 chmod +x "$HOME/.local/bin/opencode-profile" || true
 chmod +x "$HOME/.local/bin/open-browser.sh" || true
 chmod +x "$HOME/.local/bin/organize-downloads.sh" || true
+chmod +x "$HOME/.local/bin/fix-audio-streams" || true
 chmod +x "$DOTFILES_DIR/tools/bin/install-tableplus.sh" || true
 
 # Instalar aplicaciones adicionales

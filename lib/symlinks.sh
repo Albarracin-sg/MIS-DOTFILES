@@ -50,6 +50,7 @@ build_symlink_specs() {
     "$DOTFILES_DIR/tools/bin/opencode-profile.sh|$HOME/.local/bin/opencode-profile"
     "$DOTFILES_DIR/tools/bin/open-browser.sh|$HOME/.local/bin/open-browser.sh"
     "$DOTFILES_DIR/tools/bin/organize-downloads.sh|$HOME/.local/bin/organize-downloads.sh"
+    "$DOTFILES_DIR/tools/bin/fix-audio-streams.sh|$HOME/.local/bin/fix-audio-streams"
     "$DOTFILES_DIR/tools/systemd-user/organize-downloads.service|$HOME/.config/systemd/user/organize-downloads.service"
     "$DOTFILES_DIR/tools/systemd-user/organize-downloads.path|$HOME/.config/systemd/user/organize-downloads.path"
     "$DOTFILES_DIR/wallpapers|$HOME/Imagenes/Wallpapers"

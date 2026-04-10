@@ -113,6 +113,7 @@ alias pgstatus='systemctl status postgresql'
 
 alias reboot='systemctl reboot'
 alias poweroff='systemctl poweroff'
+alias fixaudio='fix-audio-streams'
 
 
 # ==============================
