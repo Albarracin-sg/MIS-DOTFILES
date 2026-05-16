@@ -1,8 +1,9 @@
 {
   "general": {
     "defaultApprovalMode": "auto_edit",
-    "disableAutoUpdate": true,
-    "vimMode": false
+    "vimMode": false,
+    "enableAutoUpdate": false,
+    "preferredEditor": "vscode"
   },
   "ide": {
     "enabled": true,

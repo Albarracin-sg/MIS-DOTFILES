@@ -4,7 +4,9 @@
     "github_*": false
   },
   "plugin": [
-    "opencode-anthropic-auth",
+    "opencode-gemini-auth@latest",
+    "opencode-anthropic-login-via-cli@latest",
+    "opencode-qwen-auth@latest",
     "@tarquinen/opencode-dcp@1.2.7",
     "@franlol/opencode-md-table-formatter@0.0.3"
   ],
@@ -34,6 +36,30 @@
     "kagi_*": "deny",
     "webfetch": "deny",
     "worktree_*": "deny"
+  },
+  "provider": {
+    "qwen": {
+      "npm": "@ai-sdk/openai",
+      "options": {
+        "baseURL": "https://portal.qwen.ai/v1",
+        "compatibility": "strict"
+      },
+      "models": {
+        "coder-model": {
+          "id": "coder-model",
+          "name": "Qwen Coder",
+          "limit": {
+            "context": 1048576,
+            "output": 65536
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "attachment": true
+        }
+      }
+    }
   },
   "mcp": {
     "context7": {
@@ -367,6 +393,7 @@
   "model": "opencode/big-pickle",
   "small_model": "opencode/minimax-m2.5-free",
   "instructions": [
+    "./instructions/caveman-default.md",
     "./tools/philosophy.md",
     "./project-context.md"
   ]

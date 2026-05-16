@@ -1,6 +1,24 @@
 .env
+
+# Secrets and auth
+gemini/google_accounts.json
+gemini/oauth_creds.json
+gemini/state.json
+gemini/projects.json
+gemini/installation_id
+gemini/trustedFolders.json
+gemini/history/
+gemini/tmp/
+gemini/antigravity/
+tools/opencode/qwen-auth-accounts.json
+tools/opencode/qwen-auth-tracker-state.json
+
+# Temp/working files
 wm/eww/image.jpg
 wm/eww/current/
+wm/eww/image.jpg.tmp
+
+# Theme symlinks (local)
 terminal/kitty/current-theme.conf
 tools/rofi/themes/current.rasi
 wm/eww/current-theme.scss

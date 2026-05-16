@@ -114,6 +114,9 @@ if [ -f "$HOME/.config/hypr/themes/current.conf" ]; then
   fi
 fi
 
+# --- handy (Speech-to-Text) ---
+handy --start-hidden >/dev/null 2>&1 & disown
+
 # --- EWW ---
 if command -v eww >/dev/null 2>&1; then
   "$HOME/.config/eww/reload.sh" >/dev/null 2>&1 || true

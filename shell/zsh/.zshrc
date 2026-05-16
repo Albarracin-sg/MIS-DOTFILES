@@ -76,6 +76,7 @@ alias lta='eza --icons --tree -a'
 
 alias clone='git clone'
 alias opencode='opencode-profile portable'
+alias wuxen='opencode'
 alias ocp='opencode-profile portable'
 alias ocl='opencode-profile local'
 alias ocd='opencode-profile default'
@@ -220,3 +221,4 @@ export EZA_COLORS="di=1;36:ex=1;32:ln=1;35:or=1;31"
 export PATH="$HOME/.npm-global/bin:$PATH"
 source <(kubectl completion zsh)
 export PATH="$HOME/go/bin:$PATH"
+alias zed="zeditor"
