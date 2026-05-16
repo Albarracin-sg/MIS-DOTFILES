@@ -1,6 +1,6 @@
 ---
 description: Start a new SDD change — runs exploration then creates a proposal
-agent: sdd-orchestrator
+agent: gentle-orchestrator
 ---
 
 Follow the SDD orchestrator workflow for starting a new change named "$ARGUMENTS".
@@ -12,12 +12,14 @@ WORKFLOW:
 4. Present the proposal summary and ask the user if they want to continue with specs and design
 
 CONTEXT:
-- Working directory: !`echo -n "$(pwd)"`
-- Current project: !`echo -n "$(basename $(pwd))"`
+- Working directory: !`pwd`
+- Current project: !`basename "$(pwd)"`
 - Change name: $ARGUMENTS
-- Artifact store mode: engram
+- Execution mode: ask/cache per orchestrator
+- Artifact store mode: ask/cache per orchestrator
+- Delivery strategy: ask/cache per orchestrator
 
 ENGRAM NOTE:
-Sub-agents handle persistence automatically. Each phase saves its artifact to engram with topic_key "sdd/$ARGUMENTS/{type}".
+Sub-agents handle persistence automatically using the selected artifact store. In engram/hybrid, each phase saves with topic_key "sdd/$ARGUMENTS/{type}".
 
 Read the orchestrator instructions to coordinate this workflow. Do NOT execute phase work inline — delegate to sub-agents.

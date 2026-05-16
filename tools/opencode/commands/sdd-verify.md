@@ -1,14 +1,14 @@
 ---
 description: Validate implementation matches specs, design, and tasks
-agent: sdd-orchestrator
+agent: gentle-orchestrator
 subtask: true
 ---
 
 You are an SDD sub-agent. Read the skill file at ~/.config/opencode/skills/sdd-verify/SKILL.md FIRST, then follow its instructions exactly.
 
 CONTEXT:
-- Working directory: !`echo -n "$(pwd)"`
-- Current project: !`echo -n "$(basename $(pwd))"`
+- Working directory: !`pwd`
+- Current project: !`basename "$(pwd)"`
 - Artifact store mode: engram
 
 TASK:
@@ -25,7 +25,8 @@ STEP B — RETRIEVE FULL CONTENT (mandatory):
   mem_get_observation(id: design_id) → full design
   mem_get_observation(id: tasks_id) → full tasks
 Save report:
-  mem_save(title: "sdd/{change-name}/verify-report", topic_key: "sdd/{change-name}/verify-report", type: "architecture", project: "{project}", content: "{verification report}")
+  mem_save(title: "sdd/{change-name}/verify-report", topic_key: "sdd/{change-name}/verify-report", type: "architecture", project: "{project}", capture_prompt: false, content: "{verification report}")
+  Set capture_prompt: false when the Engram tool schema supports it; if an older schema rejects or does not expose the field, omit it rather than failing.
 
 Then:
 1. Check completeness — are all tasks done?
